@@ -5,7 +5,7 @@
 
 menu_options_services() {
 
-SCRIPT_PATH="/root/NeXt-Server"
+SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 source ${SCRIPT_PATH}/configs/versions.cfg
 source ${SCRIPT_PATH}/script/functions.sh

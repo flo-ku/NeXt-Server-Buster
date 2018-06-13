@@ -28,7 +28,7 @@ WORDPRESS_USER=$(username)
 WORDPRESS_DB_NAME=$(username)
 WORDPRESS_DB_PASS=$(password)
 WORDPRESS_DB_PREFIX=$(username)
-MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" /root/NeXt-Server/login_information.txt)
+MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" /root/NeXt-Server-Buster/login_information.txt)
 
 mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE DATABASE ${WORDPRESS_DB_NAME};"
 mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE USER ${WORDPRESS_USER}@localhost IDENTIFIED BY '${WORDPRESS_DB_PASS}';"
@@ -82,19 +82,19 @@ if [ -z "${WORDPRESSPATHNAME}" ]; then # ---------------------------------------
 	sed -i "9d" /etc/nginx/sites-available/${MYDOMAIN}.conf
 	# Insert to line 9
 	#sed -i "9i           root\t\t\t/etc/nginx/html/${MYDOMAIN}/wordpress;" /etc/nginx/sites-available/${MYDOMAIN}.conf
-	
+
 	# If root Path: it is not allowed to have 2 / locations
 	# Delete line 1 to 6
 	sed -i "1,6d" /etc/nginx/sites-custom/wordpress.conf
-	
+
 else # --------------------------------------------------------------------------------------- then is custom path -------------------------------#
 	#  cp ${SCRIPT_PATH}/addons/vhosts/wordpress-custom.conf /etc/nginx/sites-custom/wordpress.conf
 	sed -i "s/WORDPRESSPATHNAME/${WORDPRESSPATHNAME}/g"  /etc/nginx/sites-custom/wordpress.conf
 	sed -i "s/REPLACEDOMAIN/${MYDOAMIN}/g"  /etc/nginx/sites-custom/wordpress.conf
-	
+
 	# Rename folder
 	mv wordpress ${WORDPRESSPATHNAME}
-	
+
 
 	# Add harding for custom path
 fi

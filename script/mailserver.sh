@@ -8,7 +8,7 @@ install_mailserver() {
 
 systemctl -q stop nginx.service
 
-SCRIPT_PATH="/root/NeXt-Server"
+SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 cd ${SCRIPT_PATH}/sources/acme.sh/
 bash acme.sh --issue --debug 2 --standalone -d mail.${MYDOMAIN} -d imap.${MYDOMAIN} -d smtp.${MYDOMAIN} --keylength 4096 >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to get mailserver let's encrypt cert"

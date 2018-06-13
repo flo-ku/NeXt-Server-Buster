@@ -10,7 +10,7 @@ echo "Preparing menu..."
 #-------------dialog
 apt-get -qq install dialog >/dev/null 2>&1
 
-SCRIPT_PATH="/root/NeXt-Server"
+SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
 GIT_LOCAL_FILES_HEAD_LAST_COMMIT=$(git log -1 --date=short --pretty=format:%cd)

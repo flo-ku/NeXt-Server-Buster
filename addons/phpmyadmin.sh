@@ -9,7 +9,7 @@ mkdir -p /usr/local/phpmyadmin/
 
 install_packages "apache2-utils"
 
-MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" /root/NeXt-Server/login_information.txt)
+MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" /root/NeXt-Server-Buster/login_information.txt)
 
 PMA_HTTPAUTH_USER=$(username)
 MYSQL_PMADB_USER=$(username)
