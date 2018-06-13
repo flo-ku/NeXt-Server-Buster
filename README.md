@@ -5,7 +5,7 @@ A vServer with at least:
 - 1 CPU Core
 - 1 GB RAM
 - KVM virtualized server (Openvz [...] will not work!)
-- The latest "clean" Debian 9.x minimal installed on the server
+- The latest "clean" Debian 10.x minimal installed on the server
 - rDNS set to the desired Domain
 - root user access
 - 9 GB free disk space
@@ -21,7 +21,7 @@ A vServer with at least:
 #Short instructions:
 
 ```
-cd /root/; apt-get update; apt-get install git -y; git clone https://github.com/shoujii/NeXt-Server-Buster; cd NeXt-Server; bash nxt.sh
+cd /root/; apt-get update; apt-get install git -y; git clone https://github.com/shoujii/NeXt-Server-Buster; cd NeXt-Server-Buster; bash nxt.sh
 ```
 
 Follow the instructions!
