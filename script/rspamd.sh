@@ -62,7 +62,13 @@ sed -i "s/placeholder/${CURRENT_YEAR}/g" /etc/rspamd/local.d/dkim_signing.conf
 
 cp -R /etc/rspamd/local.d/dkim_signing.conf /etc/rspamd/local.d/arc.conf
 
-install_packages "redis-server"
+#install_packages "redis-server"
+cd ${SCRIPT_PATH}/sources
+wget_tar "https://codeload.github.com/antirez/redis/tar.gz/${REDIS_VERSION}"
+cd redis-${REDIS_VERSION}
+make
+make install
+
 cp ${SCRIPT_PATH}/configs/rspamd/redis.conf /etc/rspamd/local.d/redis.conf
 
 mkdir -p /etc/nginx/sites-custom
