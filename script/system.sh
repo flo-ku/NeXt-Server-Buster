@@ -31,18 +31,14 @@ cat > /etc/apt/sources.list <<END
 #------------------------------------------------------------------------------#
 
 ###### Debian Main Repos
-deb http://deb.debian.org/debian/ buster main contrib non-free
-deb-src http://deb.debian.org/debian/ buster main contrib non-free
+deb http://deb.debian.org/debian/ testing main contrib non-free
+deb-src http://deb.debian.org/debian/ testing main contrib non-free
 
-deb http://deb.debian.org/debian/ buster-updates main contrib non-free
-deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free
+deb http://deb.debian.org/debian/ testing-updates main contrib non-free
+deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free
 
-deb http://deb.debian.org/debian-security buster/updates main contrib non-free
-deb-src http://deb.debian.org/debian-security buster/updates main contrib non-free
-
-#Backports
-deb http://ftp.debian.org/debian buster-backports main
-deb-src http://ftp.debian.org/debian buster-backports main
+deb http://deb.debian.org/debian-security testing/updates main
+deb-src http://deb.debian.org/debian-security testing/updates main
 END
 fi
 
