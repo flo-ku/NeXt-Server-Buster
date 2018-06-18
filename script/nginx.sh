@@ -7,6 +7,9 @@ install_nginx() {
 
 install_packages "psmisc libpcre3 libpcre3-dev libgeoip-dev zlib1g-dev"
 #checkinstall
+#temporary fix until checkinstall is available in buster repos
+wget http://ftp.de.debian.org/debian/pool/main/c/checkinstall/checkinstall_1.6.2-4_amd64.deb
+dpkg -i checkinstall_1.6.2-4_amd64.deb
 
 cd ${SCRIPT_PATH}/sources
 wget_tar "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz"
@@ -66,7 +69,7 @@ NGINX_MODULES="--without-http_browser_module \
 ./configure $NGINX_OPTIONS $NGINX_MODULES --with-cc-opt='-O2 -g -pipe -Wall -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -m64 -mtune=generic' >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to configure nginx"
 
 make -j $(nproc) >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to make nginx"
-#checkinstall --install=no -y >>"${main_log}" 2>>"${err_log}"
+checkinstall --install=no -y >>"${main_log}" 2>>"${err_log}"
 
 dpkg -i nginx_${NGINX_VERSION}-1_amd64.deb >>"${main_log}" 2>>"${err_log}"
 mv nginx_${NGINX_VERSION}-1_amd64.deb ../ >>"${main_log}" 2>>"${err_log}"
