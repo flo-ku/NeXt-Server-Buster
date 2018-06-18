@@ -47,7 +47,7 @@ check_system() {
 		echo > /dev/null
 	else
 		if [ $(dpkg-query -l | grep facter | wc -l) -ne 1 ]; then
-			install_packages "facter"
+			install_packages "facter libruby"
 		fi
 
 		if	[ "$(facter virtual)" == 'physical' ] || [ "$(facter virtual)" == 'kvm' ]; then
@@ -57,4 +57,8 @@ check_system() {
 			exit 1
        fi
 	fi
+
+	#cleanup
+	apt-get -y remove facter libruby
+	apt -y autoremove
 }
