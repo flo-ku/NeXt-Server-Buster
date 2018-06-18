@@ -32,7 +32,7 @@ done
 }
 
 setipaddrvars() {
-IPADR=$(ip route get 9.9.9.9 | awk '/9.9.9.9/ {print $NF}')
+IPADR=$(ip route get 9.9.9.9 | awk '/9.9.9.9/ {print $(NF-2)}')
 INTERFACE=$(ip route get 9.9.9.9 | head -1 | cut -d' ' -f5)
 FQDNIP=$(dig @9.9.9.9 +short ${MYDOMAIN})
 WWWIP=$(dig @9.9.9.9 +short www.${MYDOMAIN})
