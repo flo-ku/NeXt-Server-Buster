@@ -17,6 +17,7 @@ echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d
 fi
 
 apt-get update -y >/dev/null 2>&1
+install_packages "libcurl3"
 
 PHPVERSION7="7.1"
 
