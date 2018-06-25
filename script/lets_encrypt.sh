@@ -39,7 +39,6 @@ if [[ ${USE_NGINX_TEST} = "1" ]]; then
 fi
 
 systemctl -q start nginx.service
-
 }
 
 update_lets_encrypt() {

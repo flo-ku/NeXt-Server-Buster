@@ -9,6 +9,7 @@ install_mailman() {
 mysql -u root -p${MYSQL_ROOT_PASS} -e "use vmail; insert into domains (domain) values ('${MYDOMAIN}');"
 EMAIL_ACCOUNT_PASS=$(password)
 
+#needed bc the function is checking it aswell?
 if [ -z "${EMAIL_ACCOUNT_PASS}" ]; then
     echo "EMAIL_ACCOUNT_PASS is unset or set to the empty string, creating new one!"
     EMAIL_ACCOUNT_PASS=$(password)

@@ -27,10 +27,6 @@ start_after_install() {
 	dialog --backtitle "NeXt Server Installation" --msgbox "Finished after installation configuration" $HEIGHT $WIDTH
 }
 
-
-HEIGHT=40
-WIDTH=80
-
 show_ssh_key()
 {
 dialog --backtitle "NeXt Server Configuration" --msgbox "Please save the shown SSH privatekey on next page into a textfile on your PC. \n\n

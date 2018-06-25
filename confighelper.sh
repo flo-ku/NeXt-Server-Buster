@@ -120,7 +120,6 @@ else
 fi
 
 # --- DNS Check ---
-
 server_ip=$(ip route get 9.9.9.9 | awk '/9.9.9.9/ {print $NF}')
 sed -i "s/server_ip/$server_ip/g" ${SCRIPT_PATH}/dns_settings.txt
 sed -i "s/yourdomain.com/$MYDOMAIN/g" ${SCRIPT_PATH}/dns_settings.txt
@@ -184,20 +183,20 @@ fi
 #	done
 
 # --- Nginx new config test mode ---
-CHOICE_HEIGHT=2
-MENU="Do you want to use the Nginx new config mode? (unstable!):"
-OPTIONS=(1 "Yes"
-		     2 "No")
-menu
-clear
-case $CHOICE in
-      1)
-			USE_NGINX_TEST="1"
-            ;;
-		2)
+#CHOICE_HEIGHT=2
+#MENU="Do you want to use the Nginx new config mode? (unstable!):"
+#OPTIONS=(1 "Yes"
+#		     2 "No")
+#menu
+#clear
+#case $CHOICE in
+#      1)
+#			USE_NGINX_TEST="1"
+#            ;;
+#		2)
 			USE_NGINX_TEST="0"
-            ;;
-esac
+#            ;;
+#esac
 
 # --- Mailserver ---
 CHOICE_HEIGHT=2

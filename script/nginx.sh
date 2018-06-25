@@ -6,7 +6,7 @@
 install_nginx() {
 
 install_packages "psmisc libpcre3 libpcre3-dev libgeoip-dev zlib1g-dev"
-#checkinstall
+
 #temporary fix until checkinstall is available in buster repos
 wget http://ftp.de.debian.org/debian/pool/main/c/checkinstall/checkinstall_1.6.2-4_amd64.deb
 dpkg -i checkinstall_1.6.2-4_amd64.deb
