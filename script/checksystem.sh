@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compatible with Ubuntu 16.04 Xenial and Debian 9.x Stretch
+# Compatible with Ubuntu 16.04 Xenial and Debian 10.x Buster
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
@@ -65,6 +65,6 @@ check_system() {
 	fi
 
 	#cleanup
-	apt-get -y remove facter libruby
-	apt -y autoremove
+	apt-get -y remove facter libruby >/dev/null 2>&1
+	apt -y autoremove >/dev/null 2>&1
 }
