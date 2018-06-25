@@ -28,6 +28,12 @@ check_system() {
 		DISTOS="DEBIAN"
 	fi
 
+	LOCAL_KERNEL_VERSION=$(uname -a | awk '/Linux/ {print $(NF-7)}')
+	if [ $LOCAL_KERNEL_VERSION != ${KERNEL_VERSION} ]; then
+      echo "Please upgrade your Linux Version ($LOCAL_KERNEL_VERSION) with apt-get update && apt-get dist-upgrade to match the script required Version ${KERNEL_VERSION}"
+			exit 1
+	fi
+
 	if [ $(grep MemTotal /proc/meminfo | awk '{print $2}') -lt 1000000 ]; then
 		echo "This script needs at least ~1000MB of memory"
 	fi
