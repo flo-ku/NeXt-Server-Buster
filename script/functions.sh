@@ -32,11 +32,11 @@ done
 }
 
 setipaddrvars() {
-IPADR=$(ip route get 9.9.9.9 | awk '/9.9.9.9/ {print $(NF-2)}')
-INTERFACE=$(ip route get 9.9.9.9 | head -1 | cut -d' ' -f5)
-FQDNIP=$(dig @9.9.9.9 +short ${MYDOMAIN})
-WWWIP=$(dig @9.9.9.9 +short www.${MYDOMAIN})
-CHECKRDNS=$(dig @9.9.9.9 -x ${IPADR} +short)
+IPADR=$(ip route get 1.1.1.1 | awk '/1.1.1.1/ {print $(NF-2)}')
+INTERFACE=$(ip route get 1.1.1.1 | head -1 | cut -d' ' -f5)
+FQDNIP=$(dig @1.1.1.1 +short ${MYDOMAIN})
+WWWIP=$(dig @1.1.1.1 +short www.${MYDOMAIN})
+CHECKRDNS=$(dig @1.1.1.1 -x ${IPADR} +short)
 }
 
 get_domain() {
