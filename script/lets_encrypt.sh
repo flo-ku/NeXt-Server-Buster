@@ -37,8 +37,6 @@ if [[ ${USE_NGINX_TEST} = "1" ]]; then
   sed -i "s/HPKP1/${HPKP1}/g" /etc/nginx/_general.conf
   sed -i "s/HPKP2/${HPKP2}/g" /etc/nginx/_general.conf
 fi
-
-systemctl -q start nginx.service
 }
 
 update_lets_encrypt() {
