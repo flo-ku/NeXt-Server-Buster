@@ -17,7 +17,6 @@ sleep 1
 
 . ~/.bashrc >>"${main_log}" 2>>"${err_log}"
 . ~/.profile >>"${main_log}" 2>>"${err_log}"
-systemctl -q start nginx.service
 }
 
 create_nginx_cert() {
