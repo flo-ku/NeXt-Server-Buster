@@ -7,7 +7,7 @@ clear
 echo "NeXt Server"
 echo "Preparing menu..."
 
-if [ $(dpkg-query -l | grep dialog | wc -l) -ne 1 ]; then
+if [ $(dpkg-query -l | grep dialog | wc -l) -ne 3 ]; then
 	apt-get -qq install dialog >/dev/null 2>&1
 fi
 
