@@ -53,13 +53,7 @@ pm2 kill >>"${main_log}" 2>>"${err_log}"
 
 npm start >>"${main_log}" 2>>"${err_log}"
 
-cat >> /etc/nginx/sites-custom/mailman.conf << 'EOF1'
-location /mailman {
-  proxy_pass       http://localhost:4000;
-  proxy_set_header Host      $host;
-  proxy_set_header X-Real-IP $remote_addr;
-}
-EOF1
+cp ${SCRIPT_PATH}/configs/mailserver/_mailman.conf /etc/nginx/sites-custom/mailman.conf
 
 pm2 startup >>"${main_log}" 2>>"${err_log}"
 
