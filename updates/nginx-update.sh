@@ -128,7 +128,5 @@ if [[ ${LOCAL_NGINX_VERSION} != ${NGINX_VERSION} ]]; then
   ##autostart script working?
   cp -R /root/backup/$date/nginx/* /etc/nginx/
   systemctl -q start nginx.service
-else
-  dialog_info "No Nginx Update needed! Local Nginx Version: ${LOCAL_NGINX_VERSION}. Version to be installed: ${NGINX_VERSION}"
 fi
 }

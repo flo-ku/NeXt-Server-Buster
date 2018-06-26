@@ -23,7 +23,5 @@ if [[ ${LOCAL_OPENSSL_VERSION} != ${OPENSSL_VERSION} ]]; then
 
 	make -j $(nproc) >>"${make_log}" 2>>"${make_err_log}" || error_exit "Failed to make openssl"
 	make install >>"${make_log}" 2>>"${make_err_log}" || error_exit "Failed to install openssl"
-else
-	dialog_info "No Openssl Update needed! Local Openssl Version: ${LOCAL_OPENSSL_VERSION}. Version to be installed: ${OPENSSL_VERSION}"
 fi
 }
