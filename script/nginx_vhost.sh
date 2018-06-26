@@ -177,6 +177,4 @@ if [[ ${USE_PHP7_3} == '1' ]]; then
 fi
 
 systemctl -q start nginx.service
-
-ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
 }
