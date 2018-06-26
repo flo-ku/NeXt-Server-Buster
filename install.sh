@@ -9,6 +9,7 @@ source ${SCRIPT_PATH}/configs/versions.cfg
 source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 	set -x
+	set -e
 
 	install_start=`date +%s`
 	echo "0" | dialog --gauge "Checking your system..." 10 70 0
