@@ -18,6 +18,8 @@ systemctl stop unbound
 
 systemctl start unbound
 
+set -e
+
 install_packages "resolvconf"
 echo "nameserver 127.0.0.1" >> /etc/resolvconf/resolv.conf.d/head
 
