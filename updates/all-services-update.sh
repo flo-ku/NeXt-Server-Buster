@@ -45,7 +45,7 @@ if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' 
   echo "5" | dialog --gauge "Upgrading packages..." 10 70 0
   apt-get -y upgrade >/dev/null 2>&1
 
-  echo "8" | dialog --gauge "Upgrading Debian / Ubuntu..." 10 70 0
+  echo "8" | dialog --gauge "Upgrading Debian..." 10 70 0
   apt-get -y dist-upgrade >/dev/null 2>&1
 
   echo "12" | dialog --gauge "Updating fail2ban..." 10 70 0
