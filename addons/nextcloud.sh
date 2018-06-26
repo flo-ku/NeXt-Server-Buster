@@ -25,7 +25,7 @@ ln -s /srv/nextcloud/ /etc/nginx/html/${MYDOMAIN}/nextcloud >>"${main_log}" 2>>"
 
 cp ${SCRIPT_PATH}/addons/vhosts/nextcloud.conf /etc/nginx/sites-custom/nextcloud.conf
 
-if [[ ${USE_PHP7_2} == '1' ]]; then
+if [[ ${USE_PHP7_3} == '1' ]]; then
 	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/sites-custom/nextcloud.conf >>"${main_log}" 2>>"${err_log}"
 fi
 
