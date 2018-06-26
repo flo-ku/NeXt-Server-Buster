@@ -29,6 +29,7 @@ git clone https://github.com/google/ngx_brotli >>"${main_log}" 2>>"${err_log}" |
 cd ngx_brotli
 git submodule update --init >>"${main_log}" 2>>"${err_log}"
 
+set -e
 
 cd ${SCRIPT_PATH}/sources
 wget_tar "https://codeload.github.com/openresty/headers-more-nginx-module/zip/v${NGINX_HEADER_MOD_VERSION}"
