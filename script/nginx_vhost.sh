@@ -116,7 +116,7 @@ server {
 		fastcgi_param PATH_INFO \$fastcgi_path_info;
 		fastcgi_param PATH_TRANSLATED \$document_root\$fastcgi_path_info;
 		fastcgi_param APP_ENV production;
-		fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;
+		fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
 		fastcgi_index index.php;
 		include fastcgi.conf;
 		fastcgi_intercept_errors off;

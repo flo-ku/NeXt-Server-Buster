@@ -7,7 +7,9 @@ clear
 echo "NeXt Server"
 echo "Preparing menu..."
 
-apt-get -qq install dialog >/dev/null 2>&1
+if [ $(dpkg-query -l | grep dialog | wc -l) -ne 1 ]; then
+	apt-get -qq install dialog >/dev/null 2>&1
+fi
 
 SCRIPT_PATH="/root/NeXt-Server-Buster"
 

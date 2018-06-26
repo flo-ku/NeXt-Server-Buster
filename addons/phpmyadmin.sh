@@ -43,7 +43,7 @@ sed -i "s/PMA_BFSECURE_PASS/${PMA_BFSECURE_PASS}/g" /usr/local/phpmyadmin/config
 cp ${SCRIPT_PATH}/addons/vhosts/phpmyadmin.conf /etc/nginx/sites-custom/phpmyadmin.conf
 
 if [[ ${USE_PHP7_2} == '1' ]]; then
-	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.1-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/g' /etc/nginx/sites-custom/phpmyadmin.conf
+	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/sites-custom/phpmyadmin.conf
 fi
 
 
@@ -53,7 +53,7 @@ if [[ ${USE_NGINX_TEST} = "1" ]]; then
 	sed -i "s/#include _phpmyadmin.conf;/include _phpmyadmin.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 	if [[ ${USE_PHP7_2} == '1' ]]; then
-		sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.1-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/g' /etc/nginx/_phpmyadmin.conf"
+		sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/_phpmyadmin.conf"
 	fi
 fi
 

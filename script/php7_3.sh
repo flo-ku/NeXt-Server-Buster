@@ -3,7 +3,7 @@
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
-install_php_7_1() {
+install_php_7_3() {
 
 
 if [[ ${DISTOS} == 'UBUNTU' ]]; then
@@ -19,7 +19,7 @@ fi
 apt-get update -y >/dev/null 2>&1
 install_packages "libcurl3"
 
-PHPVERSION7="7.1"
+PHPVERSION7="7.3"
 
 if [[ ${DISTOS} == 'UBUNTU' ]]; then
 	install_packages "memcached"
