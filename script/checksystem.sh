@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compatible with Ubuntu 16.04 Xenial and Debian 10.x Buster
+# Compatible with Debian 10.x Buster
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
@@ -10,22 +10,9 @@ check_system() {
 		exit 1
 	fi
 
-	if [ $(lsb_release -is) != 'Debian' ] && [ $(lsb_release -is) != 'Ubuntu' ]; then
-		echo "The script only works on Ubuntu 16.04 Xenial and Debian 10.x"
+	if [ $(lsb_release -is) != 'Debian' ] && [ $(lsb_release -cs) != 'buster' ]; then
+		echo "The script only works on Debian 10.x"
 		exit 1
-	fi
-
-	if [ $(lsb_release -cs) != 'xenial' ] && [ $(lsb_release -cs) != 'buster' ]; then
-		echo "The script only works on Ubuntu 16.04 Xenial and Debian 10.x"
-		exit 1
-	fi
-
-	if [ $(lsb_release -cs) == 'xenial' ] && [ $(lsb_release -is) == 'Ubuntu' ]; then
-		DISTOS="UBUNTU"
-	fi
-
-	if [ $(lsb_release -cs) == 'buster' ] && [ $(lsb_release -is) == 'Debian' ]; then
-		DISTOS="DEBIAN"
 	fi
 
 	LOCAL_KERNEL_VERSION=$(uname -a | awk '/Linux/ {print $(NF-7)}')

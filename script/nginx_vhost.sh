@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compatible with Ubuntu 16.04 Xenial and Debian 10.x Buster
+# Compatible with Debian 10.x Buster
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
@@ -172,8 +172,8 @@ server {
 
 END
 
-if [[ ${USE_PHP7_2} == '1' ]]; then
-	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.1-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/g' /etc/nginx/sites-available/${MYDOMAIN}.conf >>"${main_log}" 2>>"${err_log}"
+if [[ ${USE_PHP7_3} == '1' ]]; then
+	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/sites-available/${MYDOMAIN}.conf >>"${main_log}" 2>>"${err_log}"
 fi
 
 ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf

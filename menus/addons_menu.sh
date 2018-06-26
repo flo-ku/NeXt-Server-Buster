@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compatible with Ubuntu 16.04 Xenial and Debian 10.x Buster
+# Compatible with Debian 10.x Buster
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
@@ -72,7 +72,7 @@ else
 fi
 ;;
 4)
-	if [[ ${USE_PHP7_1} == '1'  ]] || [[ ${USE_PHP7_2} == '1'  ]]; then
+	if [[ ${USE_PHP7_2} == '1'  ]] || [[ ${USE_PHP7_3} == '1'  ]]; then
 		if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 			dialog_info "Installing Nextcloud"
 			source ${SCRIPT_PATH}/addons/nextcloud.sh; install_nextcloud
@@ -81,7 +81,7 @@ fi
 			echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 		fi
 	else
-		echo "Nextcloud 13 is only running on PHP 7.1 and 7.2!"
+		echo "Nextcloud 13 is only running on PHP 7.2 and 7.3!"
 	fi
 	;;
 5)

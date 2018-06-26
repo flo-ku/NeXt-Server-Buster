@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compatible with Ubuntu 16.04 Xenial and Debian 10.x Buster
+# Compatible with Debian 10.x Buster
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
@@ -116,11 +116,11 @@ cp \$BLACKLIST_TEMP \${BLACKLIST_DIR}/blacklist\_\$(date '+%d.%m.%Y_%T' | tr -d 
 END
 chmod +x /etc/cron.daily/blocked-hosts
 
-if [[ ${USE_PHP7_1} == '1' ]]; then
-	systemctl -q restart {nginx,php7.1-fpm}
-fi
-
 if [[ ${USE_PHP7_2} == '1' ]]; then
 	systemctl -q restart {nginx,php7.2-fpm}
+fi
+
+if [[ ${USE_PHP7_3} == '1' ]]; then
+	systemctl -q restart {nginx,php7.3-fpm}
 fi
 }

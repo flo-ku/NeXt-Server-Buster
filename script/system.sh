@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compatible with Ubuntu 16.04 Xenial and Debian 9.x Stretch
+# Compatible with Debian 10.x Buster
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +24,6 @@ timedatectl set-timezone ${TIMEZONE}
 
 rm /etc/apt/sources.list
 
-if [[ ${DISTOS} == 'DEBIAN' ]]; then
 cat > /etc/apt/sources.list <<END
 #------------------------------------------------------------------------------#
 #                   OFFICIAL DEBIAN REPOS                                      #
@@ -40,25 +39,6 @@ deb-src http://deb.debian.org/debian/ testing-updates main contrib non-free
 deb http://deb.debian.org/debian-security testing/updates main
 deb-src http://deb.debian.org/debian-security testing/updates main
 END
-fi
-
-if [[ ${DISTOS} == 'UBUNTU' ]]; then
-cat > /etc/apt/sources.list <<END
-#------------------------------------------------------------------------------#
-#                            OFFICIAL UBUNTU REPOS                             #
-#------------------------------------------------------------------------------#
-
-###### Ubuntu Main Repos
-deb http://de.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse
-deb-src http://de.archive.ubuntu.com/ubuntu/ xenial main restricted universe multiverse
-
-###### Ubuntu Update Repos
-deb http://de.archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse
-deb http://de.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse
-deb-src http://de.archive.ubuntu.com/ubuntu/ xenial-security main restricted universe multiverse
-deb-src http://de.archive.ubuntu.com/ubuntu/ xenial-updates main restricted universe multiverse
-END
-fi
 
 apt-get update -y >/dev/null 2>&1
 apt-get -y upgrade >/dev/null 2>&1
@@ -67,12 +47,6 @@ install_packages "rkhunter needrestart"
 
 #thanks to https://linuxacademy.com/howtoguides/posts/show/topic/19700-linux-security-and-server-hardening-part1
 cat > /etc/sysctl.conf <<END
-#disable IPv6
-net.ipv6.conf.all.disable_ipv6 = 1
-net.ipv6.conf.default.disable_ipv6 = 1
-net.ipv6.conf.lo.disable_ipv6 = 1
-net.ipv6.conf.${INTERFACE}.disable_ipv6 = 1
-
 # Avoid a smurf attack
 net.ipv4.icmp_echo_ignore_broadcasts = 1
 
@@ -136,8 +110,6 @@ kernel.core_uses_pid = 1
 kernel.kptr_restrict = 2
 kernel.sysrq = 0
 net.ipv4.tcp_timestamps = 0
-net.ipv6.conf.all.accept_redirects = 0
-net.ipv6.conf.default.accept_redirects = 0
 END
 
 sysctl -p >>"${main_log}" 2>>"${err_log}"

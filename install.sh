@@ -1,5 +1,5 @@
 #!/bin/bash
-# Compatible with Ubuntu 16.04 Xenial and Debian 10.x Buster
+# Compatible with Debian 10.x Buster
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
@@ -73,12 +73,12 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 	echo "75" | dialog --gauge "Installing PHP..." 10 70 0
 	php_start=`date +%s`
-	if [[ ${USE_PHP7_1} = "1" ]]; then
-		source ${SCRIPT_PATH}/script/php7_1.sh; install_php_7_1
-	fi
-
 	if [[ ${USE_PHP7_2} = "1" ]]; then
 		source ${SCRIPT_PATH}/script/php7_2.sh; install_php_7_2
+	fi
+
+	if [[ ${USE_PHP7_3} = "1" ]]; then
+		source ${SCRIPT_PATH}/script/php7_3.sh; install_php_7_3
 	fi
 	php_end=`date +%s`
 	phptime=$((php_end-php_start))
