@@ -72,10 +72,18 @@ dpkg -i redis-server_3.2.6-3+deb9u1_amd64.deb
 
 cp ${SCRIPT_PATH}/configs/rspamd/redis.conf /etc/rspamd/local.d/redis.conf
 
-mkdir -p /etc/nginx/sites-custom
+REDIS_PASSWORT=$(password)
+sed -i "s/# rename-command CONFIG b840fc02d524045429941cc15f59e41cb7be6c52/rename-command CONFIG ${REDIS_PASSWORT}/g" /etc/redis/redis.conf
 
+echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
+echo "Redis Password: ${REDIS_PASSWORT}" >> ${SCRIPT_PATH}/login_information.txt
+echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
+echo "" >> ${SCRIPT_PATH}/login_information.txt
+
+mkdir -p /etc/nginx/sites-custom
 cp ${SCRIPT_PATH}/configs/mailserver/_rspamd.conf /etc/nginx/sites-custom/rspamd.conf
 
+systemctl restart redis-server
 systemctl restart nginx
 systemctl start rspamd
 systemctl start dovecot

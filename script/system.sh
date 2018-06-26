@@ -43,7 +43,7 @@ END
 apt-get update -y >/dev/null 2>&1
 apt-get -y upgrade >/dev/null 2>&1
 
-install_packages "rkhunter needrestart"
+install_packages "rkhunter needrestart debsecan"
 
 #thanks to https://linuxacademy.com/howtoguides/posts/show/topic/19700-linux-security-and-server-hardening-part1
 cat > /etc/sysctl.conf <<END
@@ -110,6 +110,7 @@ kernel.core_uses_pid = 1
 kernel.kptr_restrict = 2
 kernel.sysrq = 0
 net.ipv4.tcp_timestamps = 0
+kernel.yama.ptrace_scope = 1
 END
 
 sysctl -p >>"${main_log}" 2>>"${err_log}"
