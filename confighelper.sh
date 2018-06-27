@@ -11,6 +11,20 @@ TITLE="NeXt Server Installation"
 HEIGHT=40
 WIDTH=80
 
+if	[ "$(nproc)" == '1' ]; then
+dialog_msg "Your installation will take a minimum of 48 minutes!"
+else
+	if	[ "$(nproc)" == '2' ]; then
+		dialog_msg "Your installation will take a minimum of 40 minutes!"	
+	else
+		if	[ "$(nproc)" == '3' ]; then
+			dialog_msg "Your installation will take a minimum of 35 minutes!"
+		else
+			dialog_msg "Your installation will take a minimum of 30 minutes!"
+		fi
+	fi
+fi
+
 # --- TIMEZONE ---
 CHOICE_HEIGHT=12
 MENU="Choose a timezone:"
