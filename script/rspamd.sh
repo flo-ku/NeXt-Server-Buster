@@ -80,8 +80,7 @@ echo "Redis Password: ${REDIS_PASSWORT}" >> ${SCRIPT_PATH}/login_information.txt
 echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
 echo "" >> ${SCRIPT_PATH}/login_information.txt
 
-mkdir -p /etc/nginx/sites-custom
-cp ${SCRIPT_PATH}/configs/mailserver/_rspamd.conf /etc/nginx/sites-custom/rspamd.conf
+cp ${SCRIPT_PATH}/configs/nginx/mailserver/_rspamd.conf /etc/nginx/_rspamd.conf
 
 systemctl restart redis-server
 systemctl restart nginx

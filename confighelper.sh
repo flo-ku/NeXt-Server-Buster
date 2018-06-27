@@ -20,7 +20,7 @@ else
 		\n\nThe installation can take a longer time, depending on the CPU you're using!"
 	else
 		if	[ "$(nproc)" == '3' ]; then
-			dialog_msg "Your installation will take a minimum of 35 minutes use 3 CPU cores! \
+			dialog_msg "Your installation will take a minimum of 32 minutes use 3 CPU cores! \
 			\n\nThe installation can take a longer time, depending on the CPU you're using!"
 		else
 			dialog_msg "Your installation will take a minimum of 30 minutes use 4 or more CPU cores! \
@@ -200,22 +200,6 @@ fi
 #			fi
 #	done
 
-# --- Nginx new config test mode ---
-#CHOICE_HEIGHT=2
-#MENU="Do you want to use the Nginx new config mode? (unstable!):"
-#OPTIONS=(1 "Yes"
-#		     2 "No")
-#menu
-#clear
-#case $CHOICE in
-#      1)
-#			USE_NGINX_TEST="1"
-#            ;;
-#		2)
-			USE_NGINX_TEST="0"
-#            ;;
-#esac
-
 # --- Mailserver ---
 CHOICE_HEIGHT=2
 MENU="Do you want to use the Mailserver?:"
@@ -270,7 +254,6 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 	USE_PHP7_2="${USE_PHP7_2}"
 	USE_PHP7_3="${USE_PHP7_3}"
 	PHPVERSION7="${PHPVERSION7}"
-	USE_NGINX_TEST="${USE_NGINX_TEST}"
 
 	MYSQL_HOSTNAME="localhost"
 

@@ -103,6 +103,23 @@ update-rc.d nginx defaults >>"${main_log}" 2>>"${err_log}"
 
 rm -rf /etc/nginx/nginx.conf
 cp ${SCRIPT_PATH}/configs/nginx/nginx.conf /etc/nginx/nginx.conf
+cp ${SCRIPT_PATH}/configs/nginx/_general.conf /etc/nginx/_general.conf
+cp ${SCRIPT_PATH}/configs/nginx/_letsencrypt.conf /etc/nginx/_letsencrypt.conf
+cp ${SCRIPT_PATH}/configs/nginx/_pagespeed.conf /etc/nginx/_pagespeed.conf
+cp ${SCRIPT_PATH}/configs/nginx/_php_fastcgi.conf /etc/nginx/_php_fastcgi.conf
+cp ${SCRIPT_PATH}/configs/nginx/_php.conf /etc/nginx/_php.conf
+cp ${SCRIPT_PATH}/configs/nginx/_brotli.conf /etc/nginx/_brotli.conf
+
+rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
+cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
+sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+
+if [[ ${USE_PHP7_3} == '1' ]]; then
+	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/sites-available/${MYDOMAIN}.conf >>"${main_log}" 2>>"${err_log}"
+	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/_php_fastcgi.conf >>"${main_log}" 2>>"${err_log}"
+fi
+
+systemctl -q start nginx.service
 
 mkdir -p /etc/nginx/html/${MYDOMAIN}
 systemctl -q restart nginx.service
@@ -114,29 +131,5 @@ cp ${SCRIPT_PATH}/configs/nginx/index.html /etc/nginx/html/${MYDOMAIN}/index.htm
 chown -R www-data:www-data /etc/nginx/html/${MYDOMAIN}
 #chmod og+x /etc/nginx/html/${MYDOMAIN}
 
-
-if [[ ${USE_NGINX_TEST} = "1" ]]; then
-	rm -rf /etc/nginx/nginx.conf
-	rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
-
-	cp ${SCRIPT_PATH}/configs/nginx/_brotli.conf /etc/nginx/_brotli.conf
-	cp ${SCRIPT_PATH}/configs/nginx/_general.conf /etc/nginx/_general.conf
-	cp ${SCRIPT_PATH}/configs/nginx/mailserver/_mailman.conf /etc/nginx/_mailman.conf
-	cp ${SCRIPT_PATH}/configs/nginx/mailserver/_rspamd.conf /etc/nginx/_rspamd.conf
-	cp ${SCRIPT_PATH}/configs/nginx/_letsencrypt.conf /etc/nginx/_letsencrypt.conf
-	cp ${SCRIPT_PATH}/configs/nginx/_pagespeed.conf /etc/nginx/_pagespeed.conf
-	cp ${SCRIPT_PATH}/configs/nginx/_php_fastcgi.conf /etc/nginx/_php_fastcgi.conf
-	cp ${SCRIPT_PATH}/configs/nginx/_php.conf /etc/nginx/_php.conf
-	cp ${SCRIPT_PATH}/configs/nginx/nginx.conf_new /etc/nginx/nginx.conf
-	cp ${SCRIPT_PATH}/configs/nginx/vhost_new /etc/nginx/sites-available/${MYDOMAIN}.conf
-	sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
-
-	if [[ ${USE_PHP7_3} == '1' ]]; then
-		sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/sites-available/${MYDOMAIN}.conf >>"${main_log}" 2>>"${err_log}"
-		sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/_php_fastcgi.conf >>"${main_log}" 2>>"${err_log}"
-	fi
-fi
-
 ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
-
 }

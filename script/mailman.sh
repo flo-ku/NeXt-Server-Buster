@@ -53,7 +53,7 @@ pm2 kill >>"${main_log}" 2>>"${err_log}"
 
 npm start >>"${main_log}" 2>>"${err_log}"
 
-cp ${SCRIPT_PATH}/configs/mailserver/_mailman.conf /etc/nginx/sites-custom/mailman.conf
+cp ${SCRIPT_PATH}/configs/nginx/mailserver/_mailman.conf /etc/nginx/_mailman.conf
 
 pm2 startup >>"${main_log}" 2>>"${err_log}"
 

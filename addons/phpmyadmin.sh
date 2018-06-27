@@ -40,21 +40,11 @@ mysql -u root -p${MYSQL_ROOT_PASS} mysql < phpmyadmin/sql/create_tables.sql >>"$
 cp ${SCRIPT_PATH}/configs/pma/config.inc.php /usr/local/phpmyadmin/config.inc.php
 sed -i "s/PMA_BFSECURE_PASS/${PMA_BFSECURE_PASS}/g" /usr/local/phpmyadmin/config.inc.php
 
-cp ${SCRIPT_PATH}/addons/vhosts/phpmyadmin.conf /etc/nginx/sites-custom/phpmyadmin.conf
+cp ${SCRIPT_PATH}/addons/vhosts/_phpmyadmin.conf /etc/nginx/_phpmyadmin.conf
+sed -i "s/#include _phpmyadmin.conf;/include _phpmyadmin.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 if [[ ${USE_PHP7_3} == '1' ]]; then
-	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/sites-custom/phpmyadmin.conf
-fi
-
-
-if [[ ${USE_NGINX_TEST} = "1" ]]; then
-	rm /etc/nginx/sites-custom/phpmyadmin.conf
-	cp ${SCRIPT_PATH}/addons/vhosts/_phpmyadmin.conf /etc/nginx/_phpmyadmin.conf
-	sed -i "s/#include _phpmyadmin.conf;/include _phpmyadmin.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
-
-	if [[ ${USE_PHP7_3} == '1' ]]; then
-		sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/_phpmyadmin.conf"
-	fi
+	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/_phpmyadmin.conf"
 fi
 
 chown -R www-data:www-data /usr/local/phpmyadmin/
