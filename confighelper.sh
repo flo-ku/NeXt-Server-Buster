@@ -20,10 +20,10 @@ else
 		\n\nThe installation can take a longer time, depending on the CPU you're using!"
 	else
 		if	[ "$(nproc)" == '3' ]; then
-			dialog_msg "Your installation will take a minimum of 32 minutes use 3 CPU cores! \
+			dialog_msg "Your installation will take a minimum of 32 minutes and use 3 CPU cores! \
 			\n\nThe installation can take a longer time, depending on the CPU you're using!"
 		else
-			dialog_msg "Your installation will take a minimum of 30 minutes use 4 or more CPU cores! \
+			dialog_msg "Your installation will take a minimum of 30 minutes and use 4 or more CPU cores! \
 			\n\nThe installation can take a longer time, depending on the CPU you're using!"
 		fi
 	fi
