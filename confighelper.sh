@@ -13,18 +13,18 @@ WIDTH=80
 
 if	[ "$(nproc)" == '1' ]; then
 dialog_msg "Your installation will take a minimum of 48 minutes and use 1 CPU core! \
-The installation can take a longer time, depending on the CPU you're using!"
+\n\nThe installation can take a longer time, depending on the CPU you're using!"
 else
 	if	[ "$(nproc)" == '2' ]; then
 		dialog_msg "Your installation will take a minimum of 36 minutes and use 2 CPU cores! \
-		The installation can take a longer time, depending on the CPU you're using!"
+		\n\nThe installation can take a longer time, depending on the CPU you're using!"
 	else
 		if	[ "$(nproc)" == '3' ]; then
 			dialog_msg "Your installation will take a minimum of 35 minutes use 3 CPU cores! \
-			The installation can take a longer time, depending on the CPU you're using!"
+			\n\nThe installation can take a longer time, depending on the CPU you're using!"
 		else
 			dialog_msg "Your installation will take a minimum of 30 minutes use 4 or more CPU cores! \
-			The installation can take a longer time, depending on the CPU you're using!"
+			\n\nThe installation can take a longer time, depending on the CPU you're using!"
 		fi
 	fi
 fi
