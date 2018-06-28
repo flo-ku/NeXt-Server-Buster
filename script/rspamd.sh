@@ -81,6 +81,7 @@ echo "#-------------------------------------------------------------------------
 echo "" >> ${SCRIPT_PATH}/login_information.txt
 
 cp ${SCRIPT_PATH}/configs/nginx/mailserver/_rspamd.conf /etc/nginx/_rspamd.conf
+sed -i "s/#include _rspamd.conf;/include _rspamd.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 systemctl restart redis-server
 systemctl restart nginx
