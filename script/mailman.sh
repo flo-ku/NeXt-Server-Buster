@@ -22,13 +22,13 @@ install_packages "build-essential python curl"
 
 mysql -u root -p${MYSQL_ROOT_PASS} -e "use vmail; grant select, insert, update, delete on vmail.* to 'vmail'@'localhost' identified by '${MAILSERVER_DB_PASS}';"
 
-curl -s -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.6/install.sh | bash || error_exit "Failed to curl nvm"
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v${NVM_VERSION}/install.sh | bash || error_exit "Failed to curl nvm"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
-nvm install 9.1.0 >>"${main_log}" 2>>"${err_log}"
+nvm install ${NODE_VERSION} >>"${main_log}" 2>>"${err_log}"
 npm i -g pm2 >>"${main_log}" 2>>"${err_log}"
 
 cd /etc/
@@ -53,7 +53,7 @@ pm2 kill >>"${main_log}" 2>>"${err_log}"
 
 npm start >>"${main_log}" 2>>"${err_log}"
 
-cp ${SCRIPT_PATH}/configs/nginx/mailserver/_mailman.conf /etc/nginx/_mailman.conf
+cp ${SCRIPT_PATH}/configs/mailserver/_mailman.conf /etc/nginx/_mailman.conf
 sed -i "s/#include _mailman.conf;/include _mailman.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 pm2 startup >>"${main_log}" 2>>"${err_log}"
