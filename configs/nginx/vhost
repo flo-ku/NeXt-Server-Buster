@@ -30,6 +30,7 @@ server {
 	#include _mailman.conf;
 	#include _rspamd.conf;
 	#include _wordpress.conf;
+	#include _nextcloud.conf;
 	#include _phpmyadmin.conf;
 }
 
