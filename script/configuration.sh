@@ -10,6 +10,12 @@ start_after_install() {
   source ${SCRIPT_PATH}/checks/php-check.sh; check_php
   dialog_yesno_configuration
 
+  source ${SCRIPT_PATH}/checks/openssh-check.sh; check_openssh
+  dialog_yesno_configuration
+
+  source ${SCRIPT_PATH}/checks/fail2ban-check.sh; check_fail2ban
+  dialog_yesno_configuration
+
   source ${SCRIPT_PATH}/configs/versions.cfg
 	source ${SCRIPT_PATH}/script/configuration.sh; show_ssh_key
   dialog_yesno_configuration
