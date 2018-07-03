@@ -34,13 +34,11 @@ npm i -g pm2 >>"${main_log}" 2>>"${err_log}"
 cd /etc/
 git clone https://github.com/phiilu/mailman.git >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to clone mailman"
 cd mailman/
-cp sample.env .env
+cp sample.subfolder.env .env
 
 sed -i '/^[[:blank:]]*"homepage"/s#:4000/#:4000/mailman#' /etc/mailman/client/package.json
 sed -i "s/^REACT_APP_BASENAME=\//REACT_APP_BASENAME=\/mailman/g" /etc/mailman/client/.env.production
-
 sed -i "s/^MAILMAN_DB_PASSWORD=vmail/MAILMAN_DB_PASSWORD=${MAILSERVER_DB_PASS}/g" /etc/mailman/.env
-sed -i "s/^MAILMAN_BASENAME=\//MAILMAN_BASENAME=\/mailman/g" /etc/mailman/.env
 sed -i "s/^MAILMAN_ADMIN=florian@example.org/MAILMAN_ADMIN=postmaster@${MYDOMAIN}/g" /etc/mailman/.env
 
 npm install >>"${main_log}" 2>>"${err_log}"
