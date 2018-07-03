@@ -53,6 +53,48 @@ start_after_install() {
   exit 1
   fi
 
+  source ${SCRIPT_PATH}/checks/rspamd-check.sh; check_rspamd
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
+  source ${SCRIPT_PATH}/checks/lets_encrypt-check.sh; check_lets_encrypt
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
+  source ${SCRIPT_PATH}/checks/firewall-check.sh; check_firewall
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
+  source ${SCRIPT_PATH}/checks/mailman-check.sh; check_mailman
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
+  source ${SCRIPT_PATH}/checks/mailserver-check.sh; check_mailserver
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
+  source ${SCRIPT_PATH}/checks/system-check.sh; check_system
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
   source ${SCRIPT_PATH}/configs/versions.cfg
 	source ${SCRIPT_PATH}/script/configuration.sh; show_ssh_key
   dialog_yesno_configuration
