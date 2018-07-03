@@ -5,16 +5,53 @@
 
 start_after_install() {
   source ${SCRIPT_PATH}/checks/nginx-check.sh; check_nginx
-  dialog_yesno_configuration
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
 
   source ${SCRIPT_PATH}/checks/php-check.sh; check_php
-  dialog_yesno_configuration
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
 
   source ${SCRIPT_PATH}/checks/openssh-check.sh; check_openssh
-  dialog_yesno_configuration
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
 
   source ${SCRIPT_PATH}/checks/fail2ban-check.sh; check_fail2ban
-  dialog_yesno_configuration
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
+  source ${SCRIPT_PATH}/checks/unbound-check.sh; check_unbound
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
+  source ${SCRIPT_PATH}/checks/dovecot-check.sh; check_dovecot
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+
+  source ${SCRIPT_PATH}/checks/postfix-check.sh; check_postfix
+  #dialog_yesno_configuration
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
 
   source ${SCRIPT_PATH}/configs/versions.cfg
 	source ${SCRIPT_PATH}/script/configuration.sh; show_ssh_key
