@@ -5,13 +5,6 @@
 
 check_mailserver() {
 
-source ${SCRIPT_PATH}/configs/userconfig.cfg
-
-greenb() { echo $(tput bold)$(tput setaf 2)${1}$(tput sgr0); }
-ok="$(greenb [OKAY] -)"
-redb() { echo $(tput bold)$(tput setaf 1)${1}$(tput sgr0); }
-error="$(redb [ERROR] -)"
-
 if [ -e /root/.acme.sh/mail.${MYDOMAIN}/fullchain.cer ]; then
   echo "${ok} fullchain.cer mailserver does exist"
 else

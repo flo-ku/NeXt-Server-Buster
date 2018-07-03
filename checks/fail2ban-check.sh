@@ -5,13 +5,6 @@
 
 check_fail2ban() {
 
-source ${SCRIPT_PATH}/configs/userconfig.cfg
-
-greenb() { echo $(tput bold)$(tput setaf 2)${1}$(tput sgr0); }
-ok="$(greenb [OKAY] -)"
-redb() { echo $(tput bold)$(tput setaf 1)${1}$(tput sgr0); }
-error="$(redb [ERROR] -)"
-
 if [ -e /etc/fail2ban/fail2ban.local ]; then
   echo "${ok} fail2ban.local does exist"
 else

@@ -4,6 +4,13 @@
 #-------------------------------------------------------------------------------------------------------------
 
 start_after_install() {
+
+  source ${SCRIPT_PATH}/configs/userconfig.cfg
+  greenb() { echo $(tput bold)$(tput setaf 2)${1}$(tput sgr0); }
+  ok="$(greenb [OKAY] -)"
+  redb() { echo $(tput bold)$(tput setaf 1)${1}$(tput sgr0); }
+  error="$(redb [ERROR] -)"
+
   source ${SCRIPT_PATH}/checks/nginx-check.sh; check_nginx
   #dialog_yesno_configuration
   read -p "Continue (y/n)?" ANSW
