@@ -227,13 +227,13 @@ case $CHOICE in
     1)
 		USE_PHP7_2="1"
 		USE_PHP7_3="0"
-		PHPVERSION7="7.1"
+		PHPVERSION7="7.2"
           ;;
 		2)
 		#change, if php 7.3 is available
 		USE_PHP7_2="1"
 		#USE_PHP7_3="1"
-		PHPVERSION7="7.2"
+		PHPVERSION7="7.3"
             ;;
 esac
 
