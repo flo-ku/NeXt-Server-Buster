@@ -10,7 +10,11 @@ wget --no-check-certificate -O /etc/apt/trusted.gpg.d/php.gpg https://packages.s
 echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
 
 apt-get update -y >/dev/null 2>&1
+
+###workaround
 install_packages "libcurl3"
+wget http://security.debian.org/debian-security/pool/updates/main/i/icu/libicu57_57.1-6+deb9u2_amd64.deb
+dpkg -i libicu57_57.1-6+deb9u2_amd64.deb
 
 PHPVERSION7="7.2"
 
