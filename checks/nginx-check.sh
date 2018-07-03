@@ -53,7 +53,7 @@ else
   echo "${error} _brotli.conf does NOT exist"
 fi
 
-if [ -e etc/nginx/html/${MYDOMAIN}/NeXt-logo.jpg ]; then
+if [ -e /etc/nginx/html/${MYDOMAIN}/NeXt-logo.jpg ]; then
   echo "${ok} NeXt-logo.jpg does exist"
 else
   echo "${error} NeXt-logo.jpg does NOT exist"
