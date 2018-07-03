@@ -6,6 +6,7 @@
 start_after_install() {
   source ${SCRIPT_PATH}/checks/nginx-check.sh; check_nginx
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -13,6 +14,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/php-check.sh; check_php
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -20,6 +22,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/openssh-check.sh; check_openssh
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -27,6 +30,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/fail2ban-check.sh; check_fail2ban
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -34,6 +38,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/unbound-check.sh; check_unbound
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -41,6 +46,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/dovecot-check.sh; check_dovecot
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -48,6 +54,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/postfix-check.sh; check_postfix
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -55,6 +62,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/rspamd-check.sh; check_rspamd
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -62,6 +70,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/lets_encrypt-check.sh; check_lets_encrypt
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -69,6 +78,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/firewall-check.sh; check_firewall
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -76,6 +86,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/mailman-check.sh; check_mailman
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -83,6 +94,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/mailserver-check.sh; check_mailserver
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
@@ -90,6 +102,7 @@ start_after_install() {
 
   source ${SCRIPT_PATH}/checks/system-check.sh; check_system
   #dialog_yesno_configuration
+  read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
