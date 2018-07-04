@@ -13,8 +13,8 @@ apt-get update -y >/dev/null 2>&1
 
 ###workaround
 install_packages "libcurl3"
-wget http://security.debian.org/debian-security/pool/updates/main/i/icu/libicu57_57.1-6+deb9u2_amd64.deb
-dpkg -i libicu57_57.1-6+deb9u2_amd64.deb
+wget_tar "http://security.debian.org/debian-security/pool/updates/main/i/icu/libicu57_57.1-6+deb9u2_amd64.deb"
+dpkg -i libicu57_57.1-6+deb9u2_amd64.deb >>"${main_log}" 2>>"${err_log}"
 
 PHPVERSION7="7.2"
 
