@@ -17,6 +17,11 @@ server {
 	location ~ \.php$ {
 		include _php_fastcgi.conf;
 	}
+### vll in extra datei??
+	#Rainloop
+	location ^~ /data {
+	  deny all;
+	}
 
 	include _general.conf;
 	include _brotli.conf;
