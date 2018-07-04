@@ -23,12 +23,6 @@ else
   echo "${error} _general.conf does NOT exist"
 fi
 
-if [ -e /etc/nginx/_letsencrypt.conf ]; then
-  echo "${ok} _letsencrypt.conf does exist"
-else
-  echo "${error} _letsencrypt.conf does NOT exist"
-fi
-
 if [ -e /etc/nginx/_pagespeed.conf ]; then
   echo "${ok} _pagespeed.conf does exist"
 else
@@ -39,12 +33,6 @@ if [ -e /etc/nginx/_php_fastcgi.conf ]; then
   echo "${ok} _php_fastcgi.conf does exist"
 else
   echo "${error} _php_fastcgi.conf does NOT exist"
-fi
-
-if [ -e /etc/nginx/_php.conf ]; then
-  echo "${ok} _php.conf does exist"
-else
-  echo "${error} _php.conf does NOT exist"
 fi
 
 if [ -e /etc/nginx/_brotli.conf ]; then

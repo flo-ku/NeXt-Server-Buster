@@ -104,10 +104,8 @@ update-rc.d nginx defaults >>"${main_log}" 2>>"${err_log}"
 rm -rf /etc/nginx/nginx.conf
 cp ${SCRIPT_PATH}/configs/nginx/nginx.conf /etc/nginx/nginx.conf
 cp ${SCRIPT_PATH}/configs/nginx/_general.conf /etc/nginx/_general.conf
-cp ${SCRIPT_PATH}/configs/nginx/_letsencrypt.conf /etc/nginx/_letsencrypt.conf
 cp ${SCRIPT_PATH}/configs/nginx/_pagespeed.conf /etc/nginx/_pagespeed.conf
 cp ${SCRIPT_PATH}/configs/nginx/_php_fastcgi.conf /etc/nginx/_php_fastcgi.conf
-cp ${SCRIPT_PATH}/configs/nginx/_php.conf /etc/nginx/_php.conf
 cp ${SCRIPT_PATH}/configs/nginx/_brotli.conf /etc/nginx/_brotli.conf
 
 rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
