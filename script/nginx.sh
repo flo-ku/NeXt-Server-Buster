@@ -8,8 +8,8 @@ install_nginx() {
 install_packages "psmisc libpcre3 libpcre3-dev libgeoip-dev zlib1g-dev"
 
 #temporary fix until checkinstall is available in buster repos
-wget http://ftp.de.debian.org/debian/pool/main/c/checkinstall/checkinstall_1.6.2-4_amd64.deb
-dpkg -i checkinstall_1.6.2-4_amd64.deb
+wget_tar "http://ftp.de.debian.org/debian/pool/main/c/checkinstall/checkinstall_1.6.2-4_amd64.deb"
+dpkg -i checkinstall_1.6.2-4_amd64.deb >>"${main_log}" 2>>"${err_log}"
 
 cd ${SCRIPT_PATH}/sources
 wget_tar "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz"

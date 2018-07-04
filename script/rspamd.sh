@@ -64,11 +64,11 @@ cp -R /etc/rspamd/local.d/dkim_signing.conf /etc/rspamd/local.d/arc.conf
 
 #install_packages "redis-server"
 #temporary fix until redis-server is working in buster repos
-wget http://security.debian.org/debian-security/pool/updates/main/r/redis/redis-tools_3.2.6-3+deb9u1_amd64.deb
-dpkg -i redis-tools_3.2.6-3+deb9u1_amd64.deb
+wget_tar "http://security.debian.org/debian-security/pool/updates/main/r/redis/redis-tools_3.2.6-3+deb9u1_amd64.deb"
+dpkg -i redis-tools_3.2.6-3+deb9u1_amd64.deb >>"${main_log}" 2>>"${err_log}"
 
-wget http://security.debian.org/debian-security/pool/updates/main/r/redis/redis-server_3.2.6-3+deb9u1_amd64.deb
-dpkg -i redis-server_3.2.6-3+deb9u1_amd64.deb
+wget_tar "http://security.debian.org/debian-security/pool/updates/main/r/redis/redis-server_3.2.6-3+deb9u1_amd64.deb"
+dpkg -i redis-server_3.2.6-3+deb9u1_amd64.deb >>"${main_log}" 2>>"${err_log}"
 
 cp ${SCRIPT_PATH}/configs/rspamd/redis.conf /etc/rspamd/local.d/redis.conf
 
