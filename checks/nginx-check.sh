@@ -5,64 +5,84 @@
 
 check_nginx() {
 
+failed_nginx_checks=0
+passed_nginx_checks=0
+
 if [ -e /etc/init.d/nginx ]; then
-  echo "${ok} nginx init does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} nginx init does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} nginx init does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/nginx.conf ]; then
-  echo "${ok} nginx.conf does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} nginx.conf does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} nginx.conf does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/_general.conf ]; then
-  echo "${ok} _general.conf does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} _general.conf does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} _general.conf does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/_pagespeed.conf ]; then
-  echo "${ok} _pagespeed.conf does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} _pagespeed.conf does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} _pagespeed.conf does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/_php_fastcgi.conf ]; then
-  echo "${ok} _php_fastcgi.conf does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} _php_fastcgi.conf does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} _php_fastcgi.conf does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/_brotli.conf ]; then
-  echo "${ok} _brotli.conf does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} _brotli.conf does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} _brotli.conf does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/html/${MYDOMAIN}/NeXt-logo.jpg ]; then
-  echo "${ok} NeXt-logo.jpg does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} NeXt-logo.jpg does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} NeXt-logo.jpg does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/html/${MYDOMAIN}/index.html ]; then
-  echo "${ok} index.html does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} index.html does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} index.html does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/sites-enabled/${MYDOMAIN}.conf ]; then
-  echo "${ok} /sites-enabled/${MYDOMAIN}.conf does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} /sites-enabled/${MYDOMAIN}.conf does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} /sites-enabled/${MYDOMAIN}.conf does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e /etc/nginx/sites-available/${MYDOMAIN}.conf ]; then
-  echo "${ok} /sites-available/${MYDOMAIN}.conf does exist"
+  passed_nginx_checks=$((passed_nginx_checks + 1))
 else
-  echo "${error} /sites-available/${MYDOMAIN}.conf does NOT exist"
+  failed_nginx_checks=$((failed_nginx_checks + 1))
+  echo "${error} /sites-available/${MYDOMAIN}.conf does NOT exist" >>"${failed_checks_log}"
+fi
+
+echo "Nginx:"
+echo "${ok} ${passed_nginx_checks} checks passed!"
+
+if [[ "${failed_nginx_checks}" != "0" ]]; then
+  echo "${error} ${failed_nginx_checks} check/s failed! Please check ${SCRIPT_PATH}/logs/failed_checks.log or consider a new installation!"
 fi
 
 #check website
