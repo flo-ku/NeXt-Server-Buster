@@ -21,7 +21,7 @@ unzip_file "nextcloud-${NEXTCLOUD_VERSION}.zip"
 rm nextcloud-${NEXTCLOUD_VERSION}.zip
 
 chown -R www-data: /srv/nextcloud
-ln -s /srv/nextcloud/ /etc/nginx/html/${MYDOMAIN}/nextcloud >>"${main_log}" 2>>"${err_log}"
+ln -s /srv/nextcloud/ /var/www/${MYDOMAIN}/nextcloud >>"${main_log}" 2>>"${err_log}"
 
 cp ${SCRIPT_PATH}/addons/vhosts/_nextcloud.conf /etc/nginx/_nextcloud.conf
 sed -i "s/#include _nextcloud.conf;/include _nextcloud.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf

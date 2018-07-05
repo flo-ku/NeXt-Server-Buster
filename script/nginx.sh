@@ -82,13 +82,14 @@ rm -R ${SCRIPT_PATH}/sources/ngx_brotli
 mkdir -p /etc/nginx
 mkdir -p /etc/nginx/sites
 mkdir -p /etc/nginx/ssl
-mkdir -p /var/cache/nginx
-mkdir -p /var/log/nginx/
 mkdir -p /etc/nginx/sites-available/
 mkdir -p /etc/nginx/sites-enabled/
 mkdir -p /etc/nginx/sites-custom/
 mkdir -p /etc/nginx/htpasswd/
 touch /etc/nginx/htpasswd/.htpasswd
+mkdir -p /var/www/${MYDOMAIN}
+mkdir -p /var/cache/nginx
+mkdir -p /var/log/nginx/
 
 # Install the Nginx service script
 wget -O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init --tries=3 >>"${main_log}" 2>>"${err_log}"
@@ -120,17 +121,12 @@ if [[ ${USE_PHP7_3} == '1' ]]; then
 	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/_php_fastcgi.conf >>"${main_log}" 2>>"${err_log}"
 fi
 
-systemctl -q start nginx.service
+cp ${SCRIPT_PATH}/includes/NeXt-logo.jpg /var/www/${MYDOMAIN}
+cp ${SCRIPT_PATH}/configs/nginx/index.html /var/www/${MYDOMAIN}/index.html
 
-mkdir -p /etc/nginx/html/${MYDOMAIN}
-systemctl -q restart nginx.service
-
-cp ${SCRIPT_PATH}/includes/NeXt-logo.jpg /etc/nginx/html/${MYDOMAIN}/
-cp ${SCRIPT_PATH}/configs/nginx/index.html /etc/nginx/html/${MYDOMAIN}/index.html
-
-#Make folder writeable
-chown -R www-data:www-data /etc/nginx/html/${MYDOMAIN}
-#chmod og+x /etc/nginx/html/${MYDOMAIN}
+chown -R www-data:www-data /var/www/${MYDOMAIN}
 
 ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
+
+systemctl -q restart nginx.service
 }
