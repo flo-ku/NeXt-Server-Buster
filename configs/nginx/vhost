@@ -20,26 +20,6 @@ server {
 
 	auth_basic_user_file htpasswd/.htpasswd;
 
-	location ~* /\.(?!well-known\/) {
-		deny all;
-		access_log off;
-		log_not_found off;
-	}
-	location ~* (?:\.(?:bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
-		deny all;
-		access_log off;
-		log_not_found off;
-	}
-	location = /favicon.ico {
-		access_log off;
-		log_not_found off;
-	}
-	location = /robots.txt {
-		allow all;
-		access_log off;
-		log_not_found off;
-	}
-
 	#Rainloop
 	location ^~ /data {
 	  deny all;

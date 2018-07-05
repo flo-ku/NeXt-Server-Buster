@@ -11,13 +11,13 @@ RAINLOOP_VERSION="rainloop-community-latest"
 # BASIS Edition only non commercial with auto updateer
 #RAINLOOP_VERSION="rainloop-latest"
 
-mkdir -p /etc/nginx/html/${MYDOMAIN}/webmail
-cd /etc/nginx/html/${MYDOMAIN}/
+mkdir -p /var/www/${MYDOMAIN}/public/webmail
+cd /var/www/${MYDOMAIN}/public/
 wget_tar "https://www.rainloop.net/repository/webmail/${RAINLOOP_VERSION}.zip"
 unzip_file "${RAINLOOP_VERSION}.zip -d /etc/nginx/html/${MYDOMAIN}/webmail"
 rm ${RAINLOOP_VERSION}.zip
 
-cd /etc/nginx/html/${MYDOMAIN}/webmail
+cd /var/www/${MYDOMAIN}/public/webmail
 find . -type d -exec chmod 755 {} \;
 find . -type f -exec chmod 644 {} \;
 chown -R www-data:www-data .

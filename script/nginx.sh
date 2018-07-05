@@ -79,8 +79,8 @@ rm -R ${SCRIPT_PATH}/sources/ngx_brotli
 
 mkdir -p /etc/nginx/sites
 mkdir -p /etc/nginx/ssl
-#mkdir -p /etc/nginx/sites-available/
-#mkdir -p /etc/nginx/sites-enabled/
+mkdir -p /etc/nginx/sites-available/
+mkdir -p /etc/nginx/sites-enabled/
 mkdir -p /etc/nginx/htpasswd/
 touch /etc/nginx/htpasswd/.htpasswd
 mkdir -p /var/www/${MYDOMAIN}/public
@@ -110,7 +110,7 @@ if [[ ${USE_PHP7_3} == '1' ]]; then
 	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/_php_fastcgi.conf >>"${main_log}" 2>>"${err_log}"
 fi
 
-chown -R www-data:www-data /var/www/${MYDOMAIN}
+chown -R www-data:www-data /var/www/${MYDOMAIN}/public
 ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
 
 cp ${SCRIPT_PATH}/includes/NeXt-logo.jpg /var/www/${MYDOMAIN}/public/NeXt-logo.jpg
