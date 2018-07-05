@@ -43,6 +43,7 @@ RSPAMADM_PASSWORT_HASH=$(rspamadm pw -p ${RSPAMADM_PASSWORT})
 cat > /etc/rspamd/local.d/worker-controller.inc <<END
 password = "${RSPAMADM_PASSWORT_HASH}";
 END
+sed -i "s/CPU doesn't have SSSE3 instructions set required for hyperscan, disable it//g" /etc/rspamd/local.d/worker-controller.inc
 
 cp ${SCRIPT_PATH}/configs/rspamd/worker-proxy.inc /etc/rspamd/local.d/worker-proxy.inc
 cp ${SCRIPT_PATH}/configs/rspamd/logging.inc /etc/rspamd/local.d/logging.inc
