@@ -3,8 +3,7 @@ server {
 	listen [::]:443 ssl http2;
 
 	server_name MYDOMAIN;
-	set $base /etc/nginx/html;
-	root $base/MYDOMAIN;
+	root	/etc/nginx/html/MYDOMAIN;
 
 	# index.php
 	index		index.php index.html index.htm;
@@ -17,7 +16,32 @@ server {
 	location ~ \.php$ {
 		include _php_fastcgi.conf;
 	}
-### vll in extra datei??
+
+	auth_basic_user_file htpasswd/.htpasswd;
+	
+	location ~* /\.(?!well-known\/) {
+		deny all;
+		access_log off;
+		log_not_found off;
+	}
+	location ~* (?:\.(?:bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$ {
+		deny all;
+		access_log off;
+		log_not_found off;
+	}
+	location = /favicon.ico {
+		access_log off;
+		log_not_found off;
+	}
+	location = /robots.txt {
+		allow all;
+		access_log off;
+		log_not_found off;
+	}
+	if (\$http_user_agent ~* "FeedDemon|JikeSpider|Indy Library|Alexa Toolbar|AskTbFXTV|AhrefsBot|CrawlDaddy|CoolpadWebkit|Java|Feedly|UniversalFeedParser|ApacheBench|Microsoft URL Control|Swiftbot|ZmEu|oBot|jaunty|Python-urllib|lightDeckReports Bot|YYSpider|DigExt|YisouSpider|HttpClient|MJ12bot|heritrix|EasouSpider|Ezooms|Scrapy") {
+		return 403;
+	}
+
 	#Rainloop
 	location ^~ /data {
 	  deny all;
