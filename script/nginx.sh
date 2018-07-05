@@ -68,10 +68,8 @@ NGINX_MODULES="--without-http_browser_module \
 #--with-openssl=${SCRIPT_PATH}/sources/openssl-${OPENSSL_VERSION} \
 
 ./configure $NGINX_OPTIONS $NGINX_MODULES --with-cc-opt='-O2 -g -pipe -Wall -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -m64 -mtune=generic' >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to configure nginx"
-
 make -j $(nproc) >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to make nginx"
 checkinstall --install=no -y >>"${main_log}" 2>>"${err_log}"
-
 dpkg -i nginx_${NGINX_VERSION}-1_amd64.deb >>"${main_log}" 2>>"${err_log}"
 mv nginx_${NGINX_VERSION}-1_amd64.deb ../ >>"${main_log}" 2>>"${err_log}"
 
@@ -81,23 +79,15 @@ rm -R ${SCRIPT_PATH}/sources/ngx_brotli
 
 mkdir -p /etc/nginx/sites
 mkdir -p /etc/nginx/ssl
-mkdir -p /etc/nginx/sites-available/
-mkdir -p /etc/nginx/sites-enabled/
-mkdir -p /etc/nginx/sites-custom/
+#mkdir -p /etc/nginx/sites-available/
+#mkdir -p /etc/nginx/sites-enabled/
 mkdir -p /etc/nginx/htpasswd/
 touch /etc/nginx/htpasswd/.htpasswd
 mkdir -p /var/www/${MYDOMAIN}/public
 mkdir -p /var/cache/nginx
 mkdir -p /var/log/nginx/
 
-# Install the Nginx service script
-wget -O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init --tries=3 >>"${main_log}" 2>>"${err_log}"
-	ERROR=$?
-	if [[ "$ERROR" != '0' ]]; then
-      echo "Error: nginx-sysvinit-script download failed."
-      exit
-    fi
-
+wget_tar "-O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init"
 chmod 0755 /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 chown root:root /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 update-rc.d nginx defaults >>"${main_log}" 2>>"${err_log}"
@@ -120,12 +110,11 @@ if [[ ${USE_PHP7_3} == '1' ]]; then
 	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/_php_fastcgi.conf >>"${main_log}" 2>>"${err_log}"
 fi
 
+chown -R www-data:www-data /var/www/${MYDOMAIN}
+ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
+
 cp ${SCRIPT_PATH}/includes/NeXt-logo.jpg /var/www/${MYDOMAIN}
 cp ${SCRIPT_PATH}/configs/nginx/index.html /var/www/${MYDOMAIN}/index.html
-
-chown -R www-data:www-data /var/www/${MYDOMAIN}
-
-ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
 
 systemctl -q restart nginx.service
 }
