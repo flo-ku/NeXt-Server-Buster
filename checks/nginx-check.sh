@@ -50,14 +50,14 @@ else
   echo "${error} _brotli.conf does NOT exist" >>"${failed_checks_log}"
 fi
 
-if [ -e /etc/nginx/html/${MYDOMAIN}/NeXt-logo.jpg ]; then
+if [ -e /var/www/${MYDOMAIN}/public/NeXt-logo.jpg ]; then
   passed_nginx_checks=$((passed_nginx_checks + 1))
 else
   failed_nginx_checks=$((failed_nginx_checks + 1))
   echo "${error} NeXt-logo.jpg does NOT exist" >>"${failed_checks_log}"
 fi
 
-if [ -e /etc/nginx/html/${MYDOMAIN}/index.html ]; then
+if [ -e /var/www/${MYDOMAIN}/public/index.html ]; then
   passed_nginx_checks=$((passed_nginx_checks + 1))
 else
   failed_nginx_checks=$((failed_nginx_checks + 1))
