@@ -30,6 +30,7 @@ if [[ ${USE_PHP7_3} == '1' ]]; then
 	sed -i 's/fastcgi_pass unix:\/var\/run\/php\/php7.2-fpm.sock\;/fastcgi_pass unix:\/var\/run\/php\/php7.3-fpm.sock\;/g' /etc/nginx/sites-custom/nextcloud.conf >>"${main_log}" 2>>"${err_log}"
 fi
 
+systemctl -q restart php$PHPVERSION7-fpm.service
 systemctl -q reload nginx.service
 
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt

@@ -48,6 +48,7 @@ if [[ ${USE_PHP7_3} == '1' ]]; then
 fi
 
 chown -R www-data:www-data /usr/local/phpmyadmin/
+systemctl -q restart php$PHPVERSION7-fpm.service
 systemctl -q reload nginx.service
 
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt
