@@ -18,7 +18,7 @@ server {
 	}
 
 	auth_basic_user_file htpasswd/.htpasswd;
-	
+
 	location ~* /\.(?!well-known\/) {
 		deny all;
 		access_log off;
@@ -50,7 +50,7 @@ server {
 	include _general.conf;
 	include _brotli.conf;
 	include _pagespeed.conf;
-	include _wordpress.conf;
+	#include _wordpress.conf;
 	#include _mailman.conf;
 	#include _rspamd.conf;
 	#include _wordpress.conf;
