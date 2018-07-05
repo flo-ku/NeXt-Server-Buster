@@ -3,7 +3,8 @@ server {
 	listen [::]:443 ssl http2;
 
 	server_name MYDOMAIN;
-	root	/var/www/MYDOMAIN;
+	set $base /var/www/MYDOMAIN;
+	root $base/public;
 
 	# index.php
 	index		index.php index.html index.htm;
