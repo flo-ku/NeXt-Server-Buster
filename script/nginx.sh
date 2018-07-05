@@ -113,8 +113,8 @@ fi
 chown -R www-data:www-data /var/www/${MYDOMAIN}
 ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
 
-cp ${SCRIPT_PATH}/includes/NeXt-logo.jpg /var/www/${MYDOMAIN}
-cp ${SCRIPT_PATH}/configs/nginx/index.html /var/www/${MYDOMAIN}/index.html
+cp ${SCRIPT_PATH}/includes/NeXt-logo.jpg /var/www/${MYDOMAIN}/public/NeXt-logo.jpg
+cp ${SCRIPT_PATH}/configs/nginx/index.html /var/www/${MYDOMAIN}/public/index.html
 
 systemctl -q restart nginx.service
 }
