@@ -14,7 +14,7 @@ RAINLOOP_VERSION="rainloop-community-latest"
 mkdir -p /var/www/${MYDOMAIN}/public/webmail
 cd /var/www/${MYDOMAIN}/public/
 wget_tar "https://www.rainloop.net/repository/webmail/${RAINLOOP_VERSION}.zip"
-unzip_file "${RAINLOOP_VERSION}.zip -d /etc/nginx/html/${MYDOMAIN}/webmail"
+unzip_file "${RAINLOOP_VERSION}.zip -d /var/www/${MYDOMAIN}/public/webmail"
 rm ${RAINLOOP_VERSION}.zip
 
 cd /var/www/${MYDOMAIN}/public/webmail
