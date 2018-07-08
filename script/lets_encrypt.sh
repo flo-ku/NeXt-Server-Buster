@@ -32,6 +32,7 @@ ln -s /root/.acme.sh/${MYDOMAIN}_ecc/${MYDOMAIN}.key /etc/nginx/ssl/${MYDOMAIN}-
 HPKP1=$(openssl x509 -pubkey < /etc/nginx/ssl/${MYDOMAIN}-ecc.cer | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64) >>"${main_log}" 2>>"${err_log}"
 HPKP2=$(openssl rand -base64 32) >>"${main_log}" 2>>"${err_log}"
 
+#SED doesn't work when the HPKP contains "/", so we escape it
 HPKP1=$(echo "$HPKP1" | sed 's/\//\\\//g')
 HPKP2=$(echo "$HPKP2" | sed 's/\//\\\//g')
 

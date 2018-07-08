@@ -114,4 +114,5 @@ if [[ "${failed_rspamd_checks}" != "0" ]]; then
 fi
 
 check_service "rspamd"
+check_service "redis-server"
 }
