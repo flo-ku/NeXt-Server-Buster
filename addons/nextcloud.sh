@@ -33,24 +33,15 @@ fi
 systemctl -q restart php$PHPVERSION7-fpm.service
 systemctl -q reload nginx.service
 
-echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt
-echo "Nextcloud" >> ${SCRIPT_PATH}/login_information.txt
-echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt
-echo "https://${MYDOMAIN}/nextcloud" >> ${SCRIPT_PATH}/login_information.txt
-echo "Database name = nextclouddb" >> ${SCRIPT_PATH}/login_information.txt
-echo "Database User: nextcloud" >> ${SCRIPT_PATH}/login_information.txt
-echo "Database password = ${NEXTCLOUD_DB_PASS}" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-
+touch ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
-echo "Nextcloud" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
-echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
-echo "https://${MYDOMAIN}/nextcloud" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
-echo "Database name = nextclouddb" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
-echo "Database User: nextcloud" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
-echo "Database password = ${NEXTCLOUD_DB_PASS}" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
-echo "" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
-
+echo "Nextcloud" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
+echo "--------------------------------------------" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
+echo "https://${MYDOMAIN}/nextcloud" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
+echo "NextcloudDBName = nextclouddb" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
+echo "NextcloudDBUser = nextcloud" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
+echo "Database password = ${NEXTCLOUD_DB_PASS}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
+echo "" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 
 dialog --title "Your Nextcloud logininformations" --tab-correct --exit-label "ok" --textbox ${SCRIPT_PATH}/login_information.txt_nextcloud 50 200
 }

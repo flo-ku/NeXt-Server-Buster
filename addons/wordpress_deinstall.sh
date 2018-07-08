@@ -18,6 +18,7 @@ mysql -u root -p${MYSQL_ROOT_PASS} -e "DROP USER ${WordpressDBUser}@localhost;"
 rm -rf /var/www/${MYDOMAIN}/public/${WordpressScriptPath}
 #https://github.com/shoujii/NeXt-Server/issues/47
 rm ${SCRIPT_PATH}/wordpress_login_data.txt
+sed -i "s/include _wordpress.conf;/#include _wordpress.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 service nginx restart
 }

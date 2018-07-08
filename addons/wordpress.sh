@@ -51,6 +51,7 @@ find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
 
 cp ${SCRIPT_PATH}/configs/nginx/_wordpress.conf /etc/nginx/_wordpress.conf
+sed -i "s/#include _wordpress.conf;/include _wordpress.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 systemctl restart nginx
 
