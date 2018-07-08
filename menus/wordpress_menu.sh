@@ -5,7 +5,6 @@
 
 menu_options_wordpress() {
 
-# --- MYDOMAIN ---
 source ${SCRIPT_PATH}/script/functions.sh; get_domain
 
 HEIGHT=40
@@ -13,40 +12,40 @@ WIDTH=80
 CHOICE_HEIGHT=5
 BACKTITLE="NeXt Server"
 TITLE="NeXt Server"
-CHOICE_HEIGHT=4
+CHOICE_HEIGHT=3
 MENU="In which path do you want to install Wordpress?"
 OPTIONS=(1 "${MYDOMAIN}/wordpress"
 2 "${MYDOMAIN}/blog"
-3 "root of ${MYDOMAIN} DISABLED! would be ${MYDOMAIN}/blog"
-4 "custom")
+3 "Custom (except root and minimum 2 characters!)")
 menu
 clear
 
 case $CHOICE in
   1)
-    WORDPRESSPATHNAME="wordpress"
+    WORDPRESS_PATH_NAME="wordpress"
     ;;
   2)
-    WORDPRESSPATHNAME="blog"
+    WORDPRESS_PATH_NAME="blog"
     ;;
   3)
-    #WORDPRESSPATHNAME=""
-    WORDPRESSPATHNAME="blog"
-    #WORDPRESSPATHNAME="rootpath"
-    ;;
-  4)
       while true
         do
-          WORDPRESSPATHNAME=$(dialog --clear \
+          WORDPRESS_PATH_NAME=$(dialog --clear \
           --backtitle "$BACKTITLE" \
-          --inputbox "Enter the name of Wordpress installation path. Link after ${MYDOMAIN}/ only A-Z and a-z letters" \
+          --inputbox "Enter the name of Wordpress installation path. Link after ${MYDOMAIN}/ only A-Z and a-z letters \
+          \n\nYour Input should have at least 2 characters or numbers!" \
           $HEIGHT $WIDTH \
           3>&1 1>&2 2>&3 3>&- \
           )
-            if [[ "$WORDPRESSPATHNAME" =~ [^0-9A-Za-z]+ ]];then
-              break
+            if [[ "$WORDPRESS_PATH_NAME" =~ ^[a-zA-Z0-9]+$ ]]; then
+              if [ ${#WORDPRESS_PATH_NAME} -ge 1 ]; then
+                  break
+              else
+                dialog_msg "[ERROR] Your Input should have at least 2 characters or numbers!"
+                dialog --clear
+              fi
             else
-              dialog_msg "[ERROR] You should read it properly!"
+              dialog_msg "[ERROR] Your Input should contain characters or numbers!!"
               dialog --clear
             fi
         done

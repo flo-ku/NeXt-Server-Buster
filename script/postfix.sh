@@ -36,5 +36,4 @@ touch /etc/postfix/postscreen_access
 
 postmap /etc/postfix/without_ptr
 newaliases
-
 }
