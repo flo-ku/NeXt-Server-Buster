@@ -93,21 +93,30 @@ CURRENT_DATE=`date +%Y-%m-%d:%H:%M:%S`
 #	else
 #	echo "service is running"
 #	fi
-function check_service() {
-z=0
- ps auxw | grep -P '\b'$1'(?!-)\b' > /dev/null 2>&1
- if [ $? != 0 ]; then
-	# Try to restart Service
-	while [ $z -le 2 ];
-	do
-		service $1 restart > /dev/null 2>&1
-		sleep 1
-		z=$(( z+1 ))
-	done
+#function check_service1() {
+#z=0
+# ps auxw | grep -P '\b'$1'(?!-)\b' > /dev/null 2>&1
+# if [ $? != 0 ]; then
+#	# Try to restart Service
+#	while [ $z -le 2 ];
+#	do
+#		service $1 restart > /dev/null 2>&1
+#		sleep 1
+#		z=$(( z+1 ))
+#	done
+#
+# else
+#   echo $1 "is running"; > /dev/null 2>&1
+# fi
+#}
 
- else
-   echo $1 "is running"; > /dev/null 2>&1
- fi
+function check_service() {
+if systemctl is-active --quiet $1
+then
+    echo "${ok} $1 is running!"
+else
+    echo "${error} $1 is not running!"
+fi
 }
 
 function wget_tar() {

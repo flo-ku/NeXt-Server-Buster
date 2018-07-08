@@ -49,4 +49,6 @@ echo "${ok} ${passed_openssh_checks} checks passed!"
 if [[ "${failed_openssh_checks}" != "0" ]]; then
   echo "${error} ${failed_openssh_checks} check/s failed! Please check ${SCRIPT_PATH}/logs/failed_checks.log or consider a new installation!"
 fi
+
+check_service "sshd"
 }

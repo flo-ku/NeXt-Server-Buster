@@ -85,15 +85,13 @@ if [[ "${failed_nginx_checks}" != "0" ]]; then
   echo "${error} ${failed_nginx_checks} check/s failed! Please check ${SCRIPT_PATH}/logs/failed_checks.log or consider a new installation!"
 fi
 
-#check website
-curl ${MYDOMAIN} -s -f -o /dev/null && echo "${ok} Website ${MYDOMAIN} is up and running." || echo "${error} Website ${MYDOMAIN} is down."
-
-#check process
-if pgrep -x "nginx" > /dev/null
-then
-    echo "${ok} Nginx is running"
+#check config
+nginx -t >/dev/null 2>&1
+ERROR=$?
+if [ "$ERROR" = '0' ]; then
+  echo "${ok} The Nginx Config is working."
 else
-    echo "${error} Nginx STOPPED"
+  echo "${error} The Nginx Config is NOT working."
 fi
 
 #check version
@@ -107,12 +105,9 @@ else
 	echo "${ok} The Nginx Version $nginxlocal is equal with the Nginx Version ${NGINX_VERSION} defined in the Userconfig!"
 fi
 
-#check config
-nginx -t >/dev/null 2>&1
-ERROR=$?
-if [ "$ERROR" = '0' ]; then
-  echo "${ok} The Nginx Config is working."
-else
-  echo "${error} The Nginx Config is NOT working."
-fi
+#check website
+curl ${MYDOMAIN} -s -f -o /dev/null && echo "${ok} Website ${MYDOMAIN} is up and running." || echo "${error} Website ${MYDOMAIN} is down."
+
+#check process
+check_service "nginx"
 }
