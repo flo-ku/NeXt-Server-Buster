@@ -15,21 +15,23 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 HEIGHT=40
 WIDTH=80
-CHOICE_HEIGHT=10
+CHOICE_HEIGHT=12
 BACKTITLE="NeXt Server"
 TITLE="NeXt Server"
 MENU="Choose one of the following options:"
 
 		OPTIONS=(1 "Install TS3 Server"
-						 2 "Install Minecraft"
-						 3 "Install Composer"
-						 4 "Install Nextcloud"
-						 5 "Install phpmyadmin"
-						 6 "Install Munin (WIP!)"
-             7 "Install Wordpress Experimental"
-						 8 "Deinstall Wordpress Experimental"
-						 9 "Back"
-						 10 "Exit")
+		 				 2 "Deinstall TS3 Server"
+						 3 "Install Minecraft"
+						 4 "Install Composer"
+						 5 "Install Nextcloud"
+						 6 "Deinstall Nextcloud"
+						 7 "Install phpmyadmin"
+						 8 "Install Munin"
+             9 "Install Wordpress"
+						 10 "Deinstall Wordpress"
+						 11 "Back"
+						 12 "Exit")
 
 						 CHOICE=$(dialog --clear \
 										 --nocancel \
@@ -54,6 +56,11 @@ MENU="Choose one of the following options:"
 	fi
 	;;
 2)
+	dialog_info "Deinstalling Teamspeak 3"
+		source ${SCRIPT_PATH}/addons/teamspeak3_deinstall.sh; deinstall_teamspeak3
+	dialog_msg "Finished Deinstalling Teamspeak 3"
+	;;
+3)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		dialog_info "Installing Minecraft"
 		source ${SCRIPT_PATH}/addons/minecraft.sh; install_minecraft
@@ -62,7 +69,7 @@ MENU="Choose one of the following options:"
 		echo "You have to install the NeXt Server to run this Addon!"
 	fi
 	;;
-3)
+4)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 	dialog_info "Installing Composer"
 	source ${SCRIPT_PATH}/addons/composer.sh; install_composer
@@ -71,7 +78,7 @@ else
 	echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 fi
 ;;
-4)
+5)
 	if [[ ${USE_PHP7_2} == '1'  ]] || [[ ${USE_PHP7_3} == '1'  ]]; then
 		if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 			dialog_info "Installing Nextcloud"
@@ -84,7 +91,12 @@ fi
 		echo "Nextcloud 13 is only running on PHP 7.2 and 7.3!"
 	fi
 	;;
-5)
+6)
+	dialog_info "Deinstalling Nextcloud"
+		source ${SCRIPT_PATH}/addons/nextcloud_deinstall.sh; deinstall_nextcloud
+	dialog_msg "Finished Deinstalling Nextcloud"
+	;;
+7)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		dialog_info "Installing PHPmyadmin"
 		source ${SCRIPT_PATH}/addons/composer.sh; install_composer
@@ -94,7 +106,7 @@ fi
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
 	;;
-6)
+8)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		dialog_info "Installing Munin"
 		source ${SCRIPT_PATH}/addons/munin.sh; install_munin
@@ -103,7 +115,7 @@ fi
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
 	;;
-7)
+9)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		source ${SCRIPT_PATH}/menus/wordpress_menu.sh; menu_options_wordpress
 		source ${SCRIPT_PATH}/addons/wordpress.sh; install_wordpress
@@ -112,15 +124,15 @@ fi
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
 	;;
-8)
+10)
 	dialog_info "Deinstalling Wordpress"
 		source ${SCRIPT_PATH}/addons/wordpress_deinstall.sh; deinstall_wordpress
 	dialog_msg "Finished Deinstalling Wordpress"
 	;;
-9)
+11)
   bash ${SCRIPT_PATH}/nxt.sh;
   ;;
-10)
+12)
 	echo "Exit"
 	exit 1
 	;;
