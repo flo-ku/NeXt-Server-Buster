@@ -8,11 +8,12 @@ install_nextcloud() {
 install_packages "unzip"
 
 MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" /root/NeXt-Server-Buster/login_information.txt)
+NEXTCLOUD_USER=$(username)
 NEXTCLOUD_DB_PASS=$(password)
 NEXTCLOUD_DB_NAME=$(username)
 
 mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE DATABASE ${NEXTCLOUD_DB_NAME};"
-mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY '${NEXTCLOUD_DB_PASS}';"
+mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE USER '${NEXTCLOUD_USER}'@'localhost' IDENTIFIED BY '${NEXTCLOUD_DB_PASS}';"
 mysql -u root -p${MYSQL_ROOT_PASS} -e "GRANT ALL PRIVILEGES ON ${NEXTCLOUD_DB_NAME}.* TO 'nextcloud'@'localhost';"
 mysql -u root -p${MYSQL_ROOT_PASS} -e "FLUSH PRIVILEGES;"
 
@@ -40,7 +41,7 @@ echo "Nextcloud" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "https://${MYDOMAIN}/${NEXTCLOUD_PATH_NAME}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "NextcloudDBName = ${NEXTCLOUD_DB_NAME}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
-echo "NextcloudDBUser = nextcloud" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
+echo "NextcloudDBUser = ${NEXTCLOUD_USER}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "Database password = ${NEXTCLOUD_DB_PASS}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 
