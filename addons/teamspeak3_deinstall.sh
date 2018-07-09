@@ -11,6 +11,13 @@ rm -rf /usr/local/ts3user
 rm ${SCRIPT_PATH}/ts3serverdata.txt
 rm /etc/init.d/ts3server
 
-#### close ports in firewall!
+sed -i "s/2008, //g" /etc/arno-iptables-firewall/firewall.conf
+sed -i "s/10011, //g" /etc/arno-iptables-firewall/firewall.conf
+sed -i "s/30033, //g" /etc/arno-iptables-firewall/firewall.conf
+sed -i "s/41144, //g" /etc/arno-iptables-firewall/firewall.conf
+
+sed -i "s/2010, //g" /etc/arno-iptables-firewall/firewall.conf
+sed -i "s/9987, //g" /etc/arno-iptables-firewall/firewall.conf
+
 systemctl force-reload arno-iptables-firewall.service >>"${main_log}" 2>>"${err_log}"
 }
