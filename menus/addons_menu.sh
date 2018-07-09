@@ -82,7 +82,7 @@ fi
 	if [[ ${USE_PHP7_2} == '1'  ]] || [[ ${USE_PHP7_3} == '1'  ]]; then
 		if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 			dialog_info "Installing Nextcloud"
-			source ${SCRIPT_PATH}/menus/nextcloud_menu.sh; menu_options_nextcloud
+			#source ${SCRIPT_PATH}/menus/nextcloud_menu.sh; menu_options_nextcloud
 			source ${SCRIPT_PATH}/addons/nextcloud.sh; install_nextcloud
 			dialog_msg "Finished installing Nextcloud"
 		else

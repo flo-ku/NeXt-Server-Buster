@@ -22,7 +22,7 @@ unzip_file "nextcloud-${NEXTCLOUD_VERSION}.zip"
 rm nextcloud-${NEXTCLOUD_VERSION}.zip
 
 chown -R www-data: /srv/nextcloud
-ln -s /srv/nextcloud/ /var/www/${MYDOMAIN}/public/${NEXTCLOUD_PATH_NAME} >>"${main_log}" 2>>"${err_log}"
+ln -s /srv/nextcloud/ /var/www/${MYDOMAIN}/public/nextcloud >>"${main_log}" 2>>"${err_log}"
 
 cp ${SCRIPT_PATH}/addons/vhosts/_nextcloud.conf /etc/nginx/_nextcloud.conf
 sed -i "s/#include _nextcloud.conf;/include _nextcloud.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
@@ -42,7 +42,6 @@ echo "https://${MYDOMAIN}/${NEXTCLOUD_PATH_NAME}" >> ${SCRIPT_PATH}/nextcloud_lo
 echo "NextcloudDBName = ${NEXTCLOUD_DB_NAME}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "NextcloudDBUser = nextcloud" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "Database password = ${NEXTCLOUD_DB_PASS}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
-echo "NextcloudScriptPath = ${NEXTCLOUD_PATH_NAME}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 
 dialog --title "Your Nextcloud logininformations" --tab-correct --exit-label "ok" --textbox ${SCRIPT_PATH}/login_information.txt_nextcloud 50 200
