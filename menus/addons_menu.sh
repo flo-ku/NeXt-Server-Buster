@@ -50,7 +50,7 @@ MENU="Choose one of the following options:"
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		dialog_info "Installing Teamspeak 3"
 		source ${SCRIPT_PATH}/addons/teamspeak3.sh; install_teamspeak3
-		dialog_msg "Finished installing Teamspeak 3! Credentials: ${SCRIPT_PATH}/login_information.txt"
+		dialog_msg "Finished installing Teamspeak 3! Credentials: ${SCRIPT_PATH}/teamspeak3_login_data.txt"
 	else
 		echo "You have to install the NeXt Server to run this Addon!"
 	fi
@@ -61,7 +61,7 @@ MENU="Choose one of the following options:"
 	dialog_msg "Finished Deinstalling Teamspeak 3.\n
 	Closed Ports TCP: 2008, 10011, 30033, 41144\n
 	UDP: 2010, 9987\n
-	IF you need them, please reopen them manually!"
+	If you need them, please reopen them manually!"
 	;;
 3)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
@@ -87,7 +87,7 @@ fi
 			dialog_info "Installing Nextcloud"
 			#source ${SCRIPT_PATH}/menus/nextcloud_menu.sh; menu_options_nextcloud
 			source ${SCRIPT_PATH}/addons/nextcloud.sh; install_nextcloud
-			dialog_msg "Finished installing Nextcloud"
+			dialog --title "Your Nextcloud logininformations" --tab-correct --exit-label "ok" --textbox ${SCRIPT_PATH}/nextcloud_login_data.txt 50 200
 		else
 			echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 		fi
@@ -123,7 +123,7 @@ fi
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		source ${SCRIPT_PATH}/menus/wordpress_menu.sh; menu_options_wordpress
 		source ${SCRIPT_PATH}/addons/wordpress.sh; install_wordpress
-		dialog_msg "Finished installing Wordpress"
+		dialog_msg "Visit ${MYDOMAIN}/${WORDPRESS_PATH_NAME} to finish the installation"
 	else
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi

@@ -44,6 +44,4 @@ echo "NextcloudDBName = ${NEXTCLOUD_DB_NAME}" >> ${SCRIPT_PATH}/nextcloud_login_
 echo "NextcloudDBUser = ${NEXTCLOUD_USER}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "Database password = ${NEXTCLOUD_DB_PASS}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
-
-dialog --title "Your Nextcloud logininformations" --tab-correct --exit-label "ok" --textbox ${SCRIPT_PATH}/nextcloud_login_data.txt 50 200
 }

@@ -14,7 +14,6 @@ MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" /root/NeXt-Server-Bus
 PMA_HTTPAUTH_USER=$(username)
 MYSQL_PMADB_USER=$(username)
 MYSQL_PMADB_NAME=$(username)
-
 PMA_HTTPAUTH_PASS=$(password)
 PMADB_PASS=$(password)
 PMA_BFSECURE_PASS=$(password)

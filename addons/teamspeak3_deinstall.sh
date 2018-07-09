@@ -9,7 +9,7 @@ set -x
 /etc/init.d/ts3server stop
 deluser ts3user
 rm -rf /usr/local/ts3user
-rm ${SCRIPT_PATH}/ts3serverdata.txt
+rm ${SCRIPT_PATH}/teamspeak3_login_data.txt
 rm /etc/init.d/ts3server
 
 sed -i "s/2008, //g" /etc/arno-iptables-firewall/firewall.conf
