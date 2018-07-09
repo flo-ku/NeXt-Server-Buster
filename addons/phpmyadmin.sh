@@ -51,22 +51,23 @@ chown -R www-data:www-data /usr/local/phpmyadmin/
 systemctl -q restart php$PHPVERSION7-fpm.service
 systemctl -q reload nginx.service
 
-echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt
-echo "phpmyadmin" >> ${SCRIPT_PATH}/login_information.txt
-echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-echo "PMA_HTTPAUTH_USER = ${PMA_HTTPAUTH_USER}" >> ${SCRIPT_PATH}/login_information.txt
-echo "PMA_HTTPAUTH_PASS = ${PMA_HTTPAUTH_PASS}" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-echo "MYSQL_USERNAME: root" >> ${SCRIPT_PATH}/login_information.txt
-echo "MYSQL_ROOT_PASS: $MYSQL_ROOT_PASS" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-echo "MYSQL_PMADB_USER = ${MYSQL_PMADB_USER}" >> ${SCRIPT_PATH}/login_information.txt
-echo "MYSQL_PMADB_NAME = ${MYSQL_PMADB_NAME}" >> ${SCRIPT_PATH}/login_information.txt
-echo "PMADB_PASS = ${PMADB_PASS}" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-echo "blowfish_secret = ${PMA_BFSECURE_PASS}" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
+touch ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "--------------------------------------------" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "phpmyadmin" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "--------------------------------------------" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "PMA_HTTPAUTH_USER = ${PMA_HTTPAUTH_USER}" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "PMA_HTTPAUTH_PASS = ${PMA_HTTPAUTH_PASS}" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "MYSQL_USERNAME: root" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "MYSQL_ROOT_PASS: $MYSQL_ROOT_PASS" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "MYSQL_PMADB_USER = ${MYSQL_PMADB_USER}" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "MYSQL_PMADB_NAME = ${MYSQL_PMADB_NAME}" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "PMADB_PASS = ${PMADB_PASS}" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "blowfish_secret = ${PMA_BFSECURE_PASS}" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txtt
+echo "" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
+echo "" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
 }
