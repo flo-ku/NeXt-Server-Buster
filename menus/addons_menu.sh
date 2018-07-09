@@ -58,7 +58,10 @@ MENU="Choose one of the following options:"
 2)
 	dialog_info "Deinstalling Teamspeak 3"
 		source ${SCRIPT_PATH}/addons/teamspeak3_deinstall.sh; deinstall_teamspeak3
-	dialog_msg "Finished Deinstalling Teamspeak 3"
+	dialog_msg "Finished Deinstalling Teamspeak 3.\n
+	Closed Ports TCP: 2008, 10011, 30033, 41144\n
+	UDP: 2010, 9987\n
+	IF you need them, pelase reopen them manually!"
 	;;
 3)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
