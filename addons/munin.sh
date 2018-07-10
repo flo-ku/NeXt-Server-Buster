@@ -5,8 +5,6 @@
 
 install_munin() {
 
-set -x
-
 install_packages "munin munin-node munin-plugins-extra apache2-utils"
 
 MUNIN_HTTPAUTH_PASS=$(password)
