@@ -48,6 +48,7 @@ find . -type d -exec chmod 755 {} \;
 cp ${SCRIPT_PATH}/addons/vhosts/_wordpress.conf /etc/nginx/_wordpress.conf
 sed -i "s/#include _wordpress.conf;/include _wordpress.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
+systemctl -q restart php$PHPVERSION7-fpm.service
 systemctl restart nginx
 
 touch ${SCRIPT_PATH}/wordpress_login_data.txt
