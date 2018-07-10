@@ -7,7 +7,7 @@ install_nextcloud() {
 
 install_packages "unzip"
 
-MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" /root/NeXt-Server-Buster/login_information.txt)
+MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" ${SCRIPT_PATH}/login_information.txt)
 NEXTCLOUD_USER=$(username)
 NEXTCLOUD_DB_PASS=$(password)
 NEXTCLOUD_DB_NAME=$(username)
