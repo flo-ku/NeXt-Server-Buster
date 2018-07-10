@@ -41,7 +41,7 @@ done <<< "$salts"
 
 mkdir -p /var/www/${MYDOMAIN}/public/${WORDPRESS_PATH_NAME}/wp-content/uploads
 
-cd /var/www/${MYDOMAIN}/public/${WORDPRESS_PATH_NAME}/wp-content/
+chown www-data:www-data -R *
 find . -type f -exec chmod 644 {} \;
 find . -type d -exec chmod 755 {} \;
 
