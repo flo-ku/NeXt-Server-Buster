@@ -15,10 +15,6 @@ cd ${SCRIPT_PATH}/sources
 wget_tar "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz"
 tar_file "nginx-${NGINX_VERSION}.tar.gz"
 cd nginx-${NGINX_VERSION} >>"${main_log}" 2>>"${err_log}"
-cd auto/
-cp configure ..
-cd ..
-
 
 #Thanks to https://github.com/Angristan/nginx-autoinstall/
 NGINX_OPTIONS="
