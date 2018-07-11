@@ -17,6 +17,10 @@ wget_tar "https://codeload.github.com/shoujii/nginx/tar.gz/${NGINX_VERSION}"
 #tar_file "nginx-${NGINX_VERSION}.tar.gz"
 tar_file "${NGINX_VERSION}"
 cd nginx-${NGINX_VERSION} >>"${main_log}" 2>>"${err_log}"
+cd auto/
+cp configure ..
+cd ..
+
 
 #Thanks to https://github.com/Angristan/nginx-autoinstall/
 NGINX_OPTIONS="
