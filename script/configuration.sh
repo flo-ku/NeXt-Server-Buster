@@ -124,10 +124,14 @@ start_after_install() {
   fi
 
   if [[ ${USE_MAILSERVER} = "1" ]]; then
-  dialog_msg "Please enter the shown DKIM key on next page to you DNS settings \n\n
-  remove all quote signs - so it looks like that:  \n\n
-  v=DKIM1; k=rsa; p=MIIBIjANBgkqh[...] "
-  cat ${SCRIPT_PATH}/DKIM_KEY_ADD_TO_DNS.txt
+    dialog_msg "Please enter the shown DKIM key on next page to you DNS settings \n\n
+    remove all quote signs - so it looks like that:  \n\n
+    v=DKIM1; k=rsa; p=MIIBIjANBgkqh[...] "
+    cat ${SCRIPT_PATH}/DKIM_KEY_ADD_TO_DNS.txt
+    if [ "$ANSW" = "n" ]; then
+    echo "Exit"
+    exit 1
+    fi
   fi
 
   dialog_msg "Finished after installation configuration"
