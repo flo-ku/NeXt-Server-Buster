@@ -5,7 +5,6 @@
 
 add_openssh_user() {
 
-#NEW_OPENSSH_USER
 apt-get update
 #usermod -a -G ssh-user root
 
@@ -56,5 +55,5 @@ Start the program and click on Conversions- Import key. \n
 Now select the Text file, where you saved the ssh_privatekey. \n
 After entering your SSH Password, you have to switch the paramter from RSA to ED25519. \n
 In the last step click on save private key - done! \n \n
-Dont forget to change your SSH Port in PuTTY!" 
+Dont forget to change your SSH Port in PuTTY!"
 }

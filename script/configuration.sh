@@ -5,10 +5,6 @@
 
 start_after_install() {
 
-  source ${SCRIPT_PATH}/configs/userconfig.cfg
-  source ${SCRIPT_PATH}/script/functions.sh
-  source ${SCRIPT_PATH}/configs/versions.cfg
-
   greenb() { echo $(tput bold)$(tput setaf 2)${1}$(tput sgr0); }
   ok="$(greenb [OKAY] -)"
   redb() { echo $(tput bold)$(tput setaf 1)${1}$(tput sgr0); }

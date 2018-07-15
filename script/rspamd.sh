@@ -23,11 +23,6 @@ cp ${SCRIPT_PATH}/configs/rspamd/classifier-bayes.conf /etc/rspamd/local.d/class
 
 RSPAMADM_PASSWORT=$(password)
 
-if [ -z "${RSPAMADM_PASSWORT}" ]; then
-    echo "RSPAMADM_PASSWORT is unset or set to the empty string, creating new one!"
-    RSPAMADM_PASSWORT=$(password)
-fi
-
 echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
 echo "RSPAMADM URL: https://${MYDOMAIN}/rspamd/" >> ${SCRIPT_PATH}/login_information.txt
 echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt

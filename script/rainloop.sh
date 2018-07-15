@@ -5,11 +5,7 @@
 
 install_rainloop() {
 
-# Community Edition commercial possible without auto updater
 RAINLOOP_VERSION="rainloop-community-latest"
-
-# BASIS Edition only non commercial with auto updateer
-#RAINLOOP_VERSION="rainloop-latest"
 
 mkdir -p /var/www/${MYDOMAIN}/public/webmail
 cd /var/www/${MYDOMAIN}/public/
