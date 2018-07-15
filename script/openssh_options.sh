@@ -44,9 +44,9 @@ service sshd restart
 }
 
 show_ssh_key() {
-dialog --backtitle "NeXt Server Configuration" --msgbox "Please save the shown SSH privatekey on next page into a textfile on your PC. \n\n
+dialog_msg "Please save the shown SSH privatekey on next page into a textfile on your PC. \n\n
 Important: \n
-In Putty you have only mark the text. Do not Press STRG+C!" $HEIGHT $WIDTH
+In Putty you have only mark the text. Do not Press STRG+C!"
 cat ${SCRIPT_PATH}/ssh_privatekey.txt
 }
 
