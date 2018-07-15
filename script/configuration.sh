@@ -105,7 +105,7 @@ start_after_install() {
   exit 1
   fi
 
- source ${SCRIPT_PATH}/script/openssh-options.sh; show_ssh_key
+  source ${SCRIPT_PATH}/script/openssh-options.sh; show_ssh_key
   read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
@@ -125,15 +125,11 @@ start_after_install() {
   exit 1
 
   if [[ ${USE_MAILSERVER} = "1" ]]; then
-  source ${SCRIPT_PATH}/script/configuration.sh; show_dkim_key
+  dialog_msg "Please enter the shown DKIM key on next page to you DNS settings \n\n
+  remove all quote signs - so it looks like that:  \n\n
+  v=DKIM1; k=rsa; p=MIIBIjANBgkqh[...] "
+  cat ${SCRIPT_PATH}/DKIM_KEY_ADD_TO_DNS.txt
   fi
 
   dialog_msg "Finished after installation configuration"
-}
-
-show_dkim_key() {
-dialog --backtitle "NeXt Server Configuration" --msgbox "Please enter the shown DKIM key on next page to you DNS settings \n\n
-remove all quote signs - so it looks like that:  \n\n
-v=DKIM1; k=rsa; p=MIIBIjANBgkqh[...] " $HEIGHT $WIDTH
-cat ${SCRIPT_PATH}/DKIM_KEY_ADD_TO_DNS.txt
 }
