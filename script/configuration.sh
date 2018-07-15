@@ -106,6 +106,7 @@ start_after_install() {
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
+  fi
 
   dialog_msg "Please save the shown login information on next page"
   cat ${SCRIPT_PATH}/login_information.txt
@@ -113,12 +114,14 @@ start_after_install() {
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
+  fi
 
   source ${SCRIPT_PATH}/script/openssh_options.sh; create_private_key
   read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
   exit 1
+  fi
 
   if [[ ${USE_MAILSERVER} = "1" ]]; then
   dialog_msg "Please enter the shown DKIM key on next page to you DNS settings \n\n
