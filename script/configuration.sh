@@ -105,7 +105,7 @@ start_after_install() {
   exit 1
   fi
 
-  source ${SCRIPT_PATH}/script/openssh-options.sh; show_ssh_key
+  source ${SCRIPT_PATH}/script/openssh_options.sh; show_ssh_key
   read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
@@ -118,7 +118,7 @@ start_after_install() {
   echo "Exit"
   exit 1
 
-  source ${SCRIPT_PATH}/script/openssh-options.sh; create_private_key
+  source ${SCRIPT_PATH}/script/openssh_options.sh; create_private_key
   read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
   echo "Exit"
