@@ -128,6 +128,7 @@ start_after_install() {
     remove all quote signs - so it looks like that:  \n\n
     v=DKIM1; k=rsa; p=MIIBIjANBgkqh[...] "
     cat ${SCRIPT_PATH}/DKIM_KEY_ADD_TO_DNS.txt
+    read -p "Continue (y/n)?" ANSW
     if [ "$ANSW" = "n" ]; then
     echo "Exit"
     exit 1
