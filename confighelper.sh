@@ -220,7 +220,7 @@ esac
 CHOICE_HEIGHT=2
 MENU="Do you want to Use PHP 7.2 or PHP 7.3?:"
 OPTIONS=(1 "PHP 7.2"
-		     2 "PHP 7.3 not working -> placeholder")
+		     2 "PHP 7.3 Alpha!")
 menu
 clear
 case $CHOICE in
@@ -230,9 +230,8 @@ case $CHOICE in
 		PHPVERSION7="7.2"
           ;;
 		2)
-		#change, if php 7.3 is available
-		USE_PHP7_2="1"
-		#USE_PHP7_3="1"
+		USE_PHP7_2="0"
+		USE_PHP7_3="1"
 		PHPVERSION7="7.3"
             ;;
 esac
