@@ -35,17 +35,28 @@ echo "" >> ${SCRIPT_PATH}/login_information.txt
 
 RSPAMADM_PASSWORT_HASH=$(rspamadm pw -p ${RSPAMADM_PASSWORT})
 
+grep 'sse3\|pni' /proc/cpuinfo > /dev/null
+if [ $? -eq 0 ];  then
 cat > /etc/rspamd/local.d/worker-controller.inc <<END
 password = "${RSPAMADM_PASSWORT_HASH}";
 END
+
+else
+
+cat > /etc/rspamd/local.d/worker-controller.inc <<END
+password = "${RSPAMADM_PASSWORT_HASH}";
+END
+
 sed -i '1d' /etc/rspamd/local.d/worker-controller.inc
 hash_temp=$(</etc/rspamd/local.d/worker-controller.inc)
 
 new_file='password = "'
 rm /etc/rspamd/local.d/worker-controller.inc
+
 cat > /etc/rspamd/local.d/worker-controller.inc <<END
 $new_file$hash_temp
 END
+fi
 
 cp ${SCRIPT_PATH}/configs/rspamd/worker-proxy.inc /etc/rspamd/local.d/worker-proxy.inc
 cp ${SCRIPT_PATH}/configs/rspamd/logging.inc /etc/rspamd/local.d/logging.inc
@@ -65,13 +76,13 @@ sed -i "s/placeholder/${CURRENT_YEAR}/g" /etc/rspamd/local.d/dkim_signing.conf
 
 cp -R /etc/rspamd/local.d/dkim_signing.conf /etc/rspamd/local.d/arc.conf
 
-#install_packages "redis-server"
+install_packages "redis-server"
 #temporary fix until redis-server is working in buster repos
-wget_tar "http://security.debian.org/debian-security/pool/updates/main/r/redis/redis-tools_3.2.6-3+deb9u1_amd64.deb"
-dpkg -i redis-tools_3.2.6-3+deb9u1_amd64.deb >>"${main_log}" 2>>"${err_log}"
+#wget_tar "http://security.debian.org/debian-security/pool/updates/main/r/redis/redis-tools_3.2.6-3+deb9u1_amd64.deb"
+#dpkg -i redis-tools_3.2.6-3+deb9u1_amd64.deb >>"${main_log}" 2>>"${err_log}"
 
-wget_tar "http://security.debian.org/debian-security/pool/updates/main/r/redis/redis-server_3.2.6-3+deb9u1_amd64.deb"
-dpkg -i redis-server_3.2.6-3+deb9u1_amd64.deb >>"${main_log}" 2>>"${err_log}"
+#wget_tar "http://security.debian.org/debian-security/pool/updates/main/r/redis/redis-server_3.2.6-3+deb9u1_amd64.deb"
+#dpkg -i redis-server_3.2.6-3+deb9u1_amd64.deb >>"${main_log}" 2>>"${err_log}"
 
 cp ${SCRIPT_PATH}/configs/rspamd/redis.conf /etc/rspamd/local.d/redis.conf
 
