@@ -16,7 +16,7 @@ MENU="Choose one of the following options:"
 			 2 "Add an account."
 			 3 "Change settings of an account."
        4 "Change password of an account."
-       5 "Delete an account.")
+       5 "Delete an account."
        6 "Back"
        7 "Exit")
 
@@ -32,7 +32,11 @@ MENU="Choose one of the following options:"
 
 	clear
 	case $CHOICE in
+
+######### add arguments + dialog input before doing the magic
+
 			1)
+				cd /etc/managevmail/
 				./managevmail.py list
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
@@ -42,6 +46,7 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
 				;;
 			2)
+				cd /etc/managevmail/
         ./managevmail.py add
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
@@ -51,6 +56,7 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
 				;;
 			3)
+				cd /etc/managevmail/
         ./managevmail.py change
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
@@ -60,6 +66,7 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
         ;;
       4)
+				cd /etc/managevmail/
         ./managevmail.py pw
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
@@ -69,6 +76,7 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
         ;;
       5)
+				cd /etc/managevmail/
         ./managevmail.py delete
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
