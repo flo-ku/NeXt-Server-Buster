@@ -87,6 +87,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 		source ${SCRIPT_PATH}/script/rspamd.sh; install_rspamd
 		source ${SCRIPT_PATH}/script/rainloop.sh; install_rainloop
 		source ${SCRIPT_PATH}/script/mailman.sh; install_mailman
+		source ${SCRIPT_PATH}/script/managevmail.sh; install_managevmail
 	fi
 	mailserver_end=`date +%s`
 	mailservertime=$((mailserver_end-mailserver_start))

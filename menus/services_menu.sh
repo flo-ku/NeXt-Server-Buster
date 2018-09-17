@@ -14,17 +14,18 @@ source ${SCRIPT_PATH}/script/prerequisites.sh; prerequisites
 
 HEIGHT=40
 WIDTH=80
-CHOICE_HEIGHT=6
+CHOICE_HEIGHT=7
 BACKTITLE="NeXt Server"
 TITLE="NeXt Server"
 MENU="Choose one of the following options:"
 
-		OPTIONS=(1 "Openssh Options"
-             2 "Fail2ban Options"
-             3 "Lets Encrypt Options"
-             4 "Firewall Options"
-             5 "Back"
-						 6 "Exit")
+		OPTIONS=(1 "Mailserver Options"
+             2 "Openssh Options"
+						 3 "Fail2ban Options"
+             4 "Lets Encrypt Options"
+             5 "Firewall Options"
+             6 "Back"
+						 7 "Exit")
 
 						 CHOICE=$(dialog --clear \
 										 --nocancel \
@@ -40,21 +41,24 @@ MENU="Choose one of the following options:"
 						 case $CHOICE in
 
 1)
-	source ${SCRIPT_PATH}/menus/openssh_menu.sh; menu_options_openssh
+	source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
 	;;
 2)
-	source ${SCRIPT_PATH}/menus/fail2ban_menu.sh; menu_options_fail2ban
+	source ${SCRIPT_PATH}/menus/openssh_menu.sh; menu_options_openssh
 	;;
 3)
-	source ${SCRIPT_PATH}/menus/lets_encrypt_menu.sh; menu_options_lets_encrypt
+	source ${SCRIPT_PATH}/menus/fail2ban_menu.sh; menu_options_fail2ban
 	;;
 4)
-	source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
+	source ${SCRIPT_PATH}/menus/lets_encrypt_menu.sh; menu_options_lets_encrypt
 	;;
 5)
+	source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
+	;;
+6)
   bash ${SCRIPT_PATH}/nxt.sh;
   ;;
-6)
+7)
 	echo "Exit"
 	exit 1
 	;;
