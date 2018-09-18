@@ -30,4 +30,8 @@ Follow the instructions!
 ```
 #Thanks to Thomas Leister and his awesome Mailserver Setup, we're using in this Script!
 https://thomas-leister.de/mailserver-debian-stretch/
+
+
+Also thanks to Michael Thies, for the managevmail script, used for the Mailserver.
+https://github.com/mhthies/managevmail
 ```
