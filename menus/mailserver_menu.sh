@@ -46,8 +46,14 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
 				;;
 			2)
+				CREATE_EMAIL_ADDRESS=$(dialog --clear \
+				--backtitle "$BACKTITLE" \
+				--inputbox "Enter the Email address you want to create (Example: admin@domain.com):" \
+				$HEIGHT $WIDTH \
+				3>&1 1>&2 2>&3 3>&- \
+				)
 				cd /etc/managevmail/
-        ./managevmail.py add
+        ./managevmail.py add $CREATE_EMAIL_ADDRESS
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
         echo "Exit"
@@ -56,8 +62,14 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
 				;;
 			3)
+				CHANGE_EMAIL_ADDRESS=$(dialog --clear \
+				--backtitle "$BACKTITLE" \
+				--inputbox "Enter the Email address you want to change (Example: admin@domain.com):" \
+				$HEIGHT $WIDTH \
+				3>&1 1>&2 2>&3 3>&- \
+				)
 				cd /etc/managevmail/
-        ./managevmail.py change
+        ./managevmail.py change $CHANGE_EMAIL_ADDRESS
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
         echo "Exit"
@@ -66,8 +78,14 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
         ;;
       4)
+				CHANGE_EMAIL_ADDRESS_PASSWORD=$(dialog --clear \
+				--backtitle "$BACKTITLE" \
+				--inputbox "Enter the Email address you want to change the password (Example: admin@domain.com):" \
+				$HEIGHT $WIDTH \
+				3>&1 1>&2 2>&3 3>&- \
+				)
 				cd /etc/managevmail/
-        ./managevmail.py pw
+        ./managevmail.py pw $CHANGE_EMAIL_ADDRESS_PASSWORD
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
         echo "Exit"
@@ -76,8 +94,14 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
         ;;
       5)
+				DELETE_EMAIL_ADDRESS=$(dialog --clear \
+				--backtitle "$BACKTITLE" \
+				--inputbox "Enter the Email address you want to delete (Example: admin@domain.com):" \
+				$HEIGHT $WIDTH \
+				3>&1 1>&2 2>&3 3>&- \
+				)
 				cd /etc/managevmail/
-        ./managevmail.py delete
+        ./managevmail.py delete $DELETE_EMAIL_ADDRESS
         read -p "Continue (y/n)?" ANSW
         if [ "$ANSW" = "n" ]; then
         echo "Exit"

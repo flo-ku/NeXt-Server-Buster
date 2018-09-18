@@ -19,8 +19,6 @@ MAILSERVER_MANAGEVMAIL_PASS=$(password)
 mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE USER managevmail@localhost IDENTIFIED BY '${MAILSERVER_MANAGEVMAIL_PASS}';"
 mysql -u root -p${MYSQL_ROOT_PASS} -e "GRANT SELECT, UPDATE, INSERT, DELETE ON vmail.* TO managevmail@localhost;"
 
-#add license of managevmail
-#does work???
 sed -i "s/?/${MAILSERVER_MANAGEVMAIL_PASS}/g" /etc/managevmail/config.ini
 
 echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt

@@ -32,6 +32,6 @@ Follow the instructions!
 https://thomas-leister.de/mailserver-debian-stretch/
 
 
-Also thanks to Michael Thies, for the managevmail script, used for the Mailserver.
+#Also thanks to Michael Thies, for the managevmail script, used for the Mailserver.
 https://github.com/mhthies/managevmail
 ```

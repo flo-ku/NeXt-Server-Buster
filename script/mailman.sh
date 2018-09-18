@@ -56,5 +56,5 @@ echo "Your Email User Name: postmaster@${MYDOMAIN}" >> ${SCRIPT_PATH}/login_info
 echo "EMAIL_ACCOUNT_PASS: ${EMAIL_ACCOUNT_PASS}" >> ${SCRIPT_PATH}/login_information.txt
 echo "This is also the Mailman Login" >> ${SCRIPT_PATH}/login_information.txt
 echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
-echo ""
+echo "" >> ${SCRIPT_PATH}/login_information.txt
 }
