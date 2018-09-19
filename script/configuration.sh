@@ -80,13 +80,6 @@ start_after_install() {
   exit 1
   fi
 
-  source ${SCRIPT_PATH}/checks/mailman-check.sh; check_mailman
-  read -p "Continue (y/n)?" ANSW
-  if [ "$ANSW" = "n" ]; then
-  echo "Exit"
-  exit 1
-  fi
-
   source ${SCRIPT_PATH}/checks/mailserver-check.sh; check_mailserver
   read -p "Continue (y/n)?" ANSW
   if [ "$ANSW" = "n" ]; then
