@@ -183,22 +183,22 @@ if [ ${CHECKRDNS} != mail.${MYDOMAIN} ] | [ ${CHECKRDNS} != mail.${MYDOMAIN}. ];
 	exit 1
 fi
 
-#CHECK_E_MAIL="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z])?\$"
-#while true
-#	do
-#		NXT_SYSTEM_EMAIL=$(dialog --clear \
-#		--backtitle "$BACKTITLE" \
-#		--inputbox "Enter your Email adress for system services example (please use the domain, you use for the script installation): admin@${MYDOMAIN}" \
-#		$HEIGHT $WIDTH \
-#		3>&1 1>&2 2>&3 3>&- \
-#		)
-#			if [[ "$NXT_SYSTEM_EMAIL" =~ $CHECK_E_MAIL ]];then
-#				break
-#			else
-#				dialog_msg "[ERROR] Should we again practice how a Email address looks?"
-#				dialog --clear
-#			fi
-#	done
+CHECK_E_MAIL="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z])?\$"
+while true
+	do
+		NXT_SYSTEM_EMAIL=$(dialog --clear \
+		--backtitle "$BACKTITLE" \
+		--inputbox "Enter your Email adress for system services example (please use the domain, you use for the script installation): admin@${MYDOMAIN}" \
+		$HEIGHT $WIDTH \
+		3>&1 1>&2 2>&3 3>&- \
+		)
+			if [[ "$NXT_SYSTEM_EMAIL" =~ $CHECK_E_MAIL ]];then
+				break
+			else
+				dialog_msg "[ERROR] Should we again practice how a Email address looks?"
+				dialog --clear
+			fi
+	done
 
 # --- Mailserver ---
 CHOICE_HEIGHT=2

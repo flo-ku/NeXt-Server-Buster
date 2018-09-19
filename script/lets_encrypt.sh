@@ -13,7 +13,7 @@ cd ${SCRIPT_PATH}/sources
 git clone https://github.com/Neilpang/acme.sh.git -q >>"${main_log}" 2>>"${err_log}"
 cd ./acme.sh
 sleep 1
-./acme.sh --install --accountemail "${NXT_SYSTEM_EMAIL}" >>"${main_log}" 2>>"${err_log}"
+./acme.sh --install --accountemail ${NXT_SYSTEM_EMAIL} >>"${main_log}" 2>>"${err_log}"
 
 . ~/.bashrc >>"${main_log}" 2>>"${err_log}"
 . ~/.profile >>"${main_log}" 2>>"${err_log}"
