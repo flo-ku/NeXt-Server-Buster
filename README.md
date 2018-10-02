@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="nxt.sh">
+  <a href="https://nxt.sh/">
     <img src="https://nxt.sh/wp-content/uploads/2018/01/NeXt-logo.jpg">
   </a>
 
