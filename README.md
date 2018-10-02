@@ -23,7 +23,6 @@
 
 - [What you need](#what-you-need)
 - [Quick start](#quick-start)
-- [Status](#status)
 - [What's included](#whats-included)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Documentation](#documentation)
@@ -110,14 +109,6 @@ Documentation search is powered by [Algolia's DocSearch](https://community.algol
 
 Please read through our [contributing guidelines](https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
-## Community
-
-Get updates on Bootstrap's development and chat with the project maintainers and community members.
-
-- Follow [@getbootstrap on Twitter](https://twitter.com/getbootstrap).
-- Read and subscribe to [The Official Bootstrap Blog](https://blog.getbootstrap.com/).
-- Join [the official Slack room](https://bootstrap-slack.herokuapp.com/).
-
 ## Creators
 
 **Marcel Gössel**
@@ -141,4 +132,4 @@ Also thanks to [Michael Thies], for the managevmail script, used for the Mailser
 
 ## Copyright and license
 
-Code and documentation copyright 2011-2018 the [Bootstrap Authors](https://github.com/twbs/bootstrap/graphs/contributors) and [Twitter, Inc.](https://twitter.com) Code released under the [MIT License](https://github.com/twbs/bootstrap/blob/master/LICENSE). Docs released under [Creative Commons](https://github.com/twbs/bootstrap/blob/master/docs/LICENSE).
+Code and documentation copyright 2017-2018 the [NeXt-Server-Buster Authors](https://github.com/shoujii/NeXt-Server-Buster/graphs/contributors) Code released under the [GNU General Public License v3.0](https://github.com/shoujii/NeXt-Server-Buster/blob/master/LICENSE).
