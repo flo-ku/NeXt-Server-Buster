@@ -1,6 +1,6 @@
-#What you need:
+#NeXt-Server-Buster Installation:
 
-A vServer with at least:
+What you need:
 ```
 - 1 CPU Core
 - 1 GB RAM
@@ -18,8 +18,8 @@ A vServer with at least:
 - The will to learn something about Linux ;)
 ```
 
-#Short instructions:
 
+Installation command:
 ```
 cd /root/; apt-get update; apt-get install git -y; git clone https://github.com/shoujii/NeXt-Server-Buster; cd NeXt-Server-Buster; bash nxt.sh
 ```
