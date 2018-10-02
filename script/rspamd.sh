@@ -16,7 +16,7 @@ echo "deb-src http://rspamd.com/apt-stable/ sid main" >> /etc/apt/sources.list.d
 apt-get update -y >/dev/null 2>&1
 
 #messing around...
-http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1-1_amd64.deb
+wget http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1-1_amd64.deb
 dpkg -i libssl1.1_1.1.1-1_amd64.deb
 
 install_packages "rspamd"
