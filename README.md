@@ -164,10 +164,16 @@ Also thanks to [Michael Thies], for the managevmail script, used for the Mailser
 (https://github.com/mhthies/managevmail)
 
 ## Used software
-- Nginx <https://github.com/nginx/nginx>
-- Openssh <https://github.com/openssh/openssh-portable>
-- Openssl <https://github.com/openssl/openssl>
-
+- Nginx                      <https://github.com/nginx/nginx>
+- Openssh                    <https://github.com/openssh/openssh-portable>
+- Openssl                    <https://github.com/openssl/openssl>
+- Dovecot                    <https://github.com/dovecot/core>
+- Postfix                    <http://www.postfix.org/>
+- fail2ban                   <https://github.com/fail2ban/fail2ban>
+- Arno's iptables firewall   <https://github.com/arno-iptables-firewall/aif>
+- MariaDB                    <https://github.com/MariaDB/server>
+- acme.sh                    <https://github.com/Neilpang/acme.sh>
+- unbound                    <https://github.com/NLnetLabs/unbound>
 
 ## Copyright and license
 
