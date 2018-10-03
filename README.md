@@ -29,6 +29,7 @@
 - [Contributing](#contributing)
 - [Creators](#creators)
 - [Thanks](#thanks)
+- [Used software](#used_software)
 - [Copyright and license](#copyright-and-license)
 
 ## What you need:
@@ -111,10 +112,13 @@ NeXt-Server-Buster/
     │   ├── make_error.log   
     │
     ├── menus/
+    │   ├── [Various menu .sh files]
     │
     ├── script/
+    │   ├── [Various script .sh files (main part of the script)]
     │
     ├── updates/
+    │   ├── [Various service update .sh files]
     │
     ├── LICENSE
     ├── README.md
@@ -126,8 +130,6 @@ NeXt-Server-Buster/
     ├── update_script.sh
 ```
 
-We provide compiled CSS and JS (`bootstrap.*`), as well as compiled and minified CSS and JS (`bootstrap.min.*`). [source maps](https://developers.google.com/web/tools/chrome-devtools/debug/readability/source-maps) (`bootstrap.*.map`) are available for use with certain browsers' developer tools.
-
 ## Bugs and feature requests
 
 Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/shoujii/NeXt-Server-Buster/issues/new).
@@ -135,9 +137,7 @@ Have a bug or a feature request? Please first read the [issue guidelines](https:
 
 ## Documentation
 
-Bootstrap's documentation, included in this repo in the root directory, is built with [Jekyll](https://jekyllrb.com/) and publicly hosted on GitHub Pages at <https://getbootstrap.com/>. The docs may also be run locally.
-
-Documentation search is powered by [Algolia's DocSearch](https://community.algolia.com/docsearch/). Working on our search? Be sure to set `debug: true` in `site/docs/4.1/assets/js/src/search.js` file.
+The NeXt-Server documentation, included in this repo in the docs directory, is also available on GitHub Pages at (add Link here) and the wiki.
 
 ## Contributing
 
@@ -162,6 +162,11 @@ Thanks to [Thomas Leister] and his awesome Mailserver Setup, we're using in this
 
 Also thanks to [Michael Thies], for the managevmail script, used for the Mailserver.
 (https://github.com/mhthies/managevmail)
+
+## Used software
+- Nginx <https://github.com/nginx/nginx>
+- Openssh <https://github.com/openssh/openssh-portable>
+- Openssl <https://github.com/openssl/openssl>
 
 
 ## Copyright and license
