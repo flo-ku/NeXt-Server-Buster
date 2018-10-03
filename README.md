@@ -29,7 +29,7 @@
 - [Contributing](#contributing)
 - [Creators](#creators)
 - [Thanks](#thanks)
-- [Used software](#used_software)
+- [Used software](#used-software)
 - [Copyright and license](#copyright-and-license)
 
 ## What you need:
