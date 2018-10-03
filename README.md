@@ -80,19 +80,42 @@ NeXt-Server-Buster/
     │   ├── [Various check .sh files]
     │
     ├── configs/
+    │   ├── arno-iptables-firewall/
+    │   ├── dovecot/
+    │   ├── fail2ban/
+    │   ├── mailserver/
+    │   ├── nginx/
+    │   ├── php/
+    │   ├── pma/
+    │   ├── postfix/
+    │   ├── rainloop/
+    │   ├── rspamd/  
+    │   ├── sshd_config  
+    │   ├── userconfig.cfg
+    │   ├── versions.cfg
     │
     ├── cronjobs/
+    │   ├── backupscript
     │
     ├── includes/
+    │   ├── NeXt-logo.jpg
+    │   ├── dns_settings.txt
+    │   ├── issue
+    │   ├── issue.net
     │
     ├── logs/
+    │   ├── error.log
+    │   ├── failed_checks.log
+    │   ├── main.log
+    │   ├── make.log
+    │   ├── make_error.log   
     │
     ├── menus/
     │
     ├── script/
     │
     ├── updates/
-    │ 
+    │
     ├── LICENSE
     ├── README.md
     ├── confighelper.sh
