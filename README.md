@@ -60,11 +60,11 @@ Install with [git]:
 - `cd /root/; apt-get update; apt-get install git -y; git clone https://github.com/shoujii/NeXt-Server-Buster; cd NeXt-Server-Buster; bash nxt.sh
 `
 
-Read the [Getting started page]() for information on the framework contents, templates and examples, and more.
+Read the [NeXt-Server Wiki](https://github.com/shoujii/NeXt-Server-Buster/wiki) for advanced information!
 
 ## What's included
 
-Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
+Within the cloned repository you'll find the following directories and files, grouping the different installation files and configs in a logic structure. You'll see something like this:
 
 ```
 NeXt-Server-Buster/
@@ -133,12 +133,12 @@ NeXt-Server-Buster/
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/twbs/bootstrap/blob/master/CONTRIBUTING.md#using-the-issue-tracker) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/shoujii/NeXt-Server-Buster/issues/new).
+Have a bug or a feature request? Please first read the [issue guidelines]() and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/shoujii/NeXt-Server-Buster/issues/new).
 
 
 ## Documentation
 
-The NeXt-Server documentation, included in this repo in the docs directory, is also available on GitHub Pages at (add Link here) and the wiki.
+The NeXt-Server documentation, included in this repository in the docs directory, is also available on the Github Wiki GitHub at (https://github.com/shoujii/NeXt-Server-Buster/wiki).
 
 ## Contributing
 
