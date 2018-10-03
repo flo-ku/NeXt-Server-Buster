@@ -8,7 +8,7 @@
   <p align="center">
     Debian Buster Version of NeXt-Server Script.
     <br>
-    <a href=""><strong>NeXt-Server docs »</strong></a>
+    <a href="https://github.com/shoujii/NeXt-Server-Buster/wiki"><strong>NeXt-Server Wiki »</strong></a>
     <br>
     <br>
     <a href="https://github.com/shoujii/NeXt-Server-Buster/issues/new">Report bug</a>
