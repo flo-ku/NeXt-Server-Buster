@@ -138,7 +138,7 @@ Have a bug or a feature request? Please first read the [issue guidelines]() and 
 
 ## Documentation
 
-The NeXt-Server documentation, included in this repository in the docs directory, is also available on the Github Wiki GitHub at (https://github.com/shoujii/NeXt-Server-Buster/wiki).
+The NeXt-Server documentation, included in this repository in the docs directory, is also available on the [NeXt-Server Wiki](https://github.com/shoujii/NeXt-Server-Buster/wiki).
 
 ## Contributing
 
