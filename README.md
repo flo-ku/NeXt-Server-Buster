@@ -68,19 +68,31 @@ Within the download you'll find the following directories and files, logically g
 NeXt-Server-Buster/
     ├── .github/
     │   ├── issue_template.md
+    │
     ├── addons/
+    │
     │   ├── vhosts/
         │   ├── [Various Vhost .conf files]
+        │
     │   ├── [Various Addon .sh files]
+    │
     ├── checks/
     │   ├── [Various check .sh files]
+    │
     ├── configs/
+    │
     ├── cronjobs/
+    │
     ├── includes/
+    │
     ├── logs/
+    │
     ├── menus/
+    │
     ├── script/
+    │
     ├── updates/
+    │ 
     ├── LICENSE
     ├── README.md
     ├── confighelper.sh
