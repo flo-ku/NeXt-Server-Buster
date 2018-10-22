@@ -5,7 +5,22 @@
 
 install_openssh() {
 
-install_packages "openssh-server openssh-client libpam-dev"
+mkdir -p /etc/ssh
+
+#temporary fix until 1.1.1 is available in repos
+wget_tar "http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1-1_amd64.deb"
+dpkg -i libssl1.1_1.1.1-1_amd64.deb >>"${main_log}" 2>>"${err_log}"
+install_packages "libpam-dev"
+
+cd ${SCRIPT_PATH}/sources
+wget_tar "https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${OPENSSH_VERSION}.tar.gz"
+tar_file "openssh-${OPENSSH_VERSION}.tar.gz"
+cd openssh-${OPENSSH_VERSION}
+
+./configure --prefix=/usr --with-pam --with-zlib --with-ssl-engine --with-ssl-dir=/etc/ssl --sysconfdir=/etc/ssh
+make -j $(nproc) >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to make openssh"
+mv /etc/ssh{,.bak}
+make install >>"${main_log}" 2>>"${err_log}"
 
 cp ${SCRIPT_PATH}/configs/sshd_config /etc/ssh/sshd_config
 cp ${SCRIPT_PATH}/includes/issue /etc/issue
