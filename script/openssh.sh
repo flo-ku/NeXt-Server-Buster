@@ -6,10 +6,6 @@
 install_openssh() {
 
 mkdir -p /etc/ssh
-
-#temporary fix until 1.1.1 is available in repos
-wget_tar "http://ftp.de.debian.org/debian/pool/main/o/openssl/libssl1.1_1.1.1-1_amd64.deb"
-dpkg -i libssl1.1_1.1.1-1_amd64.deb >>"${main_log}" 2>>"${err_log}"
 install_packages "libpam-dev"
 
 cd ${SCRIPT_PATH}/sources
