@@ -15,10 +15,6 @@ echo "deb-src http://rspamd.com/apt-stable/ sid main" >> /etc/apt/sources.list.d
 
 apt-get update -y >/dev/null 2>&1
 
-#messing around...
-#wget http://ftp.de.debian.org/debian/pool/main/r/rspamd/rspamd_1.7.9-1_amd64.deb
-#dpkg -i rspamd_1.7.9-1_amd64.deb
-
 install_packages "rspamd"
 systemctl stop rspamd
 
