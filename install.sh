@@ -11,7 +11,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	set -x
 
 	install_start=`date +%s`
-	echo "0" | dialog --gauge "Checking your system..." 10 70 0
+	#echo "0" | dialog --gauge "Checking your system..." 10 70 0
 	source ${SCRIPT_PATH}/script/logs.sh; set_logs
 	source ${SCRIPT_PATH}/script/functions.sh
 	source ${SCRIPT_PATH}/script/prerequisites.sh; prerequisites
@@ -125,7 +125,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	date=$(date +"%d-%m-%Y")
 	sed -i 's/NXT_INSTALL_DATE="0"/NXT_INSTALL_DATE="'${date}'"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 
-	echo "100" | dialog --gauge "NeXt Server Installation finished!" 10 70 0
+	#echo "100" | dialog --gauge "NeXt Server Installation finished!" 10 70 0
 
 	# Start Full Config after installation
 	source ${SCRIPT_PATH}/script/configuration.sh; start_after_install
