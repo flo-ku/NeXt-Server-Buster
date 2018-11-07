@@ -5,17 +5,6 @@
 
 install_php_7_3() {
 
-install_packages "apt-transport-https"
-wget --no-check-certificate -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg >>"${main_log}" 2>>"${err_log}"
-echo "deb https://packages.sury.org/php/ stretch main" > /etc/apt/sources.list.d/php.list
-
-apt-get update -y >/dev/null 2>&1
-
-###workaround
-install_packages "libcurl3"
-wget_tar "http://ftp.de.debian.org/debian/pool/main/i/icu/libicu57_57.1-9_amd64.deb"
-dpkg -i libicu57_57.1-9_amd64.deb >>"${main_log}" 2>>"${err_log}"
-
 PHPVERSION7="7.3"
 
 #conflict with libssl-dev not installed -> openssl / openssh
