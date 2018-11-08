@@ -5,6 +5,9 @@
 
 install_rainloop() {
 
+#for storing contacts in a db
+mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE DATABASE rainloop;"
+
 RAINLOOP_VERSION="rainloop-community-latest"
 
 mkdir -p /var/www/${MYDOMAIN}/public/webmail

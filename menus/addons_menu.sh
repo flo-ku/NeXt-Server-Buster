@@ -10,7 +10,6 @@ SCRIPT_PATH="/root/NeXt-Server-Buster"
 source ${SCRIPT_PATH}/configs/versions.cfg
 source ${SCRIPT_PATH}/script/functions.sh
 source ${SCRIPT_PATH}/script/logs.sh; set_logs
-source ${SCRIPT_PATH}/script/prerequisites.sh; prerequisites
 source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 HEIGHT=40
