@@ -71,7 +71,7 @@ sed -i 's/^OPEN_UDP=.*/OPEN_UDP="25, 80, 110, 143, 443, 465, 587, 993, 995"/' /e
 sed -i 's/^VERBOSE=.*/VERBOSE=1/' /etc/init.d/arno-iptables-firewall
 
 systemctl -q daemon-reload
-systemctl -q start arno-iptables-firewall.service
+#systemctl -q start arno-iptables-firewall.service
 
 #Fix error with /etc/rc.local
 touch /etc/rc.local
