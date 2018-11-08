@@ -15,6 +15,9 @@ cp ${SCRIPT_PATH}/configs/php/php.ini /etc/php/$PHPVERSION7/fpm/php.ini
 cp ${SCRIPT_PATH}/configs/php/php-fpm.conf /etc/php/$PHPVERSION7/fpm/php-fpm.conf
 cp ${SCRIPT_PATH}/configs/php/www.conf /etc/php/$PHPVERSION7/fpm/pool.d/www.conf
 
+sed -i "s/php7.2/php7.3/g" /etc/php/$PHPVERSION7/fpm/php-fpm.conf >>"${main_log}" 2>>"${err_log}"
+sed -i "s/7.2/7.3/g" /etc/php/$PHPVERSION7/fpm/php-fpm.conf >>"${main_log}" 2>>"${err_log}"
+
 # Configure APCu
 rm -rf /etc/php/$PHPVERSION7/mods-available/apcu.ini
 rm -rf /etc/php/$PHPVERSION7/mods-available/20-apcu.ini
