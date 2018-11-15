@@ -69,4 +69,6 @@ echo "--------------------------------------------" >> ${SCRIPT_PATH}/teamspeak3
 echo "TS3 Server Login = Look at: ts3serverdata.txt in the NeXt-Server Folder" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
 echo "TS3 Server commands = /etc/init.d/ts3server start and /etc/init.d/ts3server stop" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
 echo "" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
+
+sed -i 's/TS3_IS_INSTALLED="0"/TS3_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 }

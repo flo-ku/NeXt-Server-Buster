@@ -4,7 +4,7 @@
 #-------------------------------------------------------------------------------------------------------------
 
 deinstall_teamspeak3() {
-  
+
 /etc/init.d/ts3server stop
 deluser ts3user
 rm -rf /usr/local/ts3user
@@ -20,4 +20,6 @@ sed -i "s/2010, //g" /etc/arno-iptables-firewall/firewall.conf
 sed -i "s/9987, //g" /etc/arno-iptables-firewall/firewall.conf
 
 systemctl force-reload arno-iptables-firewall.service >>"${main_log}" 2>>"${err_log}"
+
+sed -i 's/TS3_IS_INSTALLED="1"/TS3_IS_INSTALLED="0"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 }

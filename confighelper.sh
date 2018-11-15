@@ -260,6 +260,17 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 	NXT_IS_INSTALLED="0"
 	NXT_IS_INSTALLED_MAILSERVER="0"
 	NXT_INSTALL_DATE="0"
+
+	NEXTCLOUD_IS_INSTALLED="0"
+	WORDPRESS_IS_INSTALLED="0"
+	PMA_IS_INSTALLED="0"
+	MONIT_IS_INSTALLED="0"
+	MUNIN_IS_INSTALLED="0"
+	TS3_IS_INSTALLED="0"
+	COMPOSER_IS_INSTALLED="0"
+
+	NEXTCLOUD_PATH=""
+	WORDPRESS_PATH=""
 #-----------------------------------------------------------#
 ############### Config File from Confighelper ###############
 #-----------------------------------------------------------#

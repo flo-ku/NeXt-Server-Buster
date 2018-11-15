@@ -29,7 +29,7 @@ cp ${SCRIPT_PATH}/addons/vhosts/_nextcloud.conf /etc/nginx/_nextcloud.conf
 sed -i "s/#include _nextcloud.conf;/include _nextcloud.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 if [[ ${USE_PHP7_3} == '1' ]]; then
-	sed -i "s/php7.2/php7.3/g" /etc/nginx/sites-custom/nextcloud.conf >>"${main_log}" 2>>"${err_log}"
+	sed -i "s/php7.2/php7.3/g" /etc/nginx/_nextcloud.conf >>"${main_log}" 2>>"${err_log}"
 fi
 
 systemctl -q restart php$PHPVERSION7-fpm.service
@@ -44,4 +44,6 @@ echo "NextcloudDBName = ${NEXTCLOUD_DB_NAME}" >> ${SCRIPT_PATH}/nextcloud_login_
 echo "NextcloudDBUser = ${NEXTCLOUD_USER}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "Database password = ${NEXTCLOUD_DB_PASS}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
+
+sed -i 's/NEXTCLOUD_IS_INSTALLED="0"/NEXTCLOUD_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 }
