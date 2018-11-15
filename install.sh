@@ -91,7 +91,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	mailservertime=$((mailserver_end-mailserver_start))
 
 	firewall_start=`date +%s`
-	#echo "96" | dialog --gauge "Installing Firewall..." 10 70 0
+	echo "96" | dialog --gauge "Installing Firewall..." 10 70 0
 	source ${SCRIPT_PATH}/script/firewall.sh; install_firewall
 	firewall_end=`date +%s`
 	firewalltime=$((firewall_end-firewall_start))
