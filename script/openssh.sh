@@ -13,7 +13,7 @@ wget_tar "https://cdn.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${OPENSSH
 tar_file "openssh-${OPENSSH_VERSION}.tar.gz"
 cd openssh-${OPENSSH_VERSION}
 
-./configure --prefix=/usr --with-pam --with-zlib --with-ssl-engine --with-ssl-dir=/etc/ssl --sysconfdir=/etc/ssh
+./configure --prefix=/usr --with-pam --with-zlib --with-ssl-engine --with-ssl-dir=/etc/ssl --sysconfdir=/etc/ssh >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to configure openssh"
 make -j $(nproc) >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to make openssh"
 mv /etc/ssh{,.bak}
 make install >>"${main_log}" 2>>"${err_log}"
