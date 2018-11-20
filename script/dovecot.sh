@@ -8,7 +8,6 @@ install_dovecot() {
 install_packages "dovecot-core dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-sieve dovecot-managesieved"
 
 systemctl stop dovecot
-
 mkdir -p /etc/dovecot
 cd /etc/dovecot
 

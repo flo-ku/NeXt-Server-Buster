@@ -13,18 +13,16 @@ source ${SCRIPT_PATH}/script/logs.sh; set_logs
 
 HEIGHT=40
 WIDTH=80
-CHOICE_HEIGHT=7
+CHOICE_HEIGHT=5
 BACKTITLE="NeXt Server"
 TITLE="NeXt Server"
 MENU="Choose one of the following options:"
 
 		OPTIONS=(1 "Mailserver Options"
              2 "Openssh Options"
-						 3 "Fail2ban Options"
-             4 "Lets Encrypt Options"
-             5 "Firewall Options"
-             6 "Back"
-						 7 "Exit")
+             3 "Firewall Options"
+             4 "Back"
+						 5 "Exit")
 
 						 CHOICE=$(dialog --clear \
 										 --nocancel \
@@ -46,18 +44,12 @@ MENU="Choose one of the following options:"
 	source ${SCRIPT_PATH}/menus/openssh_menu.sh; menu_options_openssh
 	;;
 3)
-	source ${SCRIPT_PATH}/menus/fail2ban_menu.sh; menu_options_fail2ban
-	;;
-4)
-	source ${SCRIPT_PATH}/menus/lets_encrypt_menu.sh; menu_options_lets_encrypt
-	;;
-5)
 	source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 	;;
-6)
+4)
   bash ${SCRIPT_PATH}/nxt.sh;
   ;;
-7)
+5)
 	echo "Exit"
 	exit 1
 	;;

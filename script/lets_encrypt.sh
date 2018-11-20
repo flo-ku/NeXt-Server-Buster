@@ -44,8 +44,3 @@ update_lets_encrypt() {
   cd ${SCRIPT_PATH}/.acme.sh/
   acme.sh --upgrade
 }
-
-renew_lets_encrypt_certs() {
-cd ${SCRIPT_PATH}/.acme.sh/
-bash acme.sh --renew -d ${MYDOMAIN} -d www.${MYDOMAIN} --force --ecc >>"${main_log}" 2>>"${err_log}"
-}

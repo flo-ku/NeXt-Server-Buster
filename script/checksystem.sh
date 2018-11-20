@@ -52,6 +52,6 @@ check_system() {
 	fi
 
 	#cleanup
-	apt-get -y remove facter libruby >/dev/null 2>&1
-	apt -y autoremove >/dev/null 2>&1
+	#apt-get -y remove facter libruby >/dev/null 2>&1
+	#apt -y autoremove >/dev/null 2>&1
 }
