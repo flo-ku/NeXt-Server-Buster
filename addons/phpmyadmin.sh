@@ -22,9 +22,6 @@ htpasswd -b /etc/nginx/htpasswd/.htpasswd ${PMA_HTTPAUTH_USER} ${PMA_HTTPAUTH_PA
 
 cd /usr/local
 git clone -b STABLE --depth=1 https://github.com/phpmyadmin/phpmyadmin.git phpmyadmin
-#wget_tar "https://codeload.github.com/phpmyadmin/phpmyadmin/tar.gz/RELEASE_${PMA_VERSION}"
-#tar_file "RELEASE_${PMA_VERSION}"
-#cp -R /usr/local/phpmyadmin-RELEASE_${PMA_VERSION}/* /usr/local/phpmyadmin/
 
 cd /usr/local/phpmyadmin/
 composer update --no-dev >>"${main_log}" 2>>"${err_log}"
