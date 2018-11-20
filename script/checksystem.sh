@@ -17,7 +17,7 @@ check_system() {
 
 	LOCAL_KERNEL_VERSION=$(uname -a | awk '/Linux/ {print $(NF-7)}')
 	if [ $LOCAL_KERNEL_VERSION != ${KERNEL_VERSION} ]; then
-      echo "Please upgrade your Linux Version ($LOCAL_KERNEL_VERSION) with apt-get update && apt-get dist-upgrade to match the script required Version ${KERNEL_VERSION}"
+      echo "Please upgrade your Linux Version ($LOCAL_KERNEL_VERSION) with apt-get update && apt-get dist-upgrade to match the script required Version ${KERNEL_VERSION} + reboot your server!"
 			exit 1
 	fi
 
