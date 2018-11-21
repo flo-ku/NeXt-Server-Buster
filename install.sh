@@ -9,7 +9,6 @@ source ${SCRIPT_PATH}/configs/versions.cfg
 source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 	set -x
-	set -e
 
 	install_start=`date +%s`
 	#echo "0" | dialog --gauge "Checking your system..." 10 70 0
@@ -41,6 +40,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	openssh_end=`date +%s`
 	opensshtime=$((openssh_end-openssh_start))
 
+	set -e
 	fail2ban_start=`date +%s`
 	#echo "32" | dialog --gauge "Installing fail2ban..." 10 70 0
 	source ${SCRIPT_PATH}/script/fail2ban.sh; install_fail2ban
