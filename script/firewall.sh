@@ -5,23 +5,9 @@
 
 install_firewall() {
 
-#ipset has dep. to iptables https://github.com/arno-iptables-firewall/aif/issues/53
-#if [ $(dpkg-query -l | grep ipset | wc -l) -ne 1 ]; then
-	#install_packages "ipset"
-#fi
-
-#temp fix
-wget http://ftp.de.debian.org/debian/pool/main/i/iptables/libxtables12_1.8.2-1_amd64.deb
-wget http://ftp.de.debian.org/debian/pool/main/i/iptables/libiptc0_1.8.2-1_amd64.deb
-wget http://ftp.de.debian.org/debian/pool/main/i/iptables/libip4tc0_1.8.2-1_amd64.deb
-wget http://ftp.de.debian.org/debian/pool/main/i/iptables/libip6tc0_1.8.2-1_amd64.deb
-wget http://ftp.de.debian.org/debian/pool/main/i/iptables/iptables_1.8.2-1_amd64.deb
-
-dpkg -i libxtables12_1.8.2-1_amd64.deb
-dpkg -i libiptc0_1.8.2-1_amd64.deb
-dpkg -i libip4tc0_1.8.2-1_amd64.deb
-dpkg -i libip6tc0_1.8.2-1_amd64.deb
-dpkg -i iptables_1.8.2-1_amd64.deb
+if [ $(dpkg-query -l | grep ipset | wc -l) -ne 1 ]; then
+	install_packages "ipset"
+fi
 
 git clone https://github.com/arno-iptables-firewall/aif.git ${SCRIPT_PATH}/sources/aif -q || error_exit "Failed to clone arno-ip-tables package"
 
