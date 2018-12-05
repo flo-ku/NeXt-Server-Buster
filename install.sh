@@ -40,7 +40,6 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	openssh_end=`date +%s`
 	opensshtime=$((openssh_end-openssh_start))
 
-	set -e
 	fail2ban_start=`date +%s`
 	#echo "32" | dialog --gauge "Installing fail2ban..." 10 70 0
 	source ${SCRIPT_PATH}/script/fail2ban.sh; install_fail2ban
@@ -57,6 +56,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	#echo "34" | dialog --gauge "Installing Nginx Addons..." 10 70 0
 	source ${SCRIPT_PATH}/script/nginx_addons.sh; install_nginx_addons
 
+	set -e
 	#echo "40" | dialog --gauge "Installing Nginx..." 10 70 0
 	source ${SCRIPT_PATH}/script/nginx.sh; install_nginx
 
