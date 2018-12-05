@@ -56,10 +56,10 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	#echo "34" | dialog --gauge "Installing Nginx Addons..." 10 70 0
 	source ${SCRIPT_PATH}/script/nginx_addons.sh; install_nginx_addons
 
-	set -e
 	#echo "40" | dialog --gauge "Installing Nginx..." 10 70 0
 	source ${SCRIPT_PATH}/script/nginx.sh; install_nginx
 
+	set -e
 	#echo "65" | dialog --gauge "Installing Let's Encrypt..." 10 70 0
 	source ${SCRIPT_PATH}/script/lets_encrypt.sh; install_lets_encrypt
 	#echo "68" | dialog --gauge "Creating Let's Encrypt Certificate..." 10 70 0
