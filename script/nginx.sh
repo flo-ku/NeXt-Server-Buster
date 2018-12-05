@@ -76,11 +76,8 @@ rm -R ${SCRIPT_PATH}/sources/nginx-${NGINX_VERSION}
 rm -R ${SCRIPT_PATH}/sources/libbrotli
 rm -R ${SCRIPT_PATH}/sources/ngx_brotli
 
-mkdir -p /etc/nginx/sites
-mkdir -p /etc/nginx/ssl
-mkdir -p /etc/nginx/sites-available/
-mkdir -p /etc/nginx/sites-enabled/
-mkdir -p /etc/nginx/htpasswd/
+mkdir -p /etc/nginx/{sites,ssl,sites-available,sites-enabled,htpasswd}
+
 touch /etc/nginx/htpasswd/.htpasswd
 mkdir -p /var/www/${MYDOMAIN}/public
 mkdir -p /var/cache/nginx
@@ -92,18 +89,13 @@ chown root:root /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 update-rc.d nginx defaults >>"${main_log}" 2>>"${err_log}"
 
 rm -rf /etc/nginx/nginx.conf
-cp ${SCRIPT_PATH}/configs/nginx/nginx.conf /etc/nginx/nginx.conf
-cp ${SCRIPT_PATH}/configs/nginx/_general.conf /etc/nginx/_general.conf
-cp ${SCRIPT_PATH}/configs/nginx/_pagespeed.conf /etc/nginx/_pagespeed.conf
-cp ${SCRIPT_PATH}/configs/nginx/_php_fastcgi.conf /etc/nginx/_php_fastcgi.conf
-cp ${SCRIPT_PATH}/configs/nginx/_brotli.conf /etc/nginx/_brotli.conf
+cp ${SCRIPT_PATH}/configs/nginx/confs/* /etc/nginx/
 
 rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
 cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
-#########################################################
 if [[ ${USE_PHP7_3} == '1' ]]; then
 	sed -i "s/php7.2/php7.3/g" /etc/nginx/_php_fastcgi.conf >>"${main_log}" 2>>"${err_log}"
 fi
