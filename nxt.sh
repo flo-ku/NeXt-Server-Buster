@@ -51,6 +51,12 @@ MENU="\n Choose one of the following options: \n \n"
 				1)
 					if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 						echo "The NeXt-Server Script is already installed!"
+						read -p "Continue (y/n)?" ANSW
+						if [ "$ANSW" = "n" ]; then
+						echo "Exit"
+						exit 1
+						fi
+						bash ${SCRIPT_PATH}/nxt.sh
 					else
 						bash install.sh
 					fi
