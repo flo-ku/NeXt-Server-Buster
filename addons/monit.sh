@@ -39,4 +39,8 @@ echo "--------------------------------------------" >> ${SCRIPT_PATH}/monit_logi
 echo "Monit Address: ${MYDOMAIN}/monit/" >> ${SCRIPT_PATH}/monit_login_data.txt
 echo "MONIT_ADMIN_USER = ${MONIT_ADMIN_USER}" >> ${SCRIPT_PATH}/monit_login_data.txt
 echo "MONIT_ADMIN_PASSWORD = ${MONIT_ADMIN_PASSWORD}" >> ${SCRIPT_PATH}/monit_login_data.txt
+
+dialog_msg "Please save the shown login information on next page"
+cat ${SCRIPT_PATH}/monit_login_data.txt
+source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
 }
