@@ -20,6 +20,7 @@ rm -r /usr/local/ts3user/teamspeak3-server_linux_amd64/ >>"${main_log}" 2>>"${er
 
 chown -R ts3user /usr/local/ts3user/ts3server >>"${main_log}" 2>>"${err_log}"
 
+touch ${SCRIPT_PATH}/teamspeak3_login_data.txt
 touch /usr/local/ts3user/ts3server/.ts3server_license_accepted
 timeout 10 sudo -u  ts3user /usr/local/ts3user/ts3server/ts3server_minimal_runscript.sh > ${SCRIPT_PATH}/teamspeak3_login_data.txt
 
