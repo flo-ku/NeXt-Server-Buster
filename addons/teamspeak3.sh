@@ -20,7 +20,6 @@ rm -r /usr/local/ts3user/teamspeak3-server_linux_amd64/ >>"${main_log}" 2>>"${er
 
 chown -R ts3user /usr/local/ts3user/ts3server >>"${main_log}" 2>>"${err_log}"
 
-touch ${SCRIPT_PATH}/teamspeak3_login_data.txt
 touch /usr/local/ts3user/ts3server/.ts3server_license_accepted
 timeout 10 sudo -u  ts3user /usr/local/ts3user/ts3server/ts3server_minimal_runscript.sh > ${SCRIPT_PATH}/teamspeak3_login_data.txt
 
@@ -68,7 +67,6 @@ echo "Teamspeak 3" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
 echo "TS3 Server Login = Look at: ts3serverdata.txt in the NeXt-Server Folder" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
 echo "TS3 Server commands = /etc/init.d/ts3server start and /etc/init.d/ts3server stop" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
-echo "" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
 
 sed -i 's/TS3_IS_INSTALLED="0"/TS3_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 }

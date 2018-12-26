@@ -60,8 +60,6 @@ echo "WordpressDBUser = ${WORDPRESS_USER}" >> ${SCRIPT_PATH}/wordpress_login_dat
 echo "WordpressDBName = ${WORDPRESS_DB_NAME}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
 echo "WordpressDBPassword = ${WORDPRESS_DB_PASS}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
 echo "WordpressScriptPath = ${WORDPRESS_PATH_NAME}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
-echo "" >> ${SCRIPT_PATH}/wordpress_login_data.txt
-echo "" >> ${SCRIPT_PATH}/wordpress_login_data.txt
 
 sed -i 's/WORDPRESS_IS_INSTALLED="0"/WORDPRESS_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 }

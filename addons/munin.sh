@@ -19,16 +19,17 @@ fi
 
 sed -i "s/localhost.localdomain/mail.${MYDOMAIN}/g" /etc/munin/munin.conf
 
-echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
-echo "Munin Address: ${MYDOMAIN}/munin/" >> ${SCRIPT_PATH}/login_information.txt
-echo "MUNIN_HTTPAUTH_USER = ${MUNIN_HTTPAUTH_USER}" >> ${SCRIPT_PATH}/login_information.txt
-echo "MUNIN_HTTPAUTH_PASS = ${MUNIN_HTTPAUTH_PASS}" >> ${SCRIPT_PATH}/login_information.txt
-echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-
 systemctl -q restart php$PHPVERSION7-fpm.service
 service munin-node restart
 service nginx restart
+
+touch ${SCRIPT_PATH}/munin_login_data.txt
+echo "--------------------------------------------" >> ${SCRIPT_PATH}/munin_login_data.txt
+echo "Munin" >> ${SCRIPT_PATH}/munin_login_data.txt
+echo "--------------------------------------------" >> ${SCRIPT_PATH}/munin_login_data.txt
+echo "Munin Address: ${MYDOMAIN}/munin/" >> ${SCRIPT_PATH}/munin_login_data.txt
+echo "MUNIN_HTTPAUTH_USER = ${MUNIN_HTTPAUTH_USER}" >> ${SCRIPT_PATH}/munin_login_data.txt
+echo "MUNIN_HTTPAUTH_PASS = ${MUNIN_HTTPAUTH_PASS}" >> ${SCRIPT_PATH}/munin_login_data.txt
 
 sed -i 's/MUNIN_IS_INSTALLED="0"/MUNIN_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 }
