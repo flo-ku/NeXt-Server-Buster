@@ -168,3 +168,11 @@ progress_gauge()
 {
   echo "$1" | dialog --gauge "$2" 10 70 0
 }
+
+if_exit()
+{
+  if $1; then
+      echo "$2"
+      exit 1
+  fi
+}

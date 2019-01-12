@@ -5,36 +5,20 @@
 
 check_system() {
 
-	if [ $USER != 'root' ]; then
-        echo "Please run the script as root"
-		exit 1
-	fi
 
-	if [ $(lsb_release -is) != 'Debian' ] && [ $(lsb_release -cs) != 'buster' ]; then
-		echo "The script only works on Debian 10.x"
-		exit 1
-	fi
+	if_exit "[ $USER != 'root' ]" "Please run the script as root"
+
+	if_exit "[ $(lsb_release -is) != 'Debian' ] && [ $(lsb_release -cs) != 'buster' ]" "The script only works on Debian 10.x"
 
 	LOCAL_KERNEL_VERSION=$(uname -a | awk '/Linux/ {print $(NF-7)}')
-	if [ $LOCAL_KERNEL_VERSION != ${KERNEL_VERSION} ]; then
-      echo "Please upgrade your Linux Version ($LOCAL_KERNEL_VERSION) with apt-get update && apt-get dist-upgrade to match the script required Version ${KERNEL_VERSION} + reboot your server!"
-			exit 1
-	fi
+	if_exit "[ $LOCAL_KERNEL_VERSION != ${KERNEL_VERSION} ]" "Please upgrade your Linux Version ($LOCAL_KERNEL_VERSION) with apt-get update && apt-get dist-upgrade to match the script required Version ${KERNEL_VERSION} + reboot your server!"
 
-	if [ $(grep MemTotal /proc/meminfo | awk '{print $2}') -lt 1000000 ]; then
-		echo "This script needs at least ~1000MB of memory"
-	fi
+	if_exit "[ $(grep MemTotal /proc/meminfo | awk '{print $2}') -lt 1000000 ]" "This script needs at least ~1000MB of memory"
 
 	FREE=`df -k --output=avail "$PWD" | tail -n1`
-	if [[ $FREE -lt 9437184 ]]; then
-		echo "This script needs at least 9 GB free disk space"
-		exit 1
-	fi
+	if_exit "[ $FREE -lt 9437184 ]" "This script needs at least 9 GB free disk space"
 
-	if [ $(dpkg-query -l | grep dmidecode | wc -l) -ne 1 ]; then
-    	echo "This script does not support the virtualization technology!"
-		exit 1
-	fi
+	if_exit "[ $(dpkg-query -l | grep dmidecode | wc -l) -ne 1 ]" "This script does not support the virtualization technology!"
 
 	if [ "$(dmidecode -s system-product-name)" == 'Bochs' ] || [ "$(dmidecode -s system-product-name)" == 'KVM' ] || [ "$(dmidecode -s system-product-name)" == 'All Series' ] || [ "$(dmidecode -s system-product-name)" == 'OpenStack Nova' ] || [ "$(dmidecode -s system-product-name)" == 'Standard' ]; then
 		echo > /dev/null
@@ -50,5 +34,4 @@ check_system() {
 			exit 1
        fi
 	fi
-
 }
