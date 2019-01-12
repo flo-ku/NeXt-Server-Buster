@@ -11,7 +11,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	set -x
 
 	install_start=`date +%s`
-	#echo "0" | dialog --gauge "Checking your system..." 10 70 0
+	progress_gauge "0" "Checking your system..."
 	source ${SCRIPT_PATH}/script/logs.sh; set_logs
 	source ${SCRIPT_PATH}/script/functions.sh
 	source ${SCRIPT_PATH}/script/functions.sh; setipaddrvars
@@ -23,49 +23,48 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	systemtime=$((system_end-install_start))
 
   system_start=`date +%s`
-	#echo "0" | dialog --gauge "Installing System..." 10 70 0
+	progress_gauge "0" "Installing System..."
 	source ${SCRIPT_PATH}/script/system.sh; install_system
 	system_end=`date +%s`
 	systemtime=$((system_end-system_start))
 
 	openssl_start=`date +%s`
-	#echo "1" | dialog --gauge "Installing OpenSSL..." 10 70 0
+	progress_gauge "1" "Installing OpenSSL..."
 	source ${SCRIPT_PATH}/script/openssl.sh; install_openssl
 	openssl_end=`date +%s`
 	openssltime=$((openssl_end-openssl_start))
 
 	openssh_start=`date +%s`
-	#echo "31" | dialog --gauge "Installing OpenSSH..." 10 70 0
+	progress_gauge "31" "Installing OpenSSH..."
 	source ${SCRIPT_PATH}/script/openssh.sh; install_openssh
 	openssh_end=`date +%s`
 	opensshtime=$((openssh_end-openssh_start))
 
 	fail2ban_start=`date +%s`
-	#echo "32" | dialog --gauge "Installing fail2ban..." 10 70 0
+	progress_gauge "32" "Installing fail2ban..."
 	source ${SCRIPT_PATH}/script/fail2ban.sh; install_fail2ban
 	fail2ban_end=`date +%s`
 	fail2bantime=$((fail2ban_end-fail2ban_start))
 
 	mariadb_start=`date +%s`
-	#echo "33" | dialog --gauge "Installing MariaDB..." 10 70 0
+	progress_gauge "33" "Installing MariaDB..."
 	source ${SCRIPT_PATH}/script/mariadb.sh; install_mariadb
 	maria_end=`date +%s`
 	mariatime=$((maria_end-mariadb_start))
 
 	nginx_start=`date +%s`
-	#echo "34" | dialog --gauge "Installing Nginx Addons..." 10 70 0
+	progress_gauge "34" "Installing Nginx Addons..."
 	source ${SCRIPT_PATH}/script/nginx_addons.sh; install_nginx_addons
 
-	#echo "40" | dialog --gauge "Installing Nginx..." 10 70 0
+	progress_gauge "40" "Installing Nginx..."
 	source ${SCRIPT_PATH}/script/nginx.sh; install_nginx
 
-	set -e
-	#echo "65" | dialog --gauge "Installing Let's Encrypt..." 10 70 0
+	progress_gauge "65" "Installing Let's Encrypt..."
 	source ${SCRIPT_PATH}/script/lets_encrypt.sh; install_lets_encrypt
-	#echo "68" | dialog --gauge "Creating Let's Encrypt Certificate..." 10 70 0
+	progress_gauge "68" "Creating Let's Encrypt Certificate..."
 	source ${SCRIPT_PATH}/script/lets_encrypt.sh; create_nginx_cert
 
-	#echo "74" | dialog --gauge "Installing PHP..." 10 70 0
+	progress_gauge "74" "Installing PHP..."
 	php_start=`date +%s`
 	if [[ ${USE_PHP7_2} = "1" ]]; then
 		source ${SCRIPT_PATH}/script/php7_2.sh; install_php_7_2
@@ -77,7 +76,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	php_end=`date +%s`
 	phptime=$((php_end-php_start))
 
-	#echo "75" | dialog --gauge "Installing Mailserver..." 10 70 0
+	progress_gauge "75" "Installing Mailserver..."
 	mailserver_start=`date +%s`
 	if [[ ${USE_MAILSERVER} = "1" ]]; then
 		source ${SCRIPT_PATH}/script/unbound.sh; install_unbound
@@ -92,7 +91,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	mailservertime=$((mailserver_end-mailserver_start))
 
 	firewall_start=`date +%s`
-	echo "96" | dialog --gauge "Installing Firewall..." 10 70 0
+	progress_gauge "96" "Installing Firewall..."
 	source ${SCRIPT_PATH}/script/firewall.sh; install_firewall
 	firewall_end=`date +%s`
 	firewalltime=$((firewall_end-firewall_start))
@@ -124,8 +123,6 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 	date=$(date +"%d-%m-%Y")
 	sed -i 's/NXT_INSTALL_DATE="0"/NXT_INSTALL_DATE="'${date}'"/' ${SCRIPT_PATH}/configs/userconfig.cfg
-
-	#echo "100" | dialog --gauge "NeXt Server Installation finished!" 10 70 0
 
 	# Start Full Config after installation
 	source ${SCRIPT_PATH}/script/configuration.sh; start_after_install
