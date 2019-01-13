@@ -6,6 +6,8 @@
 
 install_mailserver() {
 
+trap error_exit ERR  
+
 SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 systemctl -q stop nginx.service

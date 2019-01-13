@@ -9,7 +9,7 @@ check_system() {
 	Su_user=$(whoami)
 	[ "$Su_user" != 'root' ] && error_exit "Please run the script as root user"
 
-	[ $(lsb_release -is) != 'Debian' ] && [ $(lsb_release -cs) != 'buster' ] || error_exit "Please run the Script with Debian Buster"
+	[ $(lsb_release -is) != 'Debian' ] && [ $(lsb_release -cs) != 'buster' ] && error_exit "Please run the Script with Debian Buster"
 
 	LOCAL_KERNEL_VERSION=$(uname -a | awk '/Linux/ {print $(NF-7)}')
 	[ $LOCAL_KERNEL_VERSION != ${KERNEL_VERSION} ] && error_exit "Please upgrade your Linux Version ($LOCAL_KERNEL_VERSION) with apt-get update && apt-get dist-upgrade to match the script required Version ${KERNEL_VERSION} + reboot your server!"
