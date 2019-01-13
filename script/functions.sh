@@ -131,13 +131,19 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --allow-unauthenticated install $1 >>"
 
 error_exit()
 {
-  echo "Your Issue is: $1"
-  echo ""
-  echo "If you don't know how to resolve this Issue, please visit https://github.com/shoujii/NeXt-Server-Buster/issues/new to add the Issue on Github!"
+  set -eE -o functrace
+  local lineno=$1
+  local msg=$2
+  echo "Failed at $lineno: $msg"
+
+  error_file=$(basename $0)
+  echo "The error appeared on the file: ${error_file}"
   echo ""
   USED_OS=$(lsb_release -ic)
   echo "Your used OS is: $USED_OS"
-	exit 1
+  echo ""
+  echo "If you don't know how to resolve this Issue, please visit https://github.com/shoujii/NeXt-Server-Buster/issues/new to add the Issue on Github!"
+  exit 1
 }
 
 show_login_information()

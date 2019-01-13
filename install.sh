@@ -12,6 +12,9 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 	install_start=`date +%s`
 	source ${SCRIPT_PATH}/script/functions.sh
+	
+	trap 'error_exit ${LINENO} "$BASH_COMMAND"' ERR
+
 	progress_gauge "0" "Checking your system..."
 	source ${SCRIPT_PATH}/script/logs.sh; set_logs
 	source ${SCRIPT_PATH}/script/functions.sh; setipaddrvars
