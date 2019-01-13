@@ -131,14 +131,12 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --allow-unauthenticated install $1 >>"
 
 error_exit()
 {
-  set -eE -o functrace
-  local lineno=$1
-  local msg=$2
-  echo "Failed at $lineno: $msg"
-
-  error_file=$(basename $0)
-  echo "The error appeared on the file: ${error_file}"
+  clear
+  read line file <<<$(caller)
+  echo "An error occurred in line $line of file $file:" >&2
+  sed "${line}q;d" "$file" >&2
   echo ""
+  echo "Your Issue is: $1"
   USED_OS=$(lsb_release -ic)
   echo "Your used OS is: $USED_OS"
   echo ""
