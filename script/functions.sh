@@ -131,10 +131,11 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --allow-unauthenticated install $1 >>"
 
 error_exit()
 {
-	echo "$1" 1>&2
-  USED_OS=$(lsb_release -is)
-  echo "Visit https://github.com/shoujii/NeXt-Server-Buster/issues/new to add the Issue on Github!"
   echo "Your Issue is: $1"
+  echo ""
+  echo "If you don't know how to resolve this Issue, please visit https://github.com/shoujii/NeXt-Server-Buster/issues/new to add the Issue on Github!"
+  echo ""
+  USED_OS=$(lsb_release -ic)
   echo "Your used OS is: $USED_OS"
 	exit 1
 }
@@ -167,12 +168,4 @@ continue_or_exit()
 progress_gauge()
 {
   echo "$1" | dialog --gauge "$2" 10 70 0
-}
-
-if_exit()
-{
-  if $1; then
-      echo "$2"
-      exit 1
-  fi
 }

@@ -11,9 +11,9 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	set -x
 
 	install_start=`date +%s`
+	source ${SCRIPT_PATH}/script/functions.sh
 	progress_gauge "0" "Checking your system..."
 	source ${SCRIPT_PATH}/script/logs.sh; set_logs
-	source ${SCRIPT_PATH}/script/functions.sh
 	source ${SCRIPT_PATH}/script/functions.sh; setipaddrvars
 	source ${SCRIPT_PATH}/script/checksystem.sh; check_system
 
