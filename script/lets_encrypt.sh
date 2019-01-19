@@ -5,8 +5,6 @@
 
 install_lets_encrypt() {
 
-trap error_exit ERR  
-
 systemctl -q stop nginx.service
 mkdir -p /etc/nginx/ssl/
 

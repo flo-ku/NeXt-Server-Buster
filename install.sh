@@ -20,6 +20,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 	source ${SCRIPT_PATH}/confighelper.sh; confighelper_userconfig
 
+	set -euxo -o pipefail
 	progress_gauge "0" "Installing System..."
 	source ${SCRIPT_PATH}/script/system.sh; install_system
 
@@ -38,7 +39,6 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	progress_gauge "34" "Installing Nginx Addons..."
 	source ${SCRIPT_PATH}/script/nginx_addons.sh; install_nginx_addons
 
-	set -euxo -o pipefail
 	progress_gauge "40" "Installing Nginx..."
 	source ${SCRIPT_PATH}/script/nginx.sh; install_nginx
 

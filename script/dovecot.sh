@@ -4,8 +4,6 @@
 #-------------------------------------------------------------------------------------------------------------
 
 install_dovecot() {
-  
-trap error_exit ERR
 
 install_packages "dovecot-core dovecot-imapd dovecot-lmtpd dovecot-mysql dovecot-sieve dovecot-managesieved"
 

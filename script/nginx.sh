@@ -63,8 +63,7 @@ NGINX_MODULES="--without-http_browser_module \
 --with-openssl=${SCRIPT_PATH}/sources/openssl-${OPENSSL_VERSION} \
 --add-module=${SCRIPT_PATH}/sources/naxsi/naxsi_src \
 --add-module=${SCRIPT_PATH}/sources/incubator-pagespeed-ngx-${NPS_VERSION} \
---add-module=${SCRIPT_PATH}/sources/headers-more-nginx-module-${NGINX_HEADER_MOD_VERSION} \
---add-module=${SCRIPT_PATH}/sources/ngx_brotli "
+--add-module=${SCRIPT_PATH}/sources/headers-more-nginx-module-${NGINX_HEADER_MOD_VERSION}"
 
 ./configure $NGINX_OPTIONS $NGINX_MODULES --with-cc-opt='-O2 -g -pipe -Wall -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -m64 -mtune=generic' >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to configure nginx"
 make -j $(nproc) >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to make nginx"
