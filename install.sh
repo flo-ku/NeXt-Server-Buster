@@ -20,7 +20,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 	source ${SCRIPT_PATH}/confighelper.sh; confighelper_userconfig
 
-	#set -eu -o pipefail
+	set -eu -o pipefail
 	progress_gauge "0" "Installing System..."
 	source ${SCRIPT_PATH}/script/system.sh; install_system
 

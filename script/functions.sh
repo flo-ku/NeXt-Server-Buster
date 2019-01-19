@@ -131,7 +131,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --allow-unauthenticated install $1 >>"
 
 error_exit()
 {
-  clear
+  #clear
   read line file <<<$(caller)
   echo "An error occurred in line $line of file $file:" >&2
   sed "${line}q;d" "$file" >&2
