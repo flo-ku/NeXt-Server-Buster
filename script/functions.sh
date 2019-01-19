@@ -140,7 +140,7 @@ error_exit()
   echo "Your used OS is: $USED_OS"
   echo ""
   echo "If you don't know how to resolve this Issue, please visit https://github.com/shoujii/NeXt-Server-Buster/issues/new to add the Issue on Github!"
-  exit 1
+  exit
 }
 
 show_login_information()
