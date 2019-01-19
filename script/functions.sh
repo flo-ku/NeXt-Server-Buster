@@ -136,12 +136,6 @@ error_exit()
   echo "An error occurred in line $line of file $file:" >&2
   sed "${line}q;d" "$file" >&2
   echo ""
-  if [ -z "$1" ]; then
-    echo "Unspecified error"
-  else
-    echo "Your Issue is: $1"
-  fi
-  echo ""
   USED_OS=$(lsb_release -ic)
   echo "Your used OS is: $USED_OS"
   echo ""
