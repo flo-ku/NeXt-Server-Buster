@@ -104,6 +104,4 @@ ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYD
 
 cp ${SCRIPT_PATH}/includes/NeXt-logo.jpg /var/www/${MYDOMAIN}/public/NeXt-logo.jpg
 cp ${SCRIPT_PATH}/configs/nginx/index.html /var/www/${MYDOMAIN}/public/index.html
-
-systemctl -q restart nginx.service
 }
