@@ -5,6 +5,8 @@
 
 install_fail2ban() {
 
+trap error_exit ERR
+
 install_packages "python"
 
 mkdir -p ${SCRIPT_PATH}/sources/${FAIL2BAN_VERSION}/ >>"${main_log}" 2>>"${err_log}"

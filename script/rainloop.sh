@@ -5,6 +5,8 @@
 
 install_rainloop() {
 
+trap error_exit ERR
+
 #for storing contacts in a db
 mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE DATABASE rainloop;"
 

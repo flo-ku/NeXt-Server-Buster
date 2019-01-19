@@ -5,6 +5,8 @@
 
 install_roundcube() {
 
+trap error_exit ERR
+
 mkdir -p /var/www/${MYDOMAIN}/public/webmail
 cd /var/www/${MYDOMAIN}/public/
 wget_tar "https://codeload.github.com/roundcube/roundcubemail/zip/${ROUNDCUBE_VERSION}"

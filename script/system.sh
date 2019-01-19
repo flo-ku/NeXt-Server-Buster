@@ -5,6 +5,8 @@
 
 install_system() {
 
+trap error_exit ERR
+
 hostnamectl set-hostname --static mail
 
 rm /etc/hosts

@@ -5,6 +5,8 @@
 
 install_nginx_addons() {
 
+trap error_exit ERR
+
 install_packages "autoconf automake libtool git unzip zlib1g-dev libpcre3 libpcre3-dev uuid-dev"
 
 cd ${SCRIPT_PATH}/sources

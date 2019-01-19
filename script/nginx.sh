@@ -5,6 +5,8 @@
 
 install_nginx() {
 
+trap error_exit ERR
+
 install_packages "psmisc libpcre3 libpcre3-dev libgeoip-dev zlib1g-dev"
 
 #temporary fix until checkinstall is available in buster repos

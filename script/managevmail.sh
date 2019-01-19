@@ -6,6 +6,8 @@
 
 install_managevmail() {
 
+trap error_exit ERR
+
 install_packages "python3 python3-mysql.connector"
 
 mkdir -p /etc/managevmail/

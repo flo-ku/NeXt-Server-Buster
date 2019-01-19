@@ -5,6 +5,8 @@
 
 install_unbound() {
 
+trap error_exit ERR
+
 install_packages "unbound dnsutils"
 
 #IPv4 workaround

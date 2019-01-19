@@ -5,6 +5,8 @@
 
 install_openssh() {
 
+trap error_exit ERR
+
 mkdir -p /etc/ssh
 install_packages "libpam-dev openssh-server"
 
