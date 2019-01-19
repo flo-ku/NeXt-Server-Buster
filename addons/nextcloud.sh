@@ -28,10 +28,6 @@ ln -s /srv/nextcloud/ /var/www/${MYDOMAIN}/public/nextcloud >>"${main_log}" 2>>"
 cp ${SCRIPT_PATH}/addons/vhosts/_nextcloud.conf /etc/nginx/_nextcloud.conf
 sed -i "s/#include _nextcloud.conf;/include _nextcloud.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
-if [[ ${USE_PHP7_3} == '1' ]]; then
-	sed -i "s/php7.2/php7.3/g" /etc/nginx/_nextcloud.conf >>"${main_log}" 2>>"${err_log}"
-fi
-
 systemctl -q restart php$PHPVERSION7-fpm.service
 systemctl -q reload nginx.service
 

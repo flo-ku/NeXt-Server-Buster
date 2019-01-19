@@ -95,10 +95,6 @@ cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.con
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
-if [[ ${USE_PHP7_3} == '1' ]]; then
-	sed -i "s/php7.2/php7.3/g" /etc/nginx/_php_fastcgi.conf >>"${main_log}" 2>>"${err_log}"
-fi
-
 chown -R www-data:www-data /var/www/${MYDOMAIN}/public
 ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
 

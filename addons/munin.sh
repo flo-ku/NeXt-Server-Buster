@@ -13,10 +13,6 @@ htpasswd -b /etc/nginx/htpasswd/.htpasswd ${MUNIN_HTTPAUTH_USER} ${MUNIN_HTTPAUT
 cp ${SCRIPT_PATH}/addons/vhosts/_munin.conf /etc/nginx/_munin.conf
 sed -i "s/#include _munin.conf;/include _munin.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
-if [[ ${USE_PHP7_3} == '1' ]]; then
-	sed -i "s/php7.2/php7.3/g" /etc/nginx/_munin.conf
-fi
-
 sed -i "s/localhost.localdomain/mail.${MYDOMAIN}/g" /etc/munin/munin.conf
 
 systemctl -q restart php$PHPVERSION7-fpm.service

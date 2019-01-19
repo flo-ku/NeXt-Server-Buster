@@ -87,7 +87,7 @@ fi
 ;;
 
 4)
-	if [[ ${USE_PHP7_2} == '1'  ]] || [[ ${USE_PHP7_3} == '1'  ]]; then
+	if [[ ${USE_PHP7_3} == '1'  ]]; then
 		if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 			if [[ ${NEXTCLOUD_IS_INSTALLED} == '1' ]]; then
 				echo "Nextcloud is already installed!"

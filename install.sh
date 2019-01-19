@@ -47,13 +47,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 	source ${SCRIPT_PATH}/script/lets_encrypt.sh; create_nginx_cert
 
 	progress_gauge "74" "Installing PHP..."
-	if [[ ${USE_PHP7_2} = "1" ]]; then
-		source ${SCRIPT_PATH}/script/php7_2.sh; install_php_7_2
-	fi
-
-	if [[ ${USE_PHP7_3} = "1" ]]; then
-		source ${SCRIPT_PATH}/script/php7_3.sh; install_php_7_3
-	fi
+	source ${SCRIPT_PATH}/script/php7_3.sh; install_php_7_3
 
 	progress_gauge "75" "Installing Mailserver..."
 	if [[ ${USE_MAILSERVER} = "1" ]]; then

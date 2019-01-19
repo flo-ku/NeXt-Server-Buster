@@ -160,25 +160,9 @@ case $CHOICE in
             ;;
 esac
 
-# --- PHP ---
-CHOICE_HEIGHT=2
-MENU="Do you want to Use PHP 7.2 or PHP 7.3?:"
-OPTIONS=(1 "PHP 7.2"
-		     2 "PHP 7.3 Alpha!")
-menu
-clear
-case $CHOICE in
-    1)
-		USE_PHP7_2="1"
-		USE_PHP7_3="0"
-		PHPVERSION7="7.2"
-          ;;
-		2)
-		USE_PHP7_2="0"
-		USE_PHP7_3="1"
-		PHPVERSION7="7.3"
-            ;;
-esac
+
+USE_PHP7_3="1"
+PHPVERSION7="7.3"
 
 CONFIG_COMPLETED="1"
 
@@ -193,7 +177,6 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 	CONFIG_COMPLETED="${CONFIG_COMPLETED}"
 	MYDOMAIN="${MYDOMAIN}"
 	USE_MAILSERVER="${USE_MAILSERVER}"
-	USE_PHP7_2="${USE_PHP7_2}"
 	USE_PHP7_3="${USE_PHP7_3}"
 	PHPVERSION7="${PHPVERSION7}"
 
