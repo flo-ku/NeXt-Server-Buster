@@ -3,6 +3,8 @@
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
+set -x
+
 SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 source ${SCRIPT_PATH}/configs/versions.cfg
@@ -18,7 +20,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 	source ${SCRIPT_PATH}/confighelper.sh; confighelper_userconfig
 
-	set -eu -o pipefail
+	#set -eu -o pipefail
 	progress_gauge "0" "Installing System..."
 	source ${SCRIPT_PATH}/script/system.sh; install_system
 
@@ -63,6 +65,7 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 		source ${SCRIPT_PATH}/script/postfix.sh; install_postfix
 		source ${SCRIPT_PATH}/script/rspamd.sh; install_rspamd
 		source ${SCRIPT_PATH}/script/rainloop.sh; install_rainloop
+		#source ${SCRIPT_PATH}/script/rainloop.sh; install_roundcube
 		source ${SCRIPT_PATH}/script/managevmail.sh; install_managevmail
 	fi
 
