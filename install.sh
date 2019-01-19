@@ -3,8 +3,6 @@
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
-set -x
-
 SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 source ${SCRIPT_PATH}/configs/versions.cfg

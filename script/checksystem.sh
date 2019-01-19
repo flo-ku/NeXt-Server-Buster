@@ -5,7 +5,6 @@
 
 check_system() {
 
-	trap error_exit ERR
 	Su_user=$(whoami)
 	[ "$Su_user" != 'root' ] && error_exit "Please run the script as root user"
 
