@@ -29,62 +29,6 @@ else
 	fi
 fi
 
-# --- TIMEZONE ---
-CHOICE_HEIGHT=12
-MENU="Choose a timezone:"
-OPTIONS=(1 "Berlin GMT/UTC +1"
-		 2 "Vienna GMT/UTC +1"
-		 3 "Moscow GMT/UTC +3"
-		 4 "Lisbon GMT/UTC +0"
-		 5 "London GMT/UTC +0"
-		 6 "Paris GMT/UTC +1"
-		 7 "Rome GMT/UTC +1"
-		 8 "Sydney GMT/UTC +10"
-		 9 "Tokyo GMT/UTC +9"
-		10 "Istanbul GMT/UTC +3"
-		11 "Los_Angeles GMT/UTC -8"
-		12 "New_York GMT/UTC -5")
-menu
-clear
-case $CHOICE in
-        1)
-			TIMEZONE="Europe/Berlin"
-            ;;
-		2)
-			TIMEZONE="Europe/Vienna"
-            ;;
-		3)
-			TIMEZONE="Europe/Moscow"
-            ;;
-		4)
-			TIMEZONE="Europe/Lisbon"
-            ;;
-		5)
-			TIMEZONE="Europe/London"
-            ;;
-		6)
-			TIMEZONE="Europe/Paris"
-            ;;
-		7)
-			TIMEZONE="Europe/Rome"
-            ;;
-		8)
-			TIMEZONE="Australia/Sydney"
-            ;;
-		9)
-			TIMEZONE="Asia/Tokyo"
-            ;;
-		10)
-			TIMEZONE="Asia/Istanbul"
-            ;;
-		11)
-			TIMEZONE="America/Los_Angeles"
-            ;;
-        12)
-			TIMEZONE="America/New_York"
-            ;;
-esac
-
 # --- MYDOMAIN ---
 source ${SCRIPT_PATH}/script/functions.sh; get_domain
 CHECK_DOMAIN_LENGTH=`echo -n ${DETECTED_DOMAIN} | wc -m`
@@ -247,7 +191,6 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 # This file was created on ${CURRENT_DATE} with NeXt Server Version ${GIT_LOCAL_FILES_HEAD}
 
 	CONFIG_COMPLETED="${CONFIG_COMPLETED}"
-	TIMEZONE="${TIMEZONE}"
 	MYDOMAIN="${MYDOMAIN}"
 	USE_MAILSERVER="${USE_MAILSERVER}"
 	USE_PHP7_2="${USE_PHP7_2}"

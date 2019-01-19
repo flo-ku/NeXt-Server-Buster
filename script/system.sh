@@ -20,6 +20,7 @@ sed -i "s/domain.tld/${MYDOMAIN}/g" /etc/hosts
 
 echo $(hostname -f) > /etc/mailname
 
+TIMEZONE=$(wget http://ip-api.com/line/${IPADR}?fields=timezone -q -O -)
 timedatectl set-timezone ${TIMEZONE}
 
 rm /etc/apt/sources.list
