@@ -17,7 +17,8 @@ tar_file "${PSOL_VERSION}-x64.tar.gz"
 cd ${SCRIPT_PATH}/sources
 git clone --recursive https://github.com/bagder/libbrotli >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to clone libbrotli"
 cd libbrotli
-./autogen.sh >>"${main_log}" 2>>"${err_log}"
+libtoolize
+automake >>"${main_log}" 2>>"${err_log}"
 ./configure >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to configure libbrotli"
 mkdir brotli/c/tools/.deps && touch brotli/c/tools/.deps/brotli-brotli.Po
 make -j $(nproc) >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to make libbrotli"
