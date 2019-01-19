@@ -14,7 +14,7 @@ mkdir -p /etc/managevmail/
 wget https://codeload.github.com/mhthies/managevmail/zip/master
 unzip master -d /etc/managevmail/
 mv /etc/managevmail/managevmail-master/* /etc/managevmail/
-rm -R managevmail-master
+rm -R /etc/managevmail/managevmail-master
 
 MAILSERVER_MANAGEVMAIL_PASS=$(password)
 
