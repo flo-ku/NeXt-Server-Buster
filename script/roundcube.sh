@@ -10,9 +10,11 @@ trap error_exit ERR
 mkdir -p /var/www/${MYDOMAIN}/public/webmail
 cd /var/www/${MYDOMAIN}/public/
 wget_tar "https://codeload.github.com/roundcube/roundcubemail/zip/${ROUNDCUBE_VERSION}"
-unzip_file "${ROUNDCUBE_VERSION}.zip -d /var/www/${MYDOMAIN}/public/webmail"
-rm /var/www/${MYDOMAIN}/public/${ROUNDCUBE_VERSION}.zip
+unzip_file "${ROUNDCUBE_VERSION}"
+mv /var/www/${MYDOMAIN}/public/roundcubemail-1.3.8/ /var/www/${MYDOMAIN}/public/webmail/
+rm /var/www/${MYDOMAIN}/public/${ROUNDCUBE_VERSION}
 cd /var/www/${MYDOMAIN}/public/webmail
+mv /var/www/${MYDOMAIN}/public/webmail/composer.json-dist /var/www/${MYDOMAIN}/public/webmail/composer.json
 curl -sS https://getcomposer.org/installer | php && php composer.phar install --no-dev
 
 chown root:root -R /var/www/${MYDOMAIN}/public/webmail
