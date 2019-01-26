@@ -30,7 +30,7 @@ mysql -u root -p${MYSQL_ROOT_PASS} -e "CREATE USER '${ROUNDCUBE_USER}'@'localhos
 mysql -u root -p${MYSQL_ROOT_PASS} -e "GRANT ALL PRIVILEGES ON ${ROUNDCUBE_DB_NAME}.* TO '${ROUNDCUBE_USER}'@'localhost';"
 mysql -u root -p${MYSQL_ROOT_PASS} -e "FLUSH PRIVILEGES;"
 
-mysql -u root -p"${mysql_root_password}" '${ROUNDCUBE_DB_NAME}' < /var/www/${MYDOMAIN}/public/webmail/SQL/mysql.initial.sql
+mysql -u root -p"${MYSQL_ROOT_PASS}" "${ROUNDCUBE_DB_NAME}" < /var/www/${MYDOMAIN}/public/webmail/SQL/mysql.initial.sql
 
 cp /var/www/${MYDOMAIN}/public/webmail/config.inc.php.sample /var/www/${MYDOMAIN}/public/webmail/config.inc.php
 
