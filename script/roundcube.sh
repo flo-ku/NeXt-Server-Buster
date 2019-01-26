@@ -32,7 +32,7 @@ mysql -u root -p${MYSQL_ROOT_PASS} -e "FLUSH PRIVILEGES;"
 
 mysql -u root -p"${MYSQL_ROOT_PASS}" "${ROUNDCUBE_DB_NAME}" < /var/www/${MYDOMAIN}/public/webmail/SQL/mysql.initial.sql
 
-cp /var/www/${MYDOMAIN}/public/webmail/config.inc.php.sample /var/www/${MYDOMAIN}/public/webmail/config.inc.php
+cp /var/www/${MYDOMAIN}/public/webmail/config/config.inc.php.sample /var/www/${MYDOMAIN}/public/webmail/config/config.inc.php
 
 sed -i "s|^\(\$config\['db_dsnw'\] =\).*$|\1 \'mysqli://roundcube:${mysql_roundcube_password}@localhost/roundcube\';|" /var/www/${MYDOMAIN}/public/webmail/config/config.inc.php
 sed -i "s|^\(\$config\['smtp_server'\] =\).*$|\1 \'localhost\';|" /var/www/${MYDOMAIN}/public/webmail/config/config.inc.php
