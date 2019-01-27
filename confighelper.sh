@@ -144,6 +144,55 @@ while true
 			fi
 	done
 
+# --- IP Adress ---
+CHOICE_HEIGHT=3
+MENU="What IP Mode do you want to use?:"
+OPTIONS=(1 "IPv4 (Standard)"
+		     2 "IPv6"
+				 3 "Ipv4 and IPv6 dual stack")
+menu
+clear
+case $CHOICE in
+    1)
+		IPV4_ONLY="1"
+		IPV6_ONLY="0"
+		IP_DUAL="0"
+    ;;
+		2)
+		IPV4_ONLY="0"
+		IPV6_ONLY="1"
+		IP_DUAL="0"
+    ;;
+		3)
+		IPV4_ONLY="0"
+		IPV6_ONLY="0"
+		IP_DUAL="1"
+		;;
+esac
+
+if [[ ${IPV6_ONLY} == '1' ]] || [[ ${IP_DUAL} == '1' ]]; then
+	IPV6INPUT=$(dialog --clear \
+	--backtitle "$BACKTITLE" \
+	--inputbox "Enter your IPv6 Address: (Exmaple: 2a03:4000:2:11c5::1)" \
+	$HEIGHT $WIDTH \
+	3>&1 1>&2 2>&3 3>&- \
+	)
+
+	IPV6GATINPUT=$(dialog --clear \
+	--backtitle "$BACKTITLE" \
+	--inputbox "Enter your IPv6 Gateway: (Exmaple: fe80::1)" \
+	$HEIGHT $WIDTH \
+	3>&1 1>&2 2>&3 3>&- \
+	)
+
+	IPV6NETINPUT=$(dialog --clear \
+	--backtitle "$BACKTITLE" \
+	--inputbox "Enter your IPv6 Netmask: (Exmaple: 64)" \
+	$HEIGHT $WIDTH \
+	3>&1 1>&2 2>&3 3>&- \
+	)
+fi
+
 # --- Mailserver ---
 CHOICE_HEIGHT=2
 MENU="Do you want to use the Mailserver?:"
