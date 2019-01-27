@@ -7,17 +7,20 @@ server {
 	root $base/public;
 
 	# SSL
-	ssl_certificate /etc/letsencrypt/live/MYDOMAIN/fullchain.pem;
-	ssl_certificate_key /etc/letsencrypt/live/MYDOMAIN/privkey.pem;
-	ssl_trusted_certificate /etc/letsencrypt/live/MYDOMAIN/chain.pem;
+	ssl_certificate /etc/nginx/ssl/MYDOMAIN-ecc.cer;;
+	ssl_certificate_key /etc/nginx/ssl/MYDOMAIN-ecc.key;;
+
+	# logging
+	access_log /var/log/nginx/MYDOMAIN.access.log;
+	error_log /var/log/nginx/MYDOMAIN.error.log warn;
 
 	# index.php
-	index		index.php index.html index.htm;
+	index index.php;
 
-	# index.php fallback
-	#location / {
-	#	try_files $uri $uri/ /index.php?$query_string;
-	#}
+	# index.html fallback
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
 
 	# handle .php
 	location ~ \.php$ {
@@ -49,9 +52,8 @@ server {
 	server_name *.MYDOMAIN;
 
 	# SSL
-	ssl_certificate /etc/letsencrypt/live/MYDOMAIN/fullchain.pem;
-	ssl_certificate_key /etc/letsencrypt/live/MYDOMAIN/privkey.pem;
-	ssl_trusted_certificate /etc/letsencrypt/live/MYDOMAIN/chain.pem;
+	ssl_certificate /etc/nginx/ssl/MYDOMAIN-ecc.cer;;
+	ssl_certificate_key /etc/nginx/ssl/MYDOMAIN-ecc.key;;
 
 	return 301 https://MYDOMAIN$request_uri;
 }
@@ -63,7 +65,5 @@ server {
 
 	server_name .MYDOMAIN;
 
-	location / {
-		return 301 https://MYDOMAIN$request_uri;
-	}
+	return 301 https://MYDOMAIN$request_uri;
 }
