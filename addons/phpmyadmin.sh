@@ -5,6 +5,8 @@
 
 install_phpmyadmin() {
 
+trap error_exit ERR
+
 mkdir -p /usr/local/phpmyadmin/
 
 install_packages "apache2-utils"

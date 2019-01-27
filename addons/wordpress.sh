@@ -5,6 +5,8 @@
 
 install_wordpress() {
 
+trap error_exit ERR
+
 source ${SCRIPT_PATH}/script/functions.sh; get_domain
 
 WORDPRESS_USER=$(username)

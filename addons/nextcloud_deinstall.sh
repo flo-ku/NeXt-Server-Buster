@@ -6,6 +6,8 @@
 
 deinstall_nextcloud() {
 
+trap error_exit ERR
+
 MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" ${SCRIPT_PATH}/login_information.txt)
 NextcloudDBName=$(grep -Pom 1 "(?<=^NextcloudDBName = ).*$" ${SCRIPT_PATH}/nextcloud_login_data.txt)
 NextcloudDBUser=$(grep -Pom 1 "(?<=^NextcloudDBUser = ).*$" ${SCRIPT_PATH}/nextcloud_login_data.txt)

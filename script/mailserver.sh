@@ -12,7 +12,7 @@ SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 systemctl -q stop nginx.service
 cd ${SCRIPT_PATH}/sources/acme.sh/
-bash acme.sh --issue --debug 2 --standalone -d mail.${MYDOMAIN} -d imap.${MYDOMAIN} -d smtp.${MYDOMAIN} --keylength 4096 --staging >>"${main_log}" 2>>"${err_log}" || error_exit "Failed to get mailserver let's encrypt cert"
+bash acme.sh --issue --debug 2 --standalone -d mail.${MYDOMAIN} -d imap.${MYDOMAIN} -d smtp.${MYDOMAIN} --keylength 4096 --staging >>"${main_log}" 2>>"${err_log}"
 ln -s /root/.acme.sh/mail.${MYDOMAIN}/fullchain.cer /etc/nginx/ssl/mail.${MYDOMAIN}.cer
 ln -s /root/.acme.sh/mail.${MYDOMAIN}/mail.${MYDOMAIN}.key /etc/nginx/ssl/mail.${MYDOMAIN}.key
 systemctl -q start nginx.service

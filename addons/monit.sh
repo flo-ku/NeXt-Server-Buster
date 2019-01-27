@@ -5,6 +5,8 @@
 
 install_monit() {
 
+trap error_exit ERR  
+
 MONIT_ADMIN_PASSWORD=$(password)
 MONIT_ADMIN_USER=$(username)
 

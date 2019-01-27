@@ -5,6 +5,8 @@
 
 menu_options_addons() {
 
+trap error_exit ERR	
+
 SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 source ${SCRIPT_PATH}/configs/versions.cfg

@@ -5,6 +5,8 @@
 
 menu_options_firewall() {
 
+trap error_exit ERR
+
 HEIGHT=40
 WIDTH=80
 CHOICE_HEIGHT=7

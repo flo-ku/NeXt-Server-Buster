@@ -7,6 +7,8 @@ menu_options_nextcloud() {
 
 source ${SCRIPT_PATH}/script/functions.sh; get_domain
 
+trap error_exit ERR
+
 HEIGHT=40
 WIDTH=80
 CHOICE_HEIGHT=5

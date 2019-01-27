@@ -5,6 +5,8 @@
 
 update_nginx() {
 
+trap error_exit ERR  
+
 source ${SCRIPT_PATH}/configs/versions.cfg
 
 command="nginx -v"
