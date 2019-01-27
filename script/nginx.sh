@@ -53,7 +53,7 @@ NGINX_MODULES="--without-http_browser_module \
 --with-http_random_index_module \
 --with-http_auth_request_module \
 --with-http_secure_link_module \
---with-http_flv_module \
+--with-http_flv_module \IP6ADR
 --with-http_dav_module \
 --with-http_mp4_module \
 --with-http_gunzip_module \
@@ -87,7 +87,21 @@ cp ${SCRIPT_PATH}/configs/nginx/confs/* /etc/nginx/
 rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
 cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
-sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+
+if [[ ${IPV4_ONLY} = "1" ]]; then
+  sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+  sed -i "s/IP6ADR/::/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+fi
+
+if [[ ${IPV6_ONLY} = "1" ]]; then
+  sed -i "s/IPADR/:/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+  sed -i "s/IP6ADR/::/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+fi
+
+if [[ ${IP_DUAL} == '1' ]]; then
+  sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+  sed -i "s/IP6ADR/${IP6ADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+fi
 
 chown -R www-data:www-data /var/www/${MYDOMAIN}/public
 ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf
