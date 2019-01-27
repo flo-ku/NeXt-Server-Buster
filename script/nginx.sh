@@ -87,6 +87,7 @@ cp ${SCRIPT_PATH}/configs/nginx/confs/* /etc/nginx/
 rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
 cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/_pagespeed.conf
 
 if [[ ${IPV4_ONLY} = "1" ]]; then
   sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf

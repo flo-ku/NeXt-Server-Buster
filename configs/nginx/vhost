@@ -15,12 +15,7 @@ server {
 	error_log /var/log/nginx/MYDOMAIN.error.log warn;
 
 	# index.php
-	index index.php;
-
-	# index.html fallback
-	location / {
-		try_files $uri $uri/ /index.html;
-	}
+	index		index.php index.html index.htm;
 
 	# handle .php
 	location ~ \.php$ {
