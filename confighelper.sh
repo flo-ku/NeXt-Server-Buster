@@ -171,7 +171,7 @@ case $CHOICE in
 esac
 
 if [[ ${IPV6_ONLY} == '1' ]] || [[ ${IP_DUAL} == '1' ]]; then
-	IPV6INPUT=$(dialog --clear \
+	IPV6ADRINPUT=$(dialog --clear \
 	--backtitle "$BACKTITLE" \
 	--inputbox "Enter your IPv6 Address: (Exmaple: 2a03:4000:2:11c5::1)" \
 	$HEIGHT $WIDTH \
@@ -228,6 +228,9 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 	USE_MAILSERVER="${USE_MAILSERVER}"
 	USE_PHP7_3="${USE_PHP7_3}"
 	PHPVERSION7="${PHPVERSION7}"
+	IP6ADR="${IPV6ADRINPUT}"
+	IPV6GAT="${IPV6GATINPUT}"
+	IPV6NET="${IPV6NETINPUT}"
 
 	MYSQL_HOSTNAME="localhost"
 
