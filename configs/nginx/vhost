@@ -1,6 +1,6 @@
 server {
 	listen IPADR:443 ssl http2;
-	listen [IP6ADR]:443 ssl http2;
+	#listen [IP6ADR]:443 ssl http2;
 
 	server_name MYDOMAIN;
 	set $base /var/www/MYDOMAIN;
@@ -47,7 +47,7 @@ server {
 # subdomains redirect
 server {
 	listen IPADR:443 ssl http2;
-	listen [IP6ADR]:443 ssl http2;
+	#listen [IP6ADR]:443 ssl http2;
 
 	server_name *.MYDOMAIN;
 
@@ -61,7 +61,7 @@ server {
 # HTTP redirect
 server {
 	listen IPADR:80;
-	listen [IP6ADR]:80;
+	#listen [IP6ADR]:80;
 
 	server_name .MYDOMAIN;
 
