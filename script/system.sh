@@ -7,19 +7,16 @@ install_system() {
 
 trap error_exit ERR
 
+source ${SCRIPT_PATH}/configs/userconfig.cfg
+
 rm /etc/network/interfaces
 if [[ ${IPV4_ONLY} = "1" ]]; then
-  echo "IPv4 ${IPADR}"
-  echo "IPv4 ${IPV4GAT}"
   cp -f ${SCRIPT_PATH}/configs/IPv4.interface /etc/network/interfaces
   sed -i 's/IPV4ADDR/${IPADR}/' /etc/network/interfaces
   sed -i 's/IPV4GATE/${IPV4GAT}/' /etc/network/interfaces
 fi
 
 if [[ ${IPV6_ONLY} = "1" ]]; then
-  echo "IPv6 ADR ${IP6ADR}"
-  echo "IPv6 GAT ${IPV6GAT}"
-  echo "IPv6 NET ${IPV6NET}"
   cp -f ${SCRIPT_PATH}/configs/IPv6.interface /etc/network/interfaces
   sed -i 's/IPV6ADDR/${IP6ADR}/' /etc/network/interfaces
   sed -i 's/IPV6GATE/${IPV6GAT}/' /etc/network/interfaces
@@ -27,11 +24,6 @@ if [[ ${IPV6_ONLY} = "1" ]]; then
 fi
 
 if [[ ${IP_DUAL} = "1" ]]; then
-  echo "IPv4 ${IPADR}"
-  echo "IPv4 ${IPV4GAT}"
-  echo "IPv6 ADR ${IP6ADR}"
-  echo "IPv6 GAT ${IPV6GAT}"
-  echo "IPv6 NET ${IPV6NET}"
   cp -f ${SCRIPT_PATH}/configs/IPv4-IPv6.interface /etc/network/interfaces
   sed -i 's/IPV4ADDR/${IPADR}/' /etc/network/interfaces
   sed -i 's/IPV4GATE/${IPV4GAT}/' /etc/network/interfaces
