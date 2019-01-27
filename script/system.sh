@@ -17,14 +17,27 @@ if [[ ${IPV4_ONLY} = "1" ]]; then
 fi
 
 if [[ ${IPV6_ONLY} = "1" ]]; then
-  echo "IPv6"
+  echo "IPv6 ADR ${IP6ADR}"
+  echo "IPv6 GAT ${IPV6GAT}"
+  echo "IPv6 NET ${IPV6NET}"
   cp -f ${SCRIPT_PATH}/configs/IPv6.interface /etc/network/interfaces
   sed -i 's/IPV6ADDR/${IP6ADR}/' /etc/network/interfaces
   sed -i 's/IPV6GATE/${IPV6GAT}/' /etc/network/interfaces
+  sed -i 's/IPV6NET/${IPV6NET}/' /etc/network/interfaces
 fi
 
 if [[ ${IP_DUAL} = "1" ]]; then
+  echo "IPv4 ${IPADR}"
+  echo "IPv4 ${IPV4GAT}"
+  echo "IPv6 ADR ${IP6ADR}"
+  echo "IPv6 GAT ${IPV6GAT}"
+  echo "IPv6 NET ${IPV6NET}"
   cp -f ${SCRIPT_PATH}/configs/IPv4-IPv6.interface /etc/network/interfaces
+  sed -i 's/IPV4ADDR/${IPADR}/' /etc/network/interfaces
+  sed -i 's/IPV4GATE/${IPV4GAT}/' /etc/network/interfaces
+  sed -i 's/IPV6ADDR/${IP6ADR}/' /etc/network/interfaces
+  sed -i 's/IPV6GATE/${IPV6GAT}/' /etc/network/interfaces
+  sed -i 's/IPV6NET/${IPV6NET}/' /etc/network/interfaces
 fi
 
 hostnamectl set-hostname --static mail
