@@ -7,17 +7,17 @@ check_system() {
 
 	trap error_exit ERR
 
-	Su_user=$(whoami)
+	local Su_user=$(whoami)
 	[ "$Su_user" != 'root' ] && error_exit "Please run the script as root user"
 
 	[ $(lsb_release -is) != 'Debian' ] && [ $(lsb_release -cs) != 'buster' ] && error_exit "Please run the Script with Debian Buster"
 
-	LOCAL_KERNEL_VERSION=$(uname -a | awk '/Linux/ {print $(NF-7)}')
+	local LOCAL_KERNEL_VERSION=$(uname -a | awk '/Linux/ {print $(NF-7)}')
 	[ $LOCAL_KERNEL_VERSION != ${KERNEL_VERSION} ] && error_exit "Please upgrade your Linux Version ($LOCAL_KERNEL_VERSION) with apt-get update && apt-get dist-upgrade to match the script required Version ${KERNEL_VERSION} + reboot your server!"
 
 	[ $(grep MemTotal /proc/meminfo | awk '{print $2}') -lt 1000000 ] && error_exit "This script needs at least ~1GB Ram"
 
-	FREE=`df -k --output=avail "$PWD" | tail -n1`
+	local FREE=`df -k --output=avail "$PWD" | tail -n1`
   [ $FREE -lt 9437184 ] && error_exit "This script needs at least 9 GB free disk space"
 
 	[ $(dpkg-query -l | grep dmidecode | wc -l) -ne 1 ] && error_exit "This script does not support your virtualization technology!"
