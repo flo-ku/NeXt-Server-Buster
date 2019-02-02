@@ -202,9 +202,6 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 	IP_DUAL="${IP_DUAL}"
 	IPV6_ONLY="${IPV6_ONLY}"
 
-
-	MYSQL_HOSTNAME="localhost"
-
 	NXT_SYSTEM_EMAIL="${NXT_SYSTEM_EMAIL}"
 	NXT_IS_INSTALLED="0"
 	NXT_IS_INSTALLED_MAILSERVER="0"
@@ -220,6 +217,7 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 
 	NEXTCLOUD_PATH_NAME="0"
 	WORDPRESS_PATH_NAME="0"
+	MYSQL_HOSTNAME="localhost"
 #-----------------------------------------------------------#
 ############### Config File from Confighelper ###############
 #-----------------------------------------------------------#
