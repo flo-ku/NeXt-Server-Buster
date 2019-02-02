@@ -89,11 +89,6 @@ cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.con
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/_pagespeed.conf
 
-if [[ ${IPV4_ONLY} = "1" ]]; then
-  sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
-  sed -i "s/IP6ADR/::/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
-fi
-
 if [[ ${IPV6_ONLY} = "1" ]]; then
   sed -i "s/IPADR/:/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
   sed -i "s/IP6ADR/::/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
