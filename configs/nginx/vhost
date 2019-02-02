@@ -36,7 +36,6 @@ server {
 	#include _nextcloud.conf;
 	#include _phpmyadmin.conf;
 	#include _munin.conf;
-	#include _monit.conf;
 }
 
 # subdomains redirect
