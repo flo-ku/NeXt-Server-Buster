@@ -69,6 +69,7 @@ make install >>"${main_log}" 2>>"${err_log}"
 
 rm -R ${SCRIPT_PATH}/sources/nginx-${NGINX_VERSION}
 
+mkdir -p /var/lib/nginx/{body,proxy,fastcgi,uwsgi,scgi}
 mkdir -p /etc/nginx/{sites,ssl,sites-available,sites-enabled,htpasswd}
 
 touch /etc/nginx/htpasswd/.htpasswd
