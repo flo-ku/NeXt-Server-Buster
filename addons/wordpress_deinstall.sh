@@ -24,5 +24,6 @@ sed -i "s/include _wordpress.conf;/#include _wordpress.conf;/g" /etc/nginx/sites
 systemctl -q restart php$PHPVERSION7-fpm.service
 service nginx restart
 
+sed -i 's/WORDPRESS_PATH_NAME=".*$"/WORDPRESS_PATH_NAME="0"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 sed -i 's/WORDPRESS_IS_INSTALLED="1"/WORDPRESS_IS_INSTALLED="0"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 }

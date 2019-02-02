@@ -5,7 +5,7 @@
 
 menu_options_addons() {
 
-trap error_exit ERR	
+trap error_exit ERR
 
 SCRIPT_PATH="/root/NeXt-Server-Buster"
 
@@ -60,7 +60,6 @@ MENU="Choose one of the following options:"
 		echo "You have to install the NeXt Server to run this Addon!"
 	fi
 	;;
-
 2)
 	if [[ ${TS3_IS_INSTALLED} == '0' ]]; then
 		echo "Teamspeak 3 is already deinstalled!"
@@ -73,7 +72,6 @@ MENU="Choose one of the following options:"
 		If you need them, please reopen them manually!"
 	fi
 	;;
-
 3)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		if [[ ${COMPOSER_IS_INSTALLED} == '1' ]]; then
@@ -87,26 +85,20 @@ else
 	echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 fi
 ;;
-
 4)
-	if [[ ${USE_PHP7_3} == '1'  ]]; then
-		if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
-			if [[ ${NEXTCLOUD_IS_INSTALLED} == '1' ]]; then
-				echo "Nextcloud is already installed!"
-			else
-				dialog_info "Installing Nextcloud"
-				#source ${SCRIPT_PATH}/menus/nextcloud_menu.sh; menu_options_nextcloud
-				source ${SCRIPT_PATH}/addons/nextcloud.sh; install_nextcloud
-				dialog --title "Your Nextcloud logininformations" --tab-correct --exit-label "ok" --textbox ${SCRIPT_PATH}/nextcloud_login_data.txt 50 200
-			fi
+	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
+		if [[ ${NEXTCLOUD_IS_INSTALLED} == '1' ]]; then
+			echo "Nextcloud is already installed!"
 		else
-			echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
+			dialog_info "Installing Nextcloud"
+			source ${SCRIPT_PATH}/menus/nextcloud_menu.sh; menu_options_nextcloud
+			source ${SCRIPT_PATH}/addons/nextcloud.sh; install_nextcloud
+			dialog --title "Your Nextcloud logininformations" --tab-correct --exit-label "ok" --textbox ${SCRIPT_PATH}/nextcloud_login_data.txt 50 200
 		fi
 	else
-		echo "Nextcloud 13 is only running on PHP 7.2 and 7.3!"
+		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
 	;;
-
 5)
 	if [[ ${NEXTCLOUD_IS_INSTALLED} == '0' ]]; then
 		echo "Nextcloud is already deinstalled!"
@@ -116,7 +108,6 @@ fi
 		dialog_msg "Finished Deinstalling Nextcloud"
 	fi
 	;;
-
 6)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		if [[ ${PMA_IS_INSTALLED} == '1' ]]; then
@@ -131,7 +122,6 @@ fi
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
 	;;
-
 7)
 	if [[ ${PMA_IS_INSTALLED} == '0' ]]; then
 		echo "Phpmyadmin is already deinstalled!"
@@ -141,7 +131,6 @@ fi
 		dialog_msg "Finished Deinstalling PHPmyadmin"
 	fi
 	;;
-
 8)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		if [[ ${MUNIN_IS_INSTALLED} == '1' ]]; then
@@ -155,7 +144,6 @@ fi
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
 	;;
-
 9)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 		if [[ ${WORDPRESS_IS_INSTALLED} == '1' ]]; then
@@ -169,7 +157,6 @@ fi
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
 	;;
-
 10)
 	if [[ ${WORDPRESS_IS_INSTALLED} == '0' ]]; then
 		echo "Wordpress is already deinstalled!"
@@ -179,11 +166,9 @@ fi
 		dialog_msg "Finished Deinstalling Wordpress"
 	fi
 	;;
-
 11)
   bash ${SCRIPT_PATH}/nxt.sh
   ;;
-
 12)
 	echo "Exit"
 	exit 1

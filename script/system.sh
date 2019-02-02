@@ -10,12 +10,6 @@ trap error_exit ERR
 source ${SCRIPT_PATH}/configs/userconfig.cfg
 
 rm /etc/network/interfaces
-if [[ ${IPV4_ONLY} = "1" ]]; then
-  cp -f ${SCRIPT_PATH}/configs/IPv4.interface /etc/network/interfaces
-  sed -i "s/IPV4ADDR/${IPADR}/" /etc/network/interfaces
-  sed -i "s/IPV4GATE/${IPV4GAT}/" /etc/network/interfaces
-fi
-
 if [[ ${IPV6_ONLY} = "1" ]]; then
   cp -f ${SCRIPT_PATH}/configs/IPv6.interface /etc/network/interfaces
   sed -i "s/IPV6ADDR/${IP6ADR}/" /etc/network/interfaces

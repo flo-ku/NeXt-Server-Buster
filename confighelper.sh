@@ -11,24 +11,6 @@ TITLE="NeXt Server Installation"
 HEIGHT=40
 WIDTH=80
 
-if	[ "$(nproc)" == '1' ]; then
-dialog_msg "Your installation will take a minimum of 48 minutes and use 1 CPU core! \
-\n\nThe installation can take a longer time, depending on the CPU you're using!"
-else
-	if	[ "$(nproc)" == '2' ]; then
-		dialog_msg "Your installation will take a minimum of 36 minutes and use 2 CPU cores! \
-		\n\nThe installation can take a longer time, depending on the CPU you're using!"
-	else
-		if	[ "$(nproc)" == '3' ]; then
-			dialog_msg "Your installation will take a minimum of 32 minutes and use 3 CPU cores! \
-			\n\nThe installation can take a longer time, depending on the CPU you're using!"
-		else
-			dialog_msg "Your installation will take a minimum of 30 minutes and use 4 or more CPU cores! \
-			\n\nThe installation can take a longer time, depending on the CPU you're using!"
-		fi
-	fi
-fi
-
 # --- MYDOMAIN ---
 source ${SCRIPT_PATH}/script/functions.sh; get_domain
 CHECK_DOMAIN_LENGTH=`echo -n ${DETECTED_DOMAIN} | wc -m`
@@ -145,53 +127,43 @@ while true
 	done
 
 # --- IP Adress ---
-CHOICE_HEIGHT=3
+CHOICE_HEIGHT=2
 MENU="What IP Mode do you want to use?:"
-OPTIONS=(1 "IPv4 (Standard)"
-		     2 "IPv6"
-				 3 "Ipv4 and IPv6 dual stack")
+OPTIONS=(1 "Ipv4 and IPv6 dual stack (Standard)"
+		     2 "IPv6 only")
 menu
 clear
 case $CHOICE in
     1)
-		IPV4_ONLY="1"
+		IP_DUAL="1"
 		IPV6_ONLY="0"
-		IP_DUAL="0"
     ;;
 		2)
-		IPV4_ONLY="0"
-		IPV6_ONLY="1"
 		IP_DUAL="0"
+		IPV6_ONLY="1"
     ;;
-		3)
-		IPV4_ONLY="0"
-		IPV6_ONLY="0"
-		IP_DUAL="1"
-		;;
 esac
 
-if [[ ${IPV6_ONLY} == '1' ]] || [[ ${IP_DUAL} == '1' ]]; then
-	IPV6ADRINPUT=$(dialog --clear \
-	--backtitle "$BACKTITLE" \
-	--inputbox "Enter your IPv6 Address: (Exmaple: 2a03:4000:2:11c5::1)" \
-	$HEIGHT $WIDTH \
-	3>&1 1>&2 2>&3 3>&- \
-	)
+IPV6ADRINPUT=$(dialog --clear \
+--backtitle "$BACKTITLE" \
+--inputbox "Enter your IPv6 Address: (Example: 2a03:4000:2:11c5::1)" \
+$HEIGHT $WIDTH \
+3>&1 1>&2 2>&3 3>&- \
+)
 
-	IPV6GATINPUT=$(dialog --clear \
-	--backtitle "$BACKTITLE" \
-	--inputbox "Enter your IPv6 Gateway: (Exmaple: fe80::1)" \
-	$HEIGHT $WIDTH \
-	3>&1 1>&2 2>&3 3>&- \
-	)
+IPV6GATINPUT=$(dialog --clear \
+--backtitle "$BACKTITLE" \
+--inputbox "Enter your IPv6 Gateway: (Example: fe80::1)" \
+$HEIGHT $WIDTH \
+3>&1 1>&2 2>&3 3>&- \
+)
 
-	IPV6NETINPUT=$(dialog --clear \
-	--backtitle "$BACKTITLE" \
-	--inputbox "Enter your IPv6 Netmask: (Exmaple: 64)" \
-	$HEIGHT $WIDTH \
-	3>&1 1>&2 2>&3 3>&- \
-	)
-fi
+IPV6NETINPUT=$(dialog --clear \
+--backtitle "$BACKTITLE" \
+--inputbox "Enter your IPv6 Netmask: (Example: 64)" \
+$HEIGHT $WIDTH \
+3>&1 1>&2 2>&3 3>&- \
+)
 
 # --- Mailserver ---
 CHOICE_HEIGHT=2
@@ -209,10 +181,7 @@ case $CHOICE in
             ;;
 esac
 
-
-USE_PHP7_3="1"
 PHPVERSION7="7.3"
-
 CONFIG_COMPLETED="1"
 
 GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
@@ -226,11 +195,13 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 	CONFIG_COMPLETED="${CONFIG_COMPLETED}"
 	MYDOMAIN="${MYDOMAIN}"
 	USE_MAILSERVER="${USE_MAILSERVER}"
-	USE_PHP7_3="${USE_PHP7_3}"
 	PHPVERSION7="${PHPVERSION7}"
 	IP6ADR="${IPV6ADRINPUT}"
 	IPV6GAT="${IPV6GATINPUT}"
 	IPV6NET="${IPV6NETINPUT}"
+	IP_DUAL="${IP_DUAL}"
+	IPV6_ONLY="${IPV6_ONLY}"
+
 
 	MYSQL_HOSTNAME="localhost"
 
@@ -249,8 +220,8 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 	TS3_IS_INSTALLED="0"
 	COMPOSER_IS_INSTALLED="0"
 
-	NEXTCLOUD_PATH=""
-	WORDPRESS_PATH=""
+	NEXTCLOUD_PATH_NAME="0"
+	WORDPRESS_PATH_NAME="0"
 #-----------------------------------------------------------#
 ############### Config File from Confighelper ###############
 #-----------------------------------------------------------#
