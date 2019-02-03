@@ -41,11 +41,13 @@ sed -i "s/domain.tld/${MYDOMAIN}/g" /etc/hosts
 
 echo $(hostname -f) > /etc/mailname
 
-TIMEZONE=$(wget http://ip-api.com/line/${IPADR}?fields=timezone -q -O -)
-timedatectl set-timezone ${TIMEZONE}
+TIMEZONE_DETECTED=$(wget http://ip-api.com/line/${IPADR}?fields=timezone -q -O -)
+timedatectl set-timezone ${TIMEZONE_DETECTED}
+
+TIMEZONE_DETECTED=$(echo "$TIMEZONE_DETECTED" | sed 's/\//\\\//g')
+sed -i "s/EMPTY_TIMEZONE/${TIMEZONE_DETECTED}/g" ${SCRIPT_PATH}/configs/userconfig.cfg
 
 rm /etc/apt/sources.list
-
 cat > /etc/apt/sources.list <<END
 #------------------------------------------------------------------------------#
 #                   OFFICIAL DEBIAN REPOS                                      #
