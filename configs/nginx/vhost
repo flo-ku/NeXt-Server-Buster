@@ -29,6 +29,10 @@ server {
 		deny all;
 	}
 
+	location /webmail/ {
+        auth_basic "Restricted";
+  }
+
 	include _general.conf;
 	include _pagespeed.conf;
 	#include _rspamd.conf;
