@@ -41,7 +41,7 @@ systemctl -q restart php$PHPVERSION7-fpm.service
 systemctl -q reload nginx.service
 
 touch ${SCRIPT_PATH}/nextcloud_login_data.txt
-echo "--------------------------------------------" >> ${SCRIPT_PATH}/login_information.txt_nextcloud
+echo "--------------------------------------------" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "Nextcloud" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 echo "https://${MYDOMAIN}/${NEXTCLOUD_PATH_NAME}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt

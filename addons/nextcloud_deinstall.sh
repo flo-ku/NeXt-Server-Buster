@@ -23,6 +23,6 @@ sed -i "s/include _nextcloud.conf;/#include _nextcloud.conf;/g" /etc/nginx/sites
 systemctl -q restart php$PHPVERSION7-fpm.service
 service nginx restart
 
-sed -i 's/NEXTCLOUD_PATH_NAME=".*$"/NEXTCLOUD_PATH_NAME="0"/' ${SCRIPT_PATH}/configs/userconfig.cfg
+sed -i 's/NEXTCLOUD_PATH_NAME=".*"/NEXTCLOUD_PATH_NAME="0"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 sed -i 's/NEXTCLOUD_IS_INSTALLED="1"/NEXTCLOUD_IS_INSTALLED="0"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 }
