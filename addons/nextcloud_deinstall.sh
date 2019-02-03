@@ -13,7 +13,7 @@ NextcloudDBName=$(grep -Pom 1 "(?<=^NextcloudDBName = ).*$" ${SCRIPT_PATH}/nextc
 NextcloudDBUser=$(grep -Pom 1 "(?<=^NextcloudDBUser = ).*$" ${SCRIPT_PATH}/nextcloud_login_data.txt)
 
 mysql -u root -p${MYSQL_ROOT_PASS} -e "DROP DATABASE IF EXISTS ${NextcloudDBName};"
-mysql -u root -p${MYSQL_ROOT_PASS} -e "DROP USER ${NextcloudDBName}@localhost;"
+mysql -u root -p${MYSQL_ROOT_PASS} -e "DROP USER ${NextcloudDBUser}@localhost;"
 
 rm -rf /var/www/${MYDOMAIN}/public/${NEXTCLOUD_PATH_NAME}
 rm ${SCRIPT_PATH}/nextcloud_login_data.txt
