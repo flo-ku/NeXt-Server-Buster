@@ -90,7 +90,6 @@ fi
 		if [[ ${NEXTCLOUD_IS_INSTALLED} == '1' ]]; then
 			echo "Nextcloud is already installed!"
 		else
-			dialog_info "Installing Nextcloud"
 			source ${SCRIPT_PATH}/menus/nextcloud_menu.sh; menu_options_nextcloud
 			source ${SCRIPT_PATH}/addons/nextcloud.sh; install_nextcloud
 			dialog --title "Your Nextcloud logininformations" --tab-correct --exit-label "ok" --textbox ${SCRIPT_PATH}/nextcloud_login_data.txt 50 200
