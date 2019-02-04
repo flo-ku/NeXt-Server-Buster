@@ -217,6 +217,7 @@ cat >> ${SCRIPT_PATH}/configs/userconfig.cfg <<END
 
 	NEXTCLOUD_PATH_NAME="0"
 	WORDPRESS_PATH_NAME="0"
+	PHPMYADMIN_PATH_NAME="0"
 	MYSQL_HOSTNAME="localhost"
 	TIMEZONE="EMPTY_TIMEZONE"
 #-----------------------------------------------------------#

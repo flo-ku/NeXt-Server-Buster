@@ -113,6 +113,7 @@ fi
 			echo "Phpmyadmin is already installed!"
 		else
 			dialog_info "Installing PHPmyadmin"
+			source ${SCRIPT_PATH}/menus/phpmyadmin_menu.sh; menu_options_phpmyadmin
 			source ${SCRIPT_PATH}/addons/composer.sh; install_composer
 			source ${SCRIPT_PATH}/addons/phpmyadmin.sh; install_phpmyadmin
 			dialog_msg "Finished installing PHPmyadmin"
