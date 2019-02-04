@@ -112,7 +112,6 @@ fi
 		if [[ ${PMA_IS_INSTALLED} == '1' ]]; then
 			echo "Phpmyadmin is already installed!"
 		else
-			dialog_info "Installing PHPmyadmin"
 			source ${SCRIPT_PATH}/menus/phpmyadmin_menu.sh; menu_options_phpmyadmin
 			source ${SCRIPT_PATH}/addons/composer.sh; install_composer
 			source ${SCRIPT_PATH}/addons/phpmyadmin.sh; install_phpmyadmin

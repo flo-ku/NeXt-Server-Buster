@@ -38,6 +38,7 @@ sed -i "s/PMA_BFSECURE_PASS/${PMA_BFSECURE_PASS}/g" /var/www/${MYDOMAIN}/public/
 cp ${SCRIPT_PATH}/addons/vhosts/_phpmyadmin.conf /etc/nginx/_phpmyadmin.conf
 sed -i "s/#include _phpmyadmin.conf;/include _phpmyadmin.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/change_path/${PHPMYADMIN_PATH_NAME}/g" /etc/nginx/_phpmyadmin.conf
+sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/_phpmyadmin.conf
 
 chown -R www-data:www-data /var/www/${MYDOMAIN}/public/${PHPMYADMIN_PATH_NAME}/
 
