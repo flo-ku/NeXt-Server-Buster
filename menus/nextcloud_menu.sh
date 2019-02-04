@@ -43,8 +43,13 @@ case $CHOICE in
           )
             if [[ "$NEXTCLOUD_PATH_NAME" =~ ^[a-zA-Z0-9]+$ ]]; then
               if [ ${#NEXTCLOUD_PATH_NAME} -ge 2 ]; then
-                if [ "$NEXTCLOUD_PATH_NAME" == "$WORDPRESS_PATH_NAME" ]; then
-                  dialog_msg "[ERROR] Your Nextcloud path ${NEXTCLOUD_PATH_NAME} is already used by Wordpress, please choose another one!"
+                declare -a array=('webmail' 'rspamd')
+                array+=(${WORDPRESS_PATH_NAME})
+                printf -v array_str -- ',,%q' "${array[@]}"
+
+                if [[ "${array_str},," =~ ,,${NEXTCLOUD_PATH_NAME},, ]]
+                then
+                  dialog_msg "[ERROR] Your Nextcloud path ${NEXTCLOUD_PATH_NAME} is already used by the script, please choose another one!"
                   dialog --clear
                 else
                   sed -i 's/NEXTCLOUD_PATH_NAME="0"/NEXTCLOUD_PATH_NAME="'${NEXTCLOUD_PATH_NAME}'"/' ${SCRIPT_PATH}/configs/userconfig.cfg
