@@ -18,7 +18,7 @@ PMA_HTTPAUTH_PASS=$(password)
 PMADB_PASS=$(password)
 PMA_BFSECURE_PASS=$(password)
 
-cd cd /var/www/${MYDOMAIN}/public/${PHPMYADMIN_PATH_NAME}/
+cd /var/www/${MYDOMAIN}/public/
 git clone -b STABLE --depth=1 https://github.com/phpmyadmin/phpmyadmin.git ${PHPMYADMIN_PATH_NAME}
 cd ${PHPMYADMIN_PATH_NAME}
 composer update --no-dev >>"${main_log}" 2>>"${err_log}"
