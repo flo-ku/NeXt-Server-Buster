@@ -11,13 +11,14 @@ source ${SCRIPT_PATH}/script/functions.sh; get_domain
 
 HEIGHT=40
 WIDTH=80
-CHOICE_HEIGHT=3
+CHOICE_HEIGHT=4
 BACKTITLE="NeXt Server"
 TITLE="NeXt Server"
 MENU="In which path do you want to install Wordpress?"
 OPTIONS=(1 "${MYDOMAIN}/wordpress"
 2 "${MYDOMAIN}/blog"
-3 "Custom (except root and minimum 2 characters!)")
+3 "Custom (except root and minimum 2 characters!)"
+4 "${MYDOMAIN} (use carefully!)")
 menu
 clear
 
@@ -64,6 +65,23 @@ case $CHOICE in
               dialog --clear
             fi
         done
+    ;;
+  4)
+    CHOICE_HEIGHT=2
+    MENU="Are you sure, that you want to install Wordpress in the root directory of the webserver? \n \nThis can cause data loss of an existing website!"
+    OPTIONS=(1 "Yes I know what I'm doing!"
+    		     2 "No (Exit)")
+    menu
+    clear
+    case $CHOICE in
+        1)
+        WORDPRESS_PATH_NAME="root"
+    		sed -i 's/WORDPRESS_PATH_NAME="0"/WORDPRESS_PATH_NAME="'${WORDPRESS_PATH_NAME}'"/' ${SCRIPT_PATH}/configs/userconfig.cfg
+        ;;
+    		2)
+        exit
+        ;;
+    esac
     ;;
 esac
 }

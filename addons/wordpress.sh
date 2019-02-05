@@ -24,13 +24,18 @@ wget_tar "https://wordpress.org/latest.tar.gz"
 tar -zxvf latest.tar.gz
 rm latest.tar.gz
 
-if [ "$WORDPRESS_PATH_NAME" == "wordpress" ]; then
-  cd wordpress
+if [ "$WORDPRESS_PATH_NAME" != "root" ]; then
+  if [ "$WORDPRESS_PATH_NAME" == "wordpress" ]; then
+    cd wordpress
+  else
+    mv wordpress ${WORDPRESS_PATH_NAME}
+    cd ${WORDPRESS_PATH_NAME}
+  fi
 else
-  mv wordpress ${WORDPRESS_PATH_NAME}
-  cd ${WORDPRESS_PATH_NAME}
+  mkdir -p /var/www/${MYDOMAIN}/public/index-files-backup
+  mv /var/www/${MYDOMAIN}/public/{index.php,index.html,index.htm} /var/www/${MYDOMAIN}/public/index-files-backup >/dev/null 2>&1
+  mv /var/www/${MYDOMAIN}/public/wordpress/* /var/www/${MYDOMAIN}/public/
 fi
-
 cp wp-config-sample.php wp-config.php
 
 sed -i "s/wp_/${WORDPRESS_DB_PREFIX}_/g" wp-config.php
@@ -45,7 +50,11 @@ while read -r salt; do
     sed -i "/^$search/s/put your unique phrase here/$(echo $replace | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/&/\\\&/g')/" wp-config.php
 done <<< "$salts"
 
-mkdir -p /var/www/${MYDOMAIN}/public/${WORDPRESS_PATH_NAME}/wp-content/uploads
+if [ "$WORDPRESS_PATH_NAME" != "root" ]; then
+  mkdir -p /var/www/${MYDOMAIN}/public/${WORDPRESS_PATH_NAME}/wp-content/uploads
+else
+  mkdir -p /var/www/${MYDOMAIN}/public/wp-content/uploads
+fi
 
 chown www-data:www-data -R *
 find . -type f -exec chmod 644 {} \;
@@ -61,7 +70,11 @@ touch ${SCRIPT_PATH}/wordpress_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/wordpress_login_data.txt
 echo "Wordpress" >> ${SCRIPT_PATH}/wordpress_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/wordpress_login_data.txt
-echo "https://${MYDOMAIN}/${WORDPRESS_PATH_NAME}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
+if [ "$WORDPRESS_PATH_NAME" != "root" ]; then
+  echo "https://${MYDOMAIN}/${WORDPRESS_PATH_NAME}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
+else
+  echo "https://${MYDOMAIN}/" >> ${SCRIPT_PATH}/wordpress_login_data.txt
+fi
 echo "WordpressDBUser = ${WORDPRESS_USER}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
 echo "WordpressDBName = ${WORDPRESS_DB_NAME}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
 echo "WordpressDBPassword = ${WORDPRESS_DB_PASS}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
