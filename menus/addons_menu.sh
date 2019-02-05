@@ -149,7 +149,11 @@ fi
 		else
 			source ${SCRIPT_PATH}/menus/wordpress_menu.sh; menu_options_wordpress
 			source ${SCRIPT_PATH}/addons/wordpress.sh; install_wordpress
-			dialog_msg "Visit ${MYDOMAIN}/${WORDPRESS_PATH_NAME} to finish the installation"
+			if [ "${WORDPRESS_PATH_NAME}" != "root" ]; then
+			  dialog_msg "Visit ${MYDOMAIN}/${WORDPRESS_PATH_NAME} to finish the installation"
+			else
+			  dialog_msg "Visit ${MYDOMAIN}/ to finish the installation"
+			fi
 		fi
 	else
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
