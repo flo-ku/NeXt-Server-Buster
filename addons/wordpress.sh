@@ -40,6 +40,7 @@ else
      mv /var/www/next-server.eu/public/index.html /var/www/next-server.eu/public/index-files-backup
   fi
   mv /var/www/${MYDOMAIN}/public/wordpress/* /var/www/${MYDOMAIN}/public/
+  rm -R /var/www/${MYDOMAIN}/public/wordpress/
 fi
 cp wp-config-sample.php wp-config.php
 
