@@ -8,6 +8,6 @@ do
   usep=$(echo $output | awk '{ print $1}' | cut -d'%' -f1  )
   partition=$(echo $output | awk '{ print $2 }' )
   if [[ $usep -ge 5 ]]; then
-     echo  $usep
+     echo "$usep percent of the disk space is used, please check your server!" | mail -s "Server running out of space" changeme
   fi
 done
