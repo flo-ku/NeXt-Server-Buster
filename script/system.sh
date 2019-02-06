@@ -147,6 +147,6 @@ cp -f ${SCRIPT_PATH}/cronjobs/webserver_backup /etc/cron.daily/
 chmod +x /etc/cron.daily/webserver_backup
 
 cp -f ${SCRIPT_PATH}/cronjobs/free_disk_space /etc/cron.hourly/
-sed -i "s/changeme/${NXT_SYSTEM_EMAIL}/g" /etc/cron.daily/free_disk_space
+sed -i "s/changeme/${NXT_SYSTEM_EMAIL}/g" /etc/cron.hourly/free_disk_space
 chmod +x /etc/cron.hourly/free_disk_space
 }
