@@ -1,0 +1,34 @@
+#!/bin/bash
+#Please check the license provided with the script!
+#-------------------------------------------------------------------------------------------------------------
+
+SCRIPT_PATH="/root/NeXt-Server-Buster"
+source ${SCRIPT_PATH}/configs/userconfig.cfg
+
+BACKUP_DATE=$(date +"%d-%m-%Y_%H_%M_%S")
+
+mkdir -p ${SCRIPT_PATH}/backups/{databases,ftpbackup,logs}
+mkdir -p /root/logs/
+touch ${SCRIPT_PATH}/backups/logs/backup.log
+touch ${SCRIPT_PATH}/backups/logs/backup_error.log
+
+#MYSQL backup
+MYSQL_ROOT_PASS=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" ${SCRIPT_PATH}/login_information.txt)
+
+# Error: The database is in a .tgz archive. Unpack this, you get a .tar. However, this must be renamed to .sql.
+databases=`/usr/bin/mysql --user=root -p$MYSQL_PASSWORD -e "SHOW DATABASES;" | grep -Ev "(Database|mysql|information_schema|performance_schema)"`
+for db in $databases; do
+  /usr/bin/mysqldump --force --opt --user=$root -p$MYSQL_PASSWORD --databases $db | gzip -c > "${SCRIPT_PATH}/backups/databases/$db-$BACKUP_DATE.sql.gz"
+done
+
+#Webserver backup
+cd $/var/www/${MYDOMAIN}/public
+folders=`for i in $(ls -d */ | grep -Ev "(backups)"); do echo ${i%%/}; done`
+for ftp in $folders; do
+cd $ftp
+  tar -cpzf "${SCRIPT_PATH}/backups/ftpbackup/$ftp-$BACKUP_DATE.tgz" * >>${SCRIPT_PATH}/backups/logs/backup_error.log 2>&1 >>${SCRIPT_PATH}/backups/logs/backup.log
+  cd $/var/www/${MYDOMAIN}/public
+done
+
+#delete old backups
+find /var/www/${MYDOMAIN}/* -type d -ctime +3 | xargs rm -rf

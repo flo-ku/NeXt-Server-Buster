@@ -143,7 +143,6 @@ END
 
 sysctl -p >>"${main_log}" 2>>"${err_log}"
 
-# Enable Backupscript
-cp -f ${SCRIPT_PATH}/cronjobs/backupscript /etc/cron.daily/
-chmod +x /etc/cron.daily/backupscript
+cp -f ${SCRIPT_PATH}/cronjobs/webserver_backup /etc/cron.daily/
+chmod +x /etc/cron.daily/webserver_backup
 }
