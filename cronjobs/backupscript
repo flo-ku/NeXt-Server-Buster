@@ -65,9 +65,6 @@ cd $ftp
   cd $PATH_TO_WEBFOLDER
 done
 cd /root
-# --------------------------------------------------------------------------------------------------------------------------------------------------
-apt-get update -y >>/root/logs/stderrorBACKUP.log 2>&1 >>/root/logs/stdoutBACKUP.log
-apt-get upgrade -y >>/root/logs/stderrorBACKUP.log 2>&1 >>/root/logs/stdoutBACKUP.log
 
 find /etc/nginx/backups/* -type d -ctime +${OLD_BACKUP_FILES} | xargs rm -rf
 
