@@ -8,7 +8,6 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 BACKUP_DATE=$(date +"%d-%m-%Y_%H_%M_%S")
 
 mkdir -p ${SCRIPT_PATH}/backups/{databases,ftpbackup,logs}
-mkdir -p /root/logs/
 touch ${SCRIPT_PATH}/backups/logs/backup.log
 touch ${SCRIPT_PATH}/backups/logs/backup_error.log
 
