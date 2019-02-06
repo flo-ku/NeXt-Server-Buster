@@ -4,54 +4,41 @@
 
 OLD_BACKUP_FILES=3
 
-###################### DO NOT EDIT ANYTHING BELOW! #######################
+mkdir -p $BACKUP_PATH/{DATABASES,FTPBACKUP}
+mkdir -p /root/logs/
+touch /root/logs/BACKUP.log
+touch /root/logs/BACKUP_ERROR.log
 
-# --------------------------------------------------------------------------------------------------------------------------------------------------
-
-# Variable deklarieren
-datum=$(date +"%d-%m-%Y_%H_%M_%S")
-PATH_TO_PASSWORDS="/root/NeXt-Server-Buster/login_information.txt"
-PATH_TO_WEBFOLDER="/etc/nginx/html"
-BACKUP_PATH="/etc/nginx/backups/$datum"
+BACKUP_DATE=$(date +"%d-%m-%Y_%H_%M_%S")
+PATH_TO_PASSWORDS="${SCRIPT_PATH}/login_information.txt"
+PATH_TO_WEBFOLDER="/var/www/${MYDOMAIN}/public"
+BACKUP_PATH="/var/www/${MYDOMAIN}/"
 MYSQL_USER="root"
 
 #MAX_SPACE=$(df -Th /dev/sda3 | tail -1 | awk '{print $3}' | sed '$s/.$//')
 #USED_SPACE=$(df -Th /dev/sda3 | tail -1 | awk '{print $4}' | sed '$s/.$//')
 #FREE_SPACE=$(df -Th /dev/sda3 | tail -1 | awk '{print $5}' | sed '$s/.$//')
 #USED_HTML_SPACE=$(du -hs /etc/nginx/html/ | tail -1 | awk '{print $1}' | sed '$s/.$//')
-# --------------------------------------------------------------------------------------------------------------------------------------------------
-#Lese Db passwort aus und speichere es
+
 #Todo: Explizites aufsuchen des 1. Treffers
 MYSQL_PASSWORD=$(grep -Pom 1 "(?<=^MYSQL_ROOT_PASS: ).*$" $PATH_TO_PASSWORDS)
 MYSQL=/usr/bin/mysql
 MYSQLDUMP=/usr/bin/mysqldump
 
-# --------------------------------------------------------------------------------------------------------------------------------------------------
-# ToDo
-# Check disk space !
-# --------------------------------------------------------------------------------------------------------------------------------------------------
+# ToDo Check disk space !
 #if [ "$USED_SPACE" -gt "$FREE_SPACE" ]; then
 	# Todo:
 	# Sent mail
 #	exit 0
 #fi
-# --------------------------------------------------------------------------------------------------------------------------------------------------
-
-mkdir -p $BACKUP_PATH
-mkdir -p $BACKUP_PATH/DATABESES
-mkdir -p $BACKUP_PATH/FTPBACKUP
-mkdir -p /root/logs/
-
-touch /root/logs/stdoutBACKUP.log
-touch /root/logs/stderrorBACKUP.log
 
 # Error: The database is in a .tgz archive. Unpack this, you get a .tar. However, this must be renamed to .sql.
 # --------------------------------------------------------------------------------------------------------------------------------------------------
 databases=`$MYSQL --user=$MYSQL_USER -p$MYSQL_PASSWORD -e "SHOW DATABASES;" | grep -Ev "(Database|mysql|information_schema|performance_schema)"`
 for db in $databases; do
 #echo "${info} Backup Database $db" | awk '{ print strftime("[%H:%M:%S] |"), $0 }'
-  #$MYSQLDUMP --force --opt --user=$MYSQL_USER -p$MYSQL_PASSWORD --databases $db | gzip > "$BACKUP_PATH/DATABESES/$db-$datum.sql.tgz"
-  $MYSQLDUMP --force --opt --user=$MYSQL_USER -p$MYSQL_PASSWORD --databases $db | gzip -c > "$BACKUP_PATH/DATABESES/$db-$datum.sql.gz"
+  #$MYSQLDUMP --force --opt --user=$MYSQL_USER -p$MYSQL_PASSWORD --databases $db | gzip > "$BACKUP_PATH/DATABASES/$db-$BACKUP_DATE.sql.tgz"
+  $MYSQLDUMP --force --opt --user=$MYSQL_USER -p$MYSQL_PASSWORD --databases $db | gzip -c > "$BACKUP_PATH/DATABASES/$db-$BACKUP_DATE.sql.gz"
 done
 # --------------------------------------------------------------------------------------------------------------------------------------------------
 cd $PATH_TO_WEBFOLDER
@@ -60,12 +47,12 @@ cd $PATH_TO_WEBFOLDER
 folders=`for i in $(ls -d */ | grep -Ev "(backups)"); do echo ${i%%/}; done`
 for ftp in $folders; do
 cd $ftp
-  #tar -cvvzf $ftp-$datum.tar.gz *
-  tar -cvvzf "$BACKUP_PATH/FTPBACKUP/$ftp-$datum.tgz" * >>/root/logs/stderrorBACKUP.log 2>&1 >>/root/logs/stdoutBACKUP.log
+  #tar -cvvzf $ftp-$BACKUP_DATE.tar.gz *
+  tar -cvvzf "$BACKUP_PATH/FTPBACKUP/$ftp-$BACKUP_DATE.tgz" * >>/root/logs/BACKUP_ERROR.log 2>&1 >>/root/logs/BACKUP.log
   cd $PATH_TO_WEBFOLDER
 done
-cd /root
 
+cd /root
 find /etc/nginx/backups/* -type d -ctime +${OLD_BACKUP_FILES} | xargs rm -rf
 
 reboot
