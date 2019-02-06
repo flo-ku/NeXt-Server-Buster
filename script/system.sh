@@ -66,11 +66,12 @@ END
 apt-get update -y >/dev/null 2>&1
 apt-get -y upgrade >/dev/null 2>&1
 
-install_packages "sudo rkhunter needrestart debsecan debsums passwdqc unattended-upgrades apt-listchanges"
+install_packages "sudo rkhunter debsecan debsums passwdqc unattended-upgrades needrestart apt-listchanges"
 cp -f ${SCRIPT_PATH}/configs/needrestart.conf /etc/needrestart/needrestart.conf
 cp -f ${SCRIPT_PATH}/configs/20auto-upgrades /etc/apt/apt.conf.d/20auto-upgrades
 cp -f ${SCRIPT_PATH}/configs/50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades
 sed -i "s/email_address=root/email_address=${NXT_SYSTEM_EMAIL}/g" /etc/apt/listchanges.conf
+sed -i "s/changeme/${NXT_SYSTEM_EMAIL}/g" /etc/apt/apt.conf.d/50unattended-upgrades
 
 #thanks to https://linuxacademy.com/howtoguides/posts/show/topic/19700-linux-security-and-server-hardening-part1
 cat > /etc/sysctl.conf <<END
