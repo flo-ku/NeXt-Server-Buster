@@ -164,6 +164,9 @@ Thanks to [Thomas Leister] and his awesome Mailserver Setup, we're using in this
 Also thanks to [Michael Thies], for the managevmail script, used for the Mailserver.
 (https://github.com/mhthies/managevmail)
 
+A big thanks to [George Liu], for some great lines of code!.
+(https://github.com/centminmod)
+
 ## Used software
 - Nginx                      <https://github.com/nginx/nginx>
 - Openssh                    <https://github.com/openssh/openssh-portable>
