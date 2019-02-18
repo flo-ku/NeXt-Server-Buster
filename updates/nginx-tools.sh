@@ -2,7 +2,7 @@
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
-nginx_tools() {
+nginx_update_menu) {
 
 trap error_exit ERR
 
@@ -10,29 +10,55 @@ LATEST_NGINX_VERSION=$(curl -4sL https://nginx.org/en/download.html 2>&1 | egrep
 LOCAL_NGINX_VERSION=$(nginx -v 2>&1 | grep -o '[0-9.]*$')
 
 if [[ ${LOCAL_NGINX_VERSION} != ${LATEST_NGINX_VERSION} ]]; then
-  echo "There is a new NGINX version ${LATEST_NGINX_VERSION} avaiable! Do you want to install?"
-  read -p "Continue (y/n)?" ANSW
-  if [ "$ANSW" = "n" ]; then
-  echo "Exit"
-  exit 1
-  fi
+BACKTITLE="NeXt Server Installation"
+TITLE="NeXt Server Installation"
+HEIGHT=15
+WIDTH=70
+
+CHOICE_HEIGHT=2
+MENU="There is a new NGINX version ${LATEST_NGINX_VERSION} available!\nYour current version is ${LOCAL_NGINX_VERSION}\nDo you want to update?"
+OPTIONS=(1 "Yes"
+                 2 "No")
+
+CHOICE=$(dialog --clear \
+                --backtitle "$BACKTITLE" \
+                --title "$TITLE" \
+                                --no-cancel \
+                --menu "$MENU" \
+                $HEIGHT $WIDTH $CHOICE_HEIGHT \
+                "${OPTIONS[@]}" \
+                2>&1 >/dev/tty)
+clear
+case $CHOICE in
+        1)
+        backup_nginx
+        update_nginx
+        check_nginx
+        restore_nginx_backup
+        ;;
+        2)
+        exit 1
+        ;;
+esac
 fi
-### change to dialog menu^^^
 }
 
 backup_nginx() {
-    ###cp folders with vhost, html folder etc -> user permissions changed? sop service + download updated addons before compile
-    ###use addon paths
-    cp -R /root/backup/$date/nginx/* /etc/nginx/
-    systemctl -q start nginx.service
 
-    #do not delete /backup/ folder
-    mkdir /root/backup/$date/nginx/
-    cp -R /etc/nginx/* /root/backup/$date/nginx/
+  trap error_exit ERR
+  ###cp folders with vhost, html folder etc -> user permissions changed? sop service + download updated addons before compile
+  ###use addon paths
+  cp -R /root/backup/$date/nginx/* /etc/nginx/
+  systemctl -q start nginx.service
+
+  #do not delete /backup/ folder
+  mkdir /root/backup/$date/nginx/
+  cp -R /etc/nginx/* /root/backup/$date/nginx/
 }
 
 update_nginx() {
 
+  trap error_exit ERR
   #download openssl again or use old folder? what if user deleted it? <-- but in all update openssl folder will be created?
   cd /root/update/sources/
   wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
@@ -114,11 +140,15 @@ update_nginx() {
 }
 
 check_nginx() {
+
+  trap error_exit ERR
   source ${SCRIPT_PATH}/checks/nginx-check.sh; check_nginx
   source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
   ##write new nginx version to version conf
 }
 
 restore_nginx_backup() {
+  
+  trap error_exit ERR
   ###restore backups to webroot
 }
