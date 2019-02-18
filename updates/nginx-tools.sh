@@ -2,31 +2,41 @@
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
-update_nginx() {
+nginx_tools() {
 
 trap error_exit ERR
 
-source ${SCRIPT_PATH}/configs/versions.cfg
+LATEST_NGINX_VERSION=$(curl -4sL https://nginx.org/en/download.html 2>&1 | egrep -o "nginx\-[0-9.]+\.tar[.a-z]*" | grep -v '.asc' | awk -F "nginx-" '/.tar.gz$/ {print $2}' | sed -e 's|.tar.gz||g' | head -n1 2>&1)
+LOCAL_NGINX_VERSION=$(nginx -v 2>&1 | grep -o '[0-9.]*$')
 
-command="nginx -v"
-nginxv=$( ${command} 2>&1 )
-LOCAL_NGINX_VERSION=$(echo $nginxv | grep -o '[0-9.]*$')
+if [[ ${LOCAL_NGINX_VERSION} != ${LATEST_NGINX_VERSION} ]]; then
+  echo "There is a new NGINX version ${LATEST_NGINX_VERSION} avaiable! Do you want to install?"
+  read -p "Continue (y/n)?" ANSW
+  if [ "$ANSW" = "n" ]; then
+  echo "Exit"
+  exit 1
+  fi
+fi
+### change to dialog menu^^^
+}
 
-if [[ ${LOCAL_NGINX_VERSION} != ${NGINX_VERSION} ]]; then
-  systemctl -q stop nginx.service
+backup_nginx() {
+    ###cp folders with vhost, html folder etc -> user permissions changed? sop service + download updated addons before compile
+    ###use addon paths
+    cp -R /root/backup/$date/nginx/* /etc/nginx/
+    systemctl -q start nginx.service
 
-  ###cp folders with vhost, html folder etc -> user permissions changed? sop service + download updated addons before compile
+    #do not delete /backup/ folder
+    mkdir /root/backup/$date/nginx/
+    cp -R /etc/nginx/* /root/backup/$date/nginx/
+}
 
-  #do not delete /backup/ folder
-  mkdir /root/backup/$date/nginx/
-  cp -R /etc/nginx/* /root/backup/$date/nginx/
+update_nginx() {
 
   #download openssl again or use old folder? what if user deleted it? <-- but in all update openssl folder will be created?
   cd /root/update/sources/
   wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
   tar -xzf openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
-
-  install_packages "autoconf automake libtool git unzip zlib1g-dev libpcre3 libpcre3-dev uuid-dev"
 
   cd ${SCRIPT_PATH}/sources
   wget_tar "https://codeload.github.com/pagespeed/ngx_pagespeed/zip/v${NPS_VERSION}"
@@ -43,10 +53,7 @@ if [[ ${LOCAL_NGINX_VERSION} != ${NGINX_VERSION} ]]; then
   cd ${SCRIPT_PATH}/sources
   git clone https://github.com/nbs-system/naxsi.git -q >>"${main_log}" 2>>"${err_log}"
 
-
-  ##nginx
-  install_packages "psmisc libpcre3 libpcre3-dev libgeoip-dev zlib1g-dev checkinstall"
-
+  systemctl -q stop nginx.service
   cd ${SCRIPT_PATH}/sources
   wget_tar "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz"
   tar_file "nginx-${NGINX_VERSION}.tar.gz"
@@ -99,20 +106,19 @@ if [[ ${LOCAL_NGINX_VERSION} != ${NGINX_VERSION} ]]; then
   --with-openssl=${SCRIPT_PATH}/sources/openssl-${OPENSSL_VERSION} \
   --add-module=${SCRIPT_PATH}/sources/naxsi/naxsi_src \
   --add-module=${SCRIPT_PATH}/sources/incubator-pagespeed-ngx-${NPS_VERSION} \
-  --add-module=${SCRIPT_PATH}/sources/headers-more-nginx-module-${NGINX_HEADER_MOD_VERSION} \
-  --add-module=${SCRIPT_PATH}/sources/ngx_brotli "
+  --add-module=${SCRIPT_PATH}/sources/headers-more-nginx-module-${NGINX_HEADER_MOD_VERSION}"
 
   ./configure $NGINX_OPTIONS $NGINX_MODULES --with-cc-opt='-O2 -g -pipe -Wall -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -m64 -mtune=generic' >>"${main_log}" 2>>"${err_log}"
-
   make -j $(nproc) >>"${main_log}" 2>>"${err_log}"
-  checkinstall --install=no -y >>"${main_log}" 2>>"${err_log}"
+  make install >>"${main_log}" 2>>"${err_log}"
+}
 
-  dpkg -i nginx_${NGINX_VERSION}-1_amd64.deb >>"${main_log}" 2>>"${err_log}"
-  mv nginx_${NGINX_VERSION}-1_amd64.deb ../ >>"${main_log}" 2>>"${err_log}"
+check_nginx() {
+  source ${SCRIPT_PATH}/checks/nginx-check.sh; check_nginx
+  source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+  ##write new nginx version to version conf
+}
 
-  ###cp back folders with vhost, html folder etc -> user permissions changed? start service
-  ##autostart script working?
-  cp -R /root/backup/$date/nginx/* /etc/nginx/
-  systemctl -q start nginx.service
-fi
+restore_nginx_backup() {
+  ###restore backups to webroot
 }
