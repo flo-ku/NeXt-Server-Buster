@@ -2,9 +2,11 @@
 #Please check the license provided with the script!
 #-------------------------------------------------------------------------------------------------------------
 
-nginx_update_menu) {
+nginx_update_menu() {
 
 trap error_exit ERR
+
+source ${SCRIPT_PATH}/configs/versions.cfg
 
 LATEST_NGINX_VERSION=$(curl -4sL https://nginx.org/en/download.html 2>&1 | egrep -o "nginx\-[0-9.]+\.tar[.a-z]*" | grep -v '.asc' | awk -F "nginx-" '/.tar.gz$/ {print $2}' | sed -e 's|.tar.gz||g' | head -n1 2>&1)
 LOCAL_NGINX_VERSION=$(nginx -v 2>&1 | grep -o '[0-9.]*$')
@@ -46,25 +48,23 @@ fi
 backup_nginx() {
 
   trap error_exit ERR
-  ###cp folders with vhost, html folder etc -> user permissions changed? sop service + download updated addons before compile
-  ###use addon paths
-  cp -R /root/backup/$date/nginx/* /etc/nginx/
-  systemctl -q start nginx.service
 
-  #do not delete /backup/ folder
-  mkdir /root/backup/$date/nginx/
-  cp -R /etc/nginx/* /root/backup/$date/nginx/
+  ##maybe save old .deb for restoring nginx?
+  systemctl -q stop nginx.service
+  mkdir -p /etc/nginx/backup/
+  mv -v /var/www/${MYDOMAIN}/public/* /etc/nginx/backup/
 }
 
 update_nginx() {
 
   trap error_exit ERR
+  mkdir -p {SCRIPT_PATH}/updates/sources/
   #download openssl again or use old folder? what if user deleted it? <-- but in all update openssl folder will be created?
-  cd /root/update/sources/
+  cd {SCRIPT_PATH}/updates/sources/
   wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
   tar -xzf openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
 
-  cd ${SCRIPT_PATH}/sources
+  cd {SCRIPT_PATH}/updates/sources/
   wget_tar "https://codeload.github.com/pagespeed/ngx_pagespeed/zip/v${NPS_VERSION}"
   unzip_file "v${NPS_VERSION}"
   cd incubator-pagespeed-ngx-${NPS_VERSION}/ >>"${main_log}" 2>>"${err_log}"
@@ -72,15 +72,15 @@ update_nginx() {
   wget_tar "https://dl.google.com/dl/page-speed/psol/${PSOL_VERSION}-x64.tar.gz"
   tar_file "${PSOL_VERSION}-x64.tar.gz"
 
-  cd ${SCRIPT_PATH}/sources
+  cd {SCRIPT_PATH}/updates/sources/
   wget_tar "https://codeload.github.com/openresty/headers-more-nginx-module/zip/v${NGINX_HEADER_MOD_VERSION}"
   unzip_file "v${NGINX_HEADER_MOD_VERSION}"
 
-  cd ${SCRIPT_PATH}/sources
+  cd {SCRIPT_PATH}/updates/sources/
   git clone https://github.com/nbs-system/naxsi.git -q >>"${main_log}" 2>>"${err_log}"
 
   systemctl -q stop nginx.service
-  cd ${SCRIPT_PATH}/sources
+  cd {SCRIPT_PATH}/updates/sources/
   wget_tar "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz"
   tar_file "nginx-${NGINX_VERSION}.tar.gz"
   cd nginx-${NGINX_VERSION} >>"${main_log}" 2>>"${err_log}"
@@ -151,4 +151,6 @@ restore_nginx_backup() {
   
   trap error_exit ERR
   ###restore backups to webroot
+  mv -v /etc/nginx/backup/* /var/www/${MYDOMAIN}/public/
+  systemctl -q start nginx.service
 }
