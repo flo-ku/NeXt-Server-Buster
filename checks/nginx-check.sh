@@ -87,14 +87,13 @@ else
 fi
 
 #check version
-command="nginx -v"
-nginxv=$( ${command} 2>&1 )
-nginxlocal=$(echo $nginxv | grep -o '[0-9.]*$')
-
-if [ $nginxlocal != ${NGINX_VERSION} ]; then
-  echo "${error} The installed Nginx Version $nginxlocal is DIFFERENT with the Nginx Version ${NGINX_VERSION} defined in the Userconfig!"
+NGINX_VERSION=$(grep -Pom 1 "(?<=^NGINX_VERSION=).*$" ${SCRIPT_PATH}/configs/versions.cfg)
+NGINX_VERSION=$(echo "$NGINX_VERSION" | sed 's/\"//g')
+LOCAL_NGINX_VERSION=$(nginx -v 2>&1 | grep -o '[0-9.]*$')
+if [ $LOCAL_NGINX_VERSION != ${NGINX_VERSION} ]; then
+  echo "${error} The installed Nginx Version $LOCAL_NGINX_VERSION is DIFFERENT with the Nginx Version ${NGINX_VERSION} defined in the Userconfig!"
 else
-	echo "${ok} The Nginx Version $nginxlocal is equal with the Nginx Version ${NGINX_VERSION} defined in the Userconfig!"
+	echo "${ok} The Nginx Version $LOCAL_NGINX_VERSION is equal with the Nginx Version ${NGINX_VERSION} defined in the Userconfig!"
 fi
 
 #check website
