@@ -35,11 +35,18 @@ else
   echo "${error} sysctl.conf does NOT exist" >>"${failed_checks_log}"
 fi
 
-if [ -e /etc/cron.daily/backupscript ]; then
+if [ -e /etc/cron.daily/webserver_backup ]; then
   passed_system_checks=$((passed_system_checks + 1))
 else
   failed_system_checks=$((failed_system_checks + 1))
-  echo "${error} backupscript does NOT exist" >>"${failed_checks_log}"
+  echo "${error} webserver_backup cron does NOT exist" >>"${failed_checks_log}"
+fi
+
+if [ -e /etc/cron.daily/free_disk_space ]; then
+  passed_system_checks=$((passed_system_checks + 1))
+else
+  failed_system_checks=$((failed_system_checks + 1))
+  echo "${error} free_disk_space cron does NOT exist" >>"${failed_checks_log}"
 fi
 
 if [ -e ${SCRIPT_PATH}/login_information.txt ]; then

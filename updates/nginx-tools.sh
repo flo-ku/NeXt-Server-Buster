@@ -58,13 +58,14 @@ backup_nginx() {
 update_nginx() {
 
   trap error_exit ERR
-  mkdir -p {SCRIPT_PATH}/updates/sources/
+  mkdir -p ${SCRIPT_PATH}/updates/sources/
+  
   #download openssl again or use old folder? what if user deleted it? <-- but in all update openssl folder will be created?
-  cd {SCRIPT_PATH}/updates/sources/
+  cd ${SCRIPT_PATH}/updates/sources/
   wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
   tar -xzf openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
 
-  cd {SCRIPT_PATH}/updates/sources/
+  cd ${SCRIPT_PATH}/updates/sources/
   wget_tar "https://codeload.github.com/pagespeed/ngx_pagespeed/zip/v${NPS_VERSION}"
   unzip_file "v${NPS_VERSION}"
   cd incubator-pagespeed-ngx-${NPS_VERSION}/ >>"${main_log}" 2>>"${err_log}"
@@ -72,15 +73,15 @@ update_nginx() {
   wget_tar "https://dl.google.com/dl/page-speed/psol/${PSOL_VERSION}-x64.tar.gz"
   tar_file "${PSOL_VERSION}-x64.tar.gz"
 
-  cd {SCRIPT_PATH}/updates/sources/
+  cd ${SCRIPT_PATH}/updates/sources/
   wget_tar "https://codeload.github.com/openresty/headers-more-nginx-module/zip/v${NGINX_HEADER_MOD_VERSION}"
   unzip_file "v${NGINX_HEADER_MOD_VERSION}"
 
-  cd {SCRIPT_PATH}/updates/sources/
+  cd ${SCRIPT_PATH}/updates/sources/
   git clone https://github.com/nbs-system/naxsi.git -q >>"${main_log}" 2>>"${err_log}"
 
   systemctl -q stop nginx.service
-  cd {SCRIPT_PATH}/updates/sources/
+  cd ${SCRIPT_PATH}/updates/sources/
   wget_tar "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz"
   tar_file "nginx-${NGINX_VERSION}.tar.gz"
   cd nginx-${NGINX_VERSION} >>"${main_log}" 2>>"${err_log}"
