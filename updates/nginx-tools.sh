@@ -7,6 +7,9 @@ nginx_update_menu() {
 trap error_exit ERR
 
 source ${SCRIPT_PATH}/configs/versions.cfg
+source ${SCRIPT_PATH}/configs/userconfig.cfg
+source ${SCRIPT_PATH}/script/functions.sh
+source ${SCRIPT_PATH}/script/logs.sh; set_logs
 
 LATEST_NGINX_VERSION=$(curl -4sL https://nginx.org/en/download.html 2>&1 | egrep -o "nginx\-[0-9.]+\.tar[.a-z]*" | grep -v '.asc' | awk -F "nginx-" '/.tar.gz$/ {print $2}' | sed -e 's|.tar.gz||g' | head -n1 2>&1)
 LOCAL_NGINX_VERSION=$(nginx -v 2>&1 | grep -o '[0-9.]*$')
@@ -61,7 +64,6 @@ update_nginx() {
   set -x
   mkdir -p ${SCRIPT_PATH}/updates/sources/
 
-  #download openssl again or use old folder? what if user deleted it? <-- but in all update openssl folder will be created?
   cd ${SCRIPT_PATH}/updates/sources/
   wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
   tar -xzf openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
@@ -141,18 +143,18 @@ update_nginx() {
   make install >>"${main_log}" 2>>"${err_log}"
 }
 
-check_nginx() {
-
-  trap error_exit ERR
-  source ${SCRIPT_PATH}/checks/nginx-check.sh; check_nginx
-  source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
-  ##write new nginx version to version conf
-}
-
 restore_nginx_backup() {
   
   trap error_exit ERR
-  ###restore backups to webroot
   mv -v /etc/nginx/backup/* /var/www/${MYDOMAIN}/public/
   systemctl -q start nginx.service
+}
+
+check_nginx() {
+
+  trap error_exit ERR
+  sed -i 's/NGINX_VERSION="'${NGINX_VERSION}'"/NGINX_VERSION="'${LATEST_NGINX_VERSION}'"/' ${SCRIPT_PATH}/configs/versions.cfg
+  ##create case for failed update + restore old version value?
+  source ${SCRIPT_PATH}/checks/nginx-check.sh; check_nginx
+  source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
 }
