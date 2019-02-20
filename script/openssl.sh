@@ -6,8 +6,6 @@ install_openssl() {
 
 trap error_exit ERR
 
-mkdir -p ${SCRIPT_PATH}/sources/
-
 install_packages "libssl-dev libtool zlib1g-dev libpcre3-dev libxslt1-dev libxml2-dev libgd-dev libgeoip-dev libgoogle-perftools-dev libperl-dev"
 
 cd ${SCRIPT_PATH}/sources
