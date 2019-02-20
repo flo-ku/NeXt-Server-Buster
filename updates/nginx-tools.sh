@@ -58,8 +58,9 @@ backup_nginx() {
 update_nginx() {
 
   trap error_exit ERR
+  set -x
   mkdir -p ${SCRIPT_PATH}/updates/sources/
-  
+
   #download openssl again or use old folder? what if user deleted it? <-- but in all update openssl folder will be created?
   cd ${SCRIPT_PATH}/updates/sources/
   wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz >>"$main_log" 2>>"$err_log"
@@ -82,9 +83,9 @@ update_nginx() {
 
   systemctl -q stop nginx.service
   cd ${SCRIPT_PATH}/updates/sources/
-  wget_tar "https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz"
-  tar_file "nginx-${NGINX_VERSION}.tar.gz"
-  cd nginx-${NGINX_VERSION} >>"${main_log}" 2>>"${err_log}"
+  wget_tar "https://nginx.org/download/nginx-${LATEST_NGINX_VERSION}.tar.gz"
+  tar_file "nginx-${LATEST_NGINX_VERSION}.tar.gz"
+  cd nginx-${LATEST_NGINX_VERSION} >>"${main_log}" 2>>"${err_log}"
 
   #Thanks to https://github.com/Angristan/nginx-autoinstall/
   NGINX_OPTIONS="
@@ -130,10 +131,10 @@ update_nginx() {
   --with-http_mp4_module \
   --with-http_gunzip_module \
   --with-openssl-opt=enable-tls1_3 \
-  --with-openssl=${SCRIPT_PATH}/sources/openssl-${OPENSSL_VERSION} \
-  --add-module=${SCRIPT_PATH}/sources/naxsi/naxsi_src \
-  --add-module=${SCRIPT_PATH}/sources/incubator-pagespeed-ngx-${NPS_VERSION} \
-  --add-module=${SCRIPT_PATH}/sources/headers-more-nginx-module-${NGINX_HEADER_MOD_VERSION}"
+  --with-openssl=${SCRIPT_PATH}/updates/sources/openssl-${OPENSSL_VERSION} \
+  --add-module=${SCRIPT_PATH}/updates/sources/naxsi/naxsi_src \
+  --add-module=${SCRIPT_PATH}/updates/sources/incubator-pagespeed-ngx-${NPS_VERSION} \
+  --add-module=${SCRIPT_PATH}/updates/sources/headers-more-nginx-module-${NGINX_HEADER_MOD_VERSION}"
 
   ./configure $NGINX_OPTIONS $NGINX_MODULES --with-cc-opt='-O2 -g -pipe -Wall -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong -m64 -mtune=generic' >>"${main_log}" 2>>"${err_log}"
   make -j $(nproc) >>"${main_log}" 2>>"${err_log}"
