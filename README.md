@@ -56,6 +56,11 @@ A vServer with at least:
 
 Several quick start options are available:
 
+Important!:
+Login with:
+- `su -`
+otherwise the script will throw multiple errors!
+
 Install with [git]:
 - `cd /root/; apt-get update; apt-get install git -y; git clone https://github.com/shoujii/NeXt-Server-Buster; cd NeXt-Server-Buster; bash nxt.sh
 `
