@@ -66,7 +66,7 @@ END
 apt-get update -y >/dev/null 2>&1
 apt-get -y upgrade >/dev/null 2>&1
 
-install_packages "sudo rkhunter debsecan debsums passwdqc unattended-upgrades needrestart apt-listchanges"
+install_packages "dirmngr software-properties-common sudo rkhunter debsecan debsums passwdqc unattended-upgrades needrestart apt-listchanges"
 cp -f ${SCRIPT_PATH}/configs/needrestart.conf /etc/needrestart/needrestart.conf
 cp -f ${SCRIPT_PATH}/configs/20auto-upgrades /etc/apt/apt.conf.d/20auto-upgrades
 cp -f ${SCRIPT_PATH}/configs/50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades
