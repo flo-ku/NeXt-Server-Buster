@@ -6,16 +6,6 @@ install_rspamd() {
 
 trap error_exit ERR
 
-install_packages "lsb-release wget"
-
-wget -q -O- https://rspamd.com/apt-stable/gpg.key | apt-key add - >>"${main_log}" 2>>"${err_log}"
-echo "deb http://rspamd.com/apt-stable/ sid main" > /etc/apt/sources.list.d/rspamd.list
-echo "deb-src http://rspamd.com/apt-stable/ sid main" >> /etc/apt/sources.list.d/rspamd.list
-#echo "deb http://rspamd.com/apt-stable/ $(lsb_release -c -s) main" > /etc/apt/sources.list.d/rspamd.list
-#echo "deb-src http://rspamd.com/apt-stable/ $(lsb_release -c -s) main" >> /etc/apt/sources.list.d/rspamd.list
-
-apt-get update -y >/dev/null 2>&1
-
 install_packages "rspamd"
 systemctl stop rspamd
 
