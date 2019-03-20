@@ -42,9 +42,7 @@ case $CHOICE in
           )
             if [[ "$NEXTCLOUD_PATH_NAME" =~ ^[a-zA-Z0-9]+$ ]]; then
               if [ ${#NEXTCLOUD_PATH_NAME} -ge 2 ]; then
-                declare -a array=('webmail' 'rspamd')
-                array+=(${WORDPRESS_PATH_NAME})
-                array+=(${PHPMYADMIN_PATH_NAME})
+                array=($(cat "${SCRIPT_PATH}/configs/blocked_paths.conf"))
                 printf -v array_str -- ',,%q' "${array[@]}"
 
                 if [[ "${array_str},," =~ ,,${NEXTCLOUD_PATH_NAME},, ]]

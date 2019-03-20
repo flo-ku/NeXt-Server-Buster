@@ -87,6 +87,7 @@ echo "WordpressDBPassword = ${WORDPRESS_DB_PASS}" >> ${SCRIPT_PATH}/wordpress_lo
 echo "WordpressScriptPath = ${WORDPRESS_PATH_NAME}" >> ${SCRIPT_PATH}/wordpress_login_data.txt
 
 sed -i 's/WORDPRESS_IS_INSTALLED="0"/WORDPRESS_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
+echo "$WORDPRESS_PATH_NAME" >> ${SCRIPT_PATH}/configs/blocked_paths.conf
 
 dialog_msg "Please save the shown login information on next page"
 cat ${SCRIPT_PATH}/wordpress_login_data.txt

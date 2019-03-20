@@ -49,6 +49,7 @@ echo "Database password = ${NEXTCLOUD_DB_PASS}" >> ${SCRIPT_PATH}/nextcloud_logi
 echo "NextcloudDBName = ${NEXTCLOUD_DB_NAME}" >> ${SCRIPT_PATH}/nextcloud_login_data.txt
 
 sed -i 's/NEXTCLOUD_IS_INSTALLED="0"/NEXTCLOUD_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
+echo "$NEXTCLOUD_PATH_NAME" >> ${SCRIPT_PATH}/configs/blocked_paths.conf
 
 dialog_msg "Please save the shown login information on next page"
 cat ${SCRIPT_PATH}/nextcloud_login_data.txt

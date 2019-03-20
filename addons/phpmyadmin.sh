@@ -63,6 +63,7 @@ echo "" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
 echo "blowfish_secret = ${PMA_BFSECURE_PASS}" >> ${SCRIPT_PATH}/phpmyadmin_login_data.txt
 
 sed -i 's/PMA_IS_INSTALLED="0"/PMA_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
+echo "${PHPMYADMIN_PATH_NAME}" >> ${SCRIPT_PATH}/configs/blocked_paths.conf
 
 dialog_msg "Please save the shown login information on next page"
 cat ${SCRIPT_PATH}/phpmyadmin_login_data.txt
