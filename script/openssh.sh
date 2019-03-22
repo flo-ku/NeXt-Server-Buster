@@ -23,32 +23,22 @@ cp ${SCRIPT_PATH}/configs/sshd_config /etc/ssh/sshd_config
 cp ${SCRIPT_PATH}/includes/issue /etc/issue
 cp ${SCRIPT_PATH}/includes/issue.net /etc/issue.net
 
-declare -A BLOCKED_PORTS='(
-    [22]="1"
-    [25]="1"
-    [80]="1"
-    [110]="1"
-    [143]="1"
-    [443]="1"
-    [465]="1"
-    [587]="1"
-    [993]="1"
-    [995]="1"
-    [4000]="1")'
+array=($(cat "${SCRIPT_PATH}/configs/blocked_ports.conf"))
+printf -v array_str -- ',,%q' "${array[@]}"
 
-		while true
-		do
-		RANDOM_SSH_PORT="$(($RANDOM % 1023))"
-			# Check is RANDOM_SSH_PORT known in BLOCKED_PORTS
-			if [[ -v BLOCKED_PORTS[$RANDOM_SSH_PORT] ]]; then
-				echo "Random Openssh Port is used by the system, creating new one"
-			else
-				SSH_PORT="$RANDOM_SSH_PORT"
-				break
-			fi
-		done
+	while true
+	do
+	RANDOM_SSH_PORT="$(($RANDOM % 1023))"
+		if [[ "${array_str},," =~ ,,${RANDOM_SSH_PORT},, ]]
+			echo "Random Openssh Port is used by the system, creating new one"
+		else
+			SSH_PORT="$RANDOM_SSH_PORT"
+			break
+		fi
+	done
 
 sed -i "s/^Port 22/Port $SSH_PORT/g" /etc/ssh/sshd_config
+echo "$SSH_PORT" >> ${SCRIPT_PATH}/configs/blocked_ports.conf
 
 echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
 echo "#SSH_PORT: ${SSH_PORT}" >> ${SCRIPT_PATH}/login_information.txt

@@ -21,7 +21,7 @@ mysql -u root -p${MYSQL_ROOT_PASS} -e "FLUSH PRIVILEGES;"
 
 cd /var/www/${MYDOMAIN}/public/
 wget_tar "https://wordpress.org/latest.tar.gz"
-tar -zxvf latest.tar.gz
+tar -zxvf latest.tar.gz >>"${main_log}" 2>>"${err_log}"
 rm latest.tar.gz
 
 if [ "$WORDPRESS_PATH_NAME" != "root" ]; then

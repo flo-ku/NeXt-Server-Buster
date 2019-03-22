@@ -62,6 +62,8 @@ sed -i "/\<$TS3_PORTS_TCP\>/ "\!"s/^OPEN_TCP=\"/&$TS3_PORTS_TCP, /" /etc/arno-ip
 sed -i "/\<$TS3_PORTS_UDP\>/ "\!"s/^OPEN_UDP=\"/&$TS3_PORTS_UDP, /" /etc/arno-iptables-firewall/firewall.conf >>"${main_log}" 2>>"${err_log}"
 sed -i '1171s/, "/"/' /etc/arno-iptables-firewall/firewall.conf
 
+cat ${SCRIPT_PATH}/addons/configs/ts3_ports.conf >> ${SCRIPT_PATH}/configs/blocked_ports.conf
+
 systemctl -q restart arno-iptables-firewall.service >>"${main_log}" 2>>"${err_log}"
 
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/teamspeak3_login_data.txt
