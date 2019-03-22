@@ -30,7 +30,7 @@ echo "MUNIN_HTTPAUTH_USER = ${MUNIN_HTTPAUTH_USER}" >> ${SCRIPT_PATH}/munin_logi
 echo "MUNIN_HTTPAUTH_PASS = ${MUNIN_HTTPAUTH_PASS}" >> ${SCRIPT_PATH}/munin_login_data.txt
 
 sed -i 's/MUNIN_IS_INSTALLED="0"/MUNIN_IS_INSTALLED="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
-echo "munin" >> ${SCRIPT_PATH}/configs/blocked_paths.conf
+echo "$MUNIN_PATH_NAME" >> ${SCRIPT_PATH}/configs/blocked_paths.conf
 
 dialog_msg "Please save the shown login information on next page"
 cat ${SCRIPT_PATH}/munin_login_data.txt

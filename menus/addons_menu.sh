@@ -135,6 +135,7 @@ fi
 			echo "Munin is already installed!"
 		else
 			dialog_info "Installing Munin"
+			source ${SCRIPT_PATH}/menus/munin_menu.sh; menu_options_munin
 			source ${SCRIPT_PATH}/addons/munin.sh; install_munin
 			dialog_msg "Finished installing Munin"
 		fi
