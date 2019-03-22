@@ -29,7 +29,7 @@ printf -v array_str -- ',,%q' "${array[@]}"
 	while true
 	do
 	RANDOM_SSH_PORT="$(($RANDOM % 1023))"
-		if [[ "${array_str},," =~ ,,${RANDOM_SSH_PORT},, ]]
+		if [[ "${array_str},," =~ ,,${RANDOM_SSH_PORT},, ]]; then
 			echo "Random Openssh Port is used by the system, creating new one"
 		else
 			SSH_PORT="$RANDOM_SSH_PORT"

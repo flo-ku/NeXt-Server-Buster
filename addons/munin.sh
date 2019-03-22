@@ -26,6 +26,7 @@ touch ${SCRIPT_PATH}/munin_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "Munin" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/munin_login_data.txt
+echo "Warning: It can take several minutes (or a restart), until the URL is working! (403 Error)" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "Munin Address: ${MYDOMAIN}/${MUNIN_PATH_NAME}/" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "MUNIN_HTTPAUTH_USER = ${MUNIN_HTTPAUTH_USER}" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "MUNIN_HTTPAUTH_PASS = ${MUNIN_HTTPAUTH_PASS}" >> ${SCRIPT_PATH}/munin_login_data.txt

@@ -45,8 +45,7 @@ case $CHOICE in
                 array=($(cat "${SCRIPT_PATH}/configs/blocked_paths.conf"))
                 printf -v array_str -- ',,%q' "${array[@]}"
 
-                if [[ "${array_str},," =~ ,,${MUNIN_PATH_NAME},, ]]
-                then
+                if [[ "${array_str},," =~ ,,${MUNIN_PATH_NAME},, ]]; then
                   dialog_msg "[ERROR] Your Munin path ${MUNIN_PATH_NAME} is already used by the script, please choose another one!"
                   dialog --clear
                 else
