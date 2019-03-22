@@ -7,13 +7,6 @@ check_rspamd() {
 failed_rspamd_checks=0
 passed_rspamd_checks=0
 
-if [ -e /etc/apt/sources.list.d/rspamd.list ]; then
-  passed_rspamd_checks=$((passed_rspamd_checks + 1))
-else
-  failed_rspamd_checks=$((failed_rspamd_checks + 1))
-  echo "${error} rspamd.list does NOT exist" >>"${failed_checks_log}"
-fi
-
 if [ -e /etc/rspamd/local.d/options.inc ]; then
   passed_rspamd_checks=$((passed_rspamd_checks + 1))
 else

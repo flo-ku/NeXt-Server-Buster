@@ -10,8 +10,8 @@ trap error_exit ERR
 install_packages "python3 python3-mysql.connector"
 
 mkdir -p /etc/managevmail/
-wget https://codeload.github.com/mhthies/managevmail/zip/master
-unzip master -d /etc/managevmail/
+wget https://codeload.github.com/mhthies/managevmail/zip/master >>"${main_log}" 2>>"${err_log}"
+unzip master -d /etc/managevmail/ >>"${main_log}" 2>>"${err_log}"
 mv /etc/managevmail/managevmail-master/* /etc/managevmail/
 rm -R /etc/managevmail/managevmail-master
 
