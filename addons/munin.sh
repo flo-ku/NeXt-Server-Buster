@@ -16,6 +16,7 @@ cp ${SCRIPT_PATH}/addons/vhosts/_munin.conf /etc/nginx/_munin.conf
 sed -i "s/#include _munin.conf;/include _munin.conf;/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 sed -i "s/localhost.localdomain/mail.${MYDOMAIN}/g" /etc/munin/munin.conf
+sed -i "s/change_path/${MUNIN_PATH_NAME}/g" /etc/nginx/_munin.conf
 
 systemctl -q restart php$PHPVERSION7-fpm.service
 service munin-node restart
@@ -25,7 +26,7 @@ touch ${SCRIPT_PATH}/munin_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "Munin" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "--------------------------------------------" >> ${SCRIPT_PATH}/munin_login_data.txt
-echo "Munin Address: ${MYDOMAIN}/munin/" >> ${SCRIPT_PATH}/munin_login_data.txt
+echo "Munin Address: ${MYDOMAIN}/${MUNIN_PATH_NAME}/" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "MUNIN_HTTPAUTH_USER = ${MUNIN_HTTPAUTH_USER}" >> ${SCRIPT_PATH}/munin_login_data.txt
 echo "MUNIN_HTTPAUTH_PASS = ${MUNIN_HTTPAUTH_PASS}" >> ${SCRIPT_PATH}/munin_login_data.txt
 
