@@ -13,9 +13,7 @@ install_packages "cron netcat-openbsd curl socat"
 cd ${SCRIPT_PATH}/sources
 git clone https://github.com/Neilpang/acme.sh.git -q >>"${main_log}" 2>>"${err_log}"
 cd ./acme.sh
-sleep 1
-./acme.sh --install  \
---accountemail ${NXT_SYSTEM_EMAIL} >>"${main_log}" 2>>"${err_log}"
+./acme.sh --install --accountemail ${NXT_SYSTEM_EMAIL} >>"${main_log}" 2>>"${err_log}"
 
 . ~/.bashrc >>"${main_log}" 2>>"${err_log}"
 . ~/.profile >>"${main_log}" 2>>"${err_log}"
@@ -23,10 +21,17 @@ sleep 1
 
 create_nginx_cert() {
 
-systemctl -q stop nginx.service
-
 cd ${SCRIPT_PATH}/sources/acme.sh/
-bash acme.sh --issue --standalone --debug 2 --log -d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging >>"${main_log}" 2>>"${err_log}"
+echo "Vor ausstellen"
+set -x
+bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/ --d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging >>"${main_log}" 2>>"${err_log}"
+echo "Nach ausstellen"
+
+echo "Vor ausstellen 2"
+bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/ --d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging >>"${main_log}" 2>>"${err_log}"
+echo "Nach ausstellen 2"
+
+exit
 
 ln -s /root/.acme.sh/${MYDOMAIN}_ecc/fullchain.cer /etc/nginx/ssl/${MYDOMAIN}-ecc.cer >>"${main_log}" 2>>"${err_log}"
 ln -s /root/.acme.sh/${MYDOMAIN}_ecc/${MYDOMAIN}.key /etc/nginx/ssl/${MYDOMAIN}-ecc.key >>"${main_log}" 2>>"${err_log}"

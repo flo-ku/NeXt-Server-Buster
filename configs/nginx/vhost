@@ -35,6 +35,7 @@ server {
 
 	include _general.conf;
 	include _pagespeed.conf;
+	include _encrypt.conf;
 	#include _rspamd.conf;
 	#include _wordpress.conf;
 	#include _nextcloud.conf;

@@ -76,6 +76,9 @@ mkdir -p /var/www/${MYDOMAIN}/public
 mkdir -p /var/cache/nginx
 mkdir -p /var/log/nginx/
 
+mkdir -p /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/
+chmod -R /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/
+
 wget_tar "-O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init"
 chmod 0755 /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 chown root:root /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
@@ -88,6 +91,7 @@ rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
 cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/_pagespeed.conf
+sed -i "s/changeme/${MYDOMAIN}/g" /etc/nginx/_encrypt.conf
 
 if [[ ${IPV6_ONLY} = "1" ]]; then
   sed -i "s/IPADR/:/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
