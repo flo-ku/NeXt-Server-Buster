@@ -1,0 +1,18 @@
+server {
+        listen IPADR;
+
+        server_name MYDOMAIN;
+        set $base /var/www/MYDOMAIN;
+        root $base/public;
+
+        include _general.conf;
+        include _encrypt.conf;
+}
+
+server {
+        listen IPADR;
+
+        server_name www.MYDOMAIN
+        set $base /var/www/MYDOMAIN
+        root $base/public;
+}
