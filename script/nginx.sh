@@ -76,9 +76,6 @@ mkdir -p /var/www/${MYDOMAIN}/public
 mkdir -p /var/cache/nginx
 mkdir -p /var/log/nginx/
 
-mkdir -p /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/
-chmod -R 0555 /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/
-
 wget_tar "-O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init"
 chmod 0755 /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 chown root:root /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
@@ -102,6 +99,9 @@ if [[ ${IP_DUAL} == '1' ]]; then
   sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
   sed -i "s/IP6ADR/${IP6ADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
 fi
+
+mkdir -p /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/
+chmod -R 0555 /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/
 
 chown -R www-data:www-data /var/www/${MYDOMAIN}/public
 ln -s /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-enabled/${MYDOMAIN}.conf

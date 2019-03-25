@@ -24,13 +24,7 @@ create_nginx_cert() {
 cd ${SCRIPT_PATH}/sources/acme.sh/
 echo "Vor ausstellen"
 set -x
-bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/ --d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging >>"${main_log}" 2>>"${err_log}"
-echo "Nach ausstellen"
-
-echo "Vor ausstellen 2"
-bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/ --d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging >>"${main_log}" 2>>"${err_log}"
-echo "Nach ausstellen 2"
-
+bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/ -d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging --log >>"${main_log}" 2>>"${err_log}"
 exit
 
 ln -s /root/.acme.sh/${MYDOMAIN}_ecc/fullchain.cer /etc/nginx/ssl/${MYDOMAIN}-ecc.cer >>"${main_log}" 2>>"${err_log}"
