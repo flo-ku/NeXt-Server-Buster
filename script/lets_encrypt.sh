@@ -22,7 +22,7 @@ create_nginx_cert() {
 
 #add case for ipv6!	
 cp /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-available/${MYDOMAIN}.vhost
-cp ${SCRIPT_PATH}/configs/nginx/confs/little_vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
+cp ${SCRIPT_PATH}/configs/nginx/little_vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 service nginx start
 
