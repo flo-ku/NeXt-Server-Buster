@@ -6,7 +6,6 @@ install_lets_encrypt() {
 
 trap error_exit ERR
 
-systemctl -q stop nginx.service
 mkdir -p /etc/nginx/ssl/
 
 install_packages "cron netcat-openbsd curl socat"
@@ -21,10 +20,17 @@ cd ./acme.sh
 
 create_nginx_cert() {
 
+#add case for ipv6!	
+cp /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-available/${MYDOMAIN}.vhost
+cp ${SCRIPT_PATH}/configs/nginx/confs/little_vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
+
+service nginx start
+
 cd ${SCRIPT_PATH}/sources/acme.sh/
 echo "Vor ausstellen"
 set -x
 bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/ -d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging --log >>"${main_log}" 2>>"${err_log}"
+echo "Nach ausstellen"
 exit
 
 ln -s /root/.acme.sh/${MYDOMAIN}_ecc/fullchain.cer /etc/nginx/ssl/${MYDOMAIN}-ecc.cer >>"${main_log}" 2>>"${err_log}"

@@ -1,5 +1,6 @@
 server {
         listen IPADR;
+        #listen [IP6ADR];
 
         server_name MYDOMAIN;
         set $base /var/www/MYDOMAIN;
@@ -11,6 +12,7 @@ server {
 
 server {
         listen IPADR;
+        #listen [IP6ADR];
 
         server_name www.MYDOMAIN
         set $base /var/www/MYDOMAIN

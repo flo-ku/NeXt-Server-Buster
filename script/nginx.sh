@@ -87,17 +87,22 @@ cp ${SCRIPT_PATH}/configs/nginx/confs/* /etc/nginx/
 rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
 cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+sed -i "s/MYDOMAIN/${MYDOMAIN}/g" ${SCRIPT_PATH}/configs/nginx/confs/little_vhost
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/_pagespeed.conf
 sed -i "s/changeme/${MYDOMAIN}/g" /etc/nginx/_encrypt.conf
 
 if [[ ${IPV6_ONLY} = "1" ]]; then
   sed -i "s/IPADR/:/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
   sed -i "s/IP6ADR/::/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+  sed -i "s/IPADR/:/g" ${SCRIPT_PATH}/configs/nginx/confs/little_vhost
+  sed -i "s/IP6ADR/::/g" ${SCRIPT_PATH}/configs/nginx/confs/little_vhost
 fi
 
 if [[ ${IP_DUAL} == '1' ]]; then
   sed -i "s/IPADR/${IPADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
   sed -i "s/IP6ADR/${IP6ADR}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
+  sed -i "s/IPADR/${IPADR}/g" ${SCRIPT_PATH}/configs/nginx/confs/little_vhost
+  sed -i "s/IP6ADR/${IP6ADR}/g" ${SCRIPT_PATH}/configs/nginx/confs/little_vhost
 fi
 
 mkdir -p /var/www/${MYDOMAIN}/public/.well-known/acme-challenge/
