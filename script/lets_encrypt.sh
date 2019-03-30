@@ -6,6 +6,8 @@ install_lets_encrypt() {
 
 trap error_exit ERR
 
+set -x
+
 mkdir -p /etc/nginx/ssl/
 
 install_packages "certbot python-certbot-nginx"
