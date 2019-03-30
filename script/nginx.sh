@@ -87,7 +87,7 @@ cp ${SCRIPT_PATH}/configs/nginx/confs/* /etc/nginx/
 rm -rf /etc/nginx/sites-available/${MYDOMAIN}.conf
 cp ${SCRIPT_PATH}/configs/nginx/vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/sites-available/${MYDOMAIN}.conf
-sed -i "s/MYDOMAIN/${MYDOMAIN}/g" ${SCRIPT_PATH}/configs/nginx/confs/little_vhost
+sed -i "s/MYDOMAIN/${MYDOMAIN}/g" ${SCRIPT_PATH}/configs/nginx/little_vhost
 sed -i "s/MYDOMAIN/${MYDOMAIN}/g" /etc/nginx/_pagespeed.conf
 sed -i "s/changeme/${MYDOMAIN}/g" /etc/nginx/_encrypt.conf
 
