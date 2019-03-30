@@ -9,12 +9,3 @@ server {
         include _general.conf;
         include _encrypt.conf;
 }
-
-server {
-        listen IPADR;
-        #listen [IP6ADR];
-
-        server_name www.MYDOMAIN
-        set $base /var/www/MYDOMAIN
-        root $base/public;
-}

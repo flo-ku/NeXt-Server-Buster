@@ -27,11 +27,12 @@ cp ${SCRIPT_PATH}/configs/nginx/little_vhost /etc/nginx/sites-available/${MYDOMA
 service nginx start
 
 cd ${SCRIPT_PATH}/sources/acme.sh/
-echo "Vor ausstellen"
 set -x
-bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/ -d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging --log >>"${main_log}" 2>>"${err_log}"
+bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/ -d ${MYDOMAIN} --keylength ec-384 --staging --log >>"${main_log}" 2>>"${err_log}"
 echo "Nach ausstellen"
-exit
+
+cp /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-available/little_vhost
+cp /etc/nginx/sites-available/${MYDOMAIN}.vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
 
 ln -s /root/.acme.sh/${MYDOMAIN}_ecc/fullchain.cer /etc/nginx/ssl/${MYDOMAIN}-ecc.cer >>"${main_log}" 2>>"${err_log}"
 ln -s /root/.acme.sh/${MYDOMAIN}_ecc/${MYDOMAIN}.key /etc/nginx/ssl/${MYDOMAIN}-ecc.key >>"${main_log}" 2>>"${err_log}"
