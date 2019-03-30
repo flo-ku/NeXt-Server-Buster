@@ -24,7 +24,7 @@ cd /etc/nginx/ssl/
 openssl ecparam -genkey -name secp384r1 -out ${MYDOMAIN}.pem
 openssl req -new  -key ${MYDOMAIN}.pem -out ${MYDOMAIN}.csr -subj "/CN=${MYDOMAIN}" -sha256
 
-certbot certonly --webroot -w /var/www/${MYDOMAIN}/public/ -d ${MYDOMAIN} -m ${NXT_SYSTEM_EMAIL} --agree-tos --csr ${MYDOMAIN}.csr --test-cert 
+certbot certonly --webroot -w /var/www/${MYDOMAIN}/public/ -d ${MYDOMAIN} -m ${NXT_SYSTEM_EMAIL} -n --agree-tos --csr ${MYDOMAIN}.csr --test-cert 
 
 cp /etc/nginx/ssl/0001_chain.pem /etc/nginx/ssl/fullchain.pem
 cp /etc/nginx/ssl/${MYDOMAIN}.pem /etc/nginx/ssl/privkey.pem
