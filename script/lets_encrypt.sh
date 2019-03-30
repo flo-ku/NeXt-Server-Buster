@@ -42,4 +42,6 @@ HPKP2=$(echo "$HPKP2" | sed 's/\//\\\//g')
 
 sed -i "s/HPKP1/${HPKP1}/g" /etc/nginx/_general.conf
 sed -i "s/HPKP2/${HPKP2}/g" /etc/nginx/_general.conf
+
+service nginx restart
 }
