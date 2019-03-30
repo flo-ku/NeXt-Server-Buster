@@ -8,31 +8,14 @@ trap error_exit ERR
 
 mkdir -p /etc/nginx/ssl/
 
-install_packages "cron netcat-openbsd curl socat"
-cd ${SCRIPT_PATH}/sources
-git clone https://github.com/Neilpang/acme.sh.git -q >>"${main_log}" 2>>"${err_log}"
-cd ./acme.sh
-./acme.sh --install --accountemail ${NXT_SYSTEM_EMAIL} >>"${main_log}" 2>>"${err_log}"
-
-. ~/.bashrc >>"${main_log}" 2>>"${err_log}"
-. ~/.profile >>"${main_log}" 2>>"${err_log}"
+install_packages "certbot python-certbot-nginx"
 }
 
 create_nginx_cert() {
 
-#add case for ipv6!	
-cp /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-available/${MYDOMAIN}.vhost
-cp ${SCRIPT_PATH}/configs/nginx/little_vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
-
 service nginx start
 
-cd ${SCRIPT_PATH}/sources/acme.sh/
-set -x
-bash acme.sh --issue -w /var/www/${MYDOMAIN}/public/ -d ${MYDOMAIN} --keylength ec-384 --staging --log >>"${main_log}" 2>>"${err_log}"
-echo "Nach ausstellen"
-
-cp /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-available/little_vhost
-cp /etc/nginx/sites-available/${MYDOMAIN}.vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
+certbot --nginx certonly --agree-tos --rsa-key-size 4096 -m retender.jw@gmail.com -d next-server.eu --test-cert 
 
 ln -s /root/.acme.sh/${MYDOMAIN}_ecc/fullchain.cer /etc/nginx/ssl/${MYDOMAIN}-ecc.cer >>"${main_log}" 2>>"${err_log}"
 ln -s /root/.acme.sh/${MYDOMAIN}_ecc/${MYDOMAIN}.key /etc/nginx/ssl/${MYDOMAIN}-ecc.key >>"${main_log}" 2>>"${err_log}"

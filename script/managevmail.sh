@@ -7,7 +7,11 @@ install_managevmail() {
 
 trap error_exit ERR
 
-install_packages "python3 python3-mysql.connector"
+install_packages "python3 libprotobuf17 python3-protobuf"
+
+wget http://ftp.de.debian.org/debian/pool/main/m/mysql-connector-python/python3-mysql.connector_8.0.15-1_all.deb
+dpkg -i python3-mysql.connector_8.0.15-1_all.deb
+#python3-mysql.connector
 
 mkdir -p /etc/managevmail/
 wget https://codeload.github.com/mhthies/managevmail/zip/master >>"${main_log}" 2>>"${err_log}"
