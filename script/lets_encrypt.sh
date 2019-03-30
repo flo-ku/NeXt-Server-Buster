@@ -15,10 +15,18 @@ create_nginx_cert() {
 
 service nginx start
 
-certbot --nginx certonly --agree-tos --rsa-key-size 4096 -m retender.jw@gmail.com -d next-server.eu --test-cert 
+cd /etc/nginx/ssl/
 
-ln -s /root/.acme.sh/${MYDOMAIN}_ecc/fullchain.cer /etc/nginx/ssl/${MYDOMAIN}-ecc.cer >>"${main_log}" 2>>"${err_log}"
-ln -s /root/.acme.sh/${MYDOMAIN}_ecc/${MYDOMAIN}.key /etc/nginx/ssl/${MYDOMAIN}-ecc.key >>"${main_log}" 2>>"${err_log}"
+openssl ecparam -genkey -name secp384r1 -out ${MYDOMAIN}.pem
+openssl req -new  -key ${MYDOMAIN}.pem -out ${MYDOMAIN}.csr -subj "/CN=${MYDOMAIN}" -sha256
+
+certbot --nginx certonly -d ${MYDOMAIN} -m ${NXT_SYSTEM_EMAIL} --agree-tos --csr ${MYDOMAIN}.csr --test-cert 
+
+cp /etc/nginx/ssl/0001_chain.pem /etc/nginx/ssl/fullchain.pem
+cp /etc/nginx/ssl/${MYDOMAIN}.pem /etc/nginx/ssl/privkey.pem
+cp /etc/nginx/ssl/0000_chain.pem  /etc/nginx/ssl/chain.pem
+
+exit
 
 HPKP1=$(openssl x509 -pubkey < /etc/nginx/ssl/${MYDOMAIN}-ecc.cer | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64) >>"${main_log}" 2>>"${err_log}"
 HPKP2=$(openssl rand -base64 32) >>"${main_log}" 2>>"${err_log}"
