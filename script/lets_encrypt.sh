@@ -10,6 +10,8 @@ set -x
 
 mkdir -p /etc/nginx/ssl/
 
+exit
+
 install_packages "certbot python-certbot-nginx"
 }
 
@@ -27,8 +29,6 @@ certbot --nginx certonly -d ${MYDOMAIN} -m ${NXT_SYSTEM_EMAIL} --agree-tos --csr
 cp /etc/nginx/ssl/0001_chain.pem /etc/nginx/ssl/fullchain.pem
 cp /etc/nginx/ssl/${MYDOMAIN}.pem /etc/nginx/ssl/privkey.pem
 cp /etc/nginx/ssl/0000_chain.pem  /etc/nginx/ssl/chain.pem
-
-exit
 
 HPKP1=$(openssl x509 -pubkey < /etc/nginx/ssl/${MYDOMAIN}-ecc.cer | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64) >>"${main_log}" 2>>"${err_log}"
 HPKP2=$(openssl rand -base64 32) >>"${main_log}" 2>>"${err_log}"
