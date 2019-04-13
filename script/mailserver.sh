@@ -11,6 +11,7 @@ SCRIPT_PATH="/root/NeXt-Server-Buster"
 
 cd /etc/nginx/ssl/
 certbot certonly --webroot -w /var/www/${MYDOMAIN}/public/ -d mail.${MYDOMAIN} -d imap.${MYDOMAIN} -d smtp.${MYDOMAIN} -m ${NXT_SYSTEM_EMAIL} -n --agree-tos --test-cert
+exit
 
 MAILSERVER_DB_PASS=$(password)
 
