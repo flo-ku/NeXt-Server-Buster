@@ -7,9 +7,8 @@ server {
 	root $base/public;
 
 	# SSL
-	ssl_certificate /etc/nginx/ssl/fullchain.pem;
-	ssl_certificate_key /etc/nginx/ssl/privkey.pem;
-	ssl_trusted_certificate /etc/nginx/ssl/chain.pem;
+	ssl_certificate /etc/nginx/ssl/MYDOMAIN-ecc.cer;
+	ssl_certificate_key /etc/nginx/ssl/MYDOMAIN-ecc.key;
 
 	# logging
 	access_log /var/log/nginx/MYDOMAIN.access.log;
@@ -36,7 +35,6 @@ server {
 
 	include _general.conf;
 	include _pagespeed.conf;
-	include _encrypt.conf;
 	#include _rspamd.conf;
 	#include _wordpress.conf;
 	#include _nextcloud.conf;
@@ -52,9 +50,8 @@ server {
 	server_name *.MYDOMAIN;
 
 	# SSL
-	ssl_certificate /etc/nginx/ssl/fullchain.pem;
-	ssl_certificate_key /etc/nginx/ssl/privkey.pem;
-	ssl_trusted_certificate /etc/nginx/ssl/chain.pem;
+	ssl_certificate /etc/nginx/ssl/MYDOMAIN-ecc.cer;
+	ssl_certificate_key /etc/nginx/ssl/MYDOMAIN-ecc.key;
 
 	return 301 https://MYDOMAIN$request_uri;
 }

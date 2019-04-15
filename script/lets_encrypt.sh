@@ -6,34 +6,31 @@ install_lets_encrypt() {
 
 trap error_exit ERR
 
+systemctl -q stop nginx.service
 mkdir -p /etc/nginx/ssl/
 
-install_packages "certbot"
+install_packages "cron netcat-openbsd curl socat"
+cd ${SCRIPT_PATH}/sources
+git clone https://github.com/Neilpang/acme.sh.git -q >>"${main_log}" 2>>"${err_log}"
+cd ./acme.sh
+sleep 1
+./acme.sh --install --accountemail ${NXT_SYSTEM_EMAIL} >>"${main_log}" 2>>"${err_log}"
+
+. ~/.bashrc >>"${main_log}" 2>>"${err_log}"
+. ~/.profile >>"${main_log}" 2>>"${err_log}"
 }
 
 create_nginx_cert() {
 
-#add case for ipv6!	
-cp /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-available/${MYDOMAIN}.vhost
-cp ${SCRIPT_PATH}/configs/nginx/little_vhost /etc/nginx/sites-available/${MYDOMAIN}.conf	
+systemctl -q stop nginx.service
 
-service nginx start
+cd ${SCRIPT_PATH}/sources/acme.sh/
+bash acme.sh --issue --standalone --debug 2 --log -d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging >>"${main_log}" 2>>"${err_log}"
 
-cd /etc/nginx/ssl/
+ln -s /root/.acme.sh/${MYDOMAIN}_ecc/fullchain.cer /etc/nginx/ssl/${MYDOMAIN}-ecc.cer >>"${main_log}" 2>>"${err_log}"
+ln -s /root/.acme.sh/${MYDOMAIN}_ecc/${MYDOMAIN}.key /etc/nginx/ssl/${MYDOMAIN}-ecc.key >>"${main_log}" 2>>"${err_log}"
 
-openssl ecparam -genkey -name secp384r1 -out ${MYDOMAIN}.pem
-openssl req -new  -key ${MYDOMAIN}.pem -out ${MYDOMAIN}.csr -subj "/CN=${MYDOMAIN}" -sha256
-
-certbot certonly --webroot -w /var/www/${MYDOMAIN}/public/ -d ${MYDOMAIN} -m ${NXT_SYSTEM_EMAIL} -n --agree-tos --csr ${MYDOMAIN}.csr --test-cert 
-
-cp /etc/nginx/ssl/0001_chain.pem /etc/nginx/ssl/fullchain.pem
-cp /etc/nginx/ssl/${MYDOMAIN}.pem /etc/nginx/ssl/privkey.pem
-cp /etc/nginx/ssl/0000_chain.pem  /etc/nginx/ssl/chain.pem
-
-cp /etc/nginx/sites-available/${MYDOMAIN}.conf /etc/nginx/sites-available/little_vhost
-cp /etc/nginx/sites-available/${MYDOMAIN}.vhost /etc/nginx/sites-available/${MYDOMAIN}.conf
-
-HPKP1=$(openssl x509 -pubkey < /etc/nginx/ssl/fullchain.pem | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64) >>"${main_log}" 2>>"${err_log}"
+HPKP1=$(openssl x509 -pubkey < /etc/nginx/ssl/${MYDOMAIN}-ecc.cer | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | base64) >>"${main_log}" 2>>"${err_log}"
 HPKP2=$(openssl rand -base64 32) >>"${main_log}" 2>>"${err_log}"
 
 #SED doesn't work when the HPKP contains "/", so we escape it
@@ -42,6 +39,9 @@ HPKP2=$(echo "$HPKP2" | sed 's/\//\\\//g')
 
 sed -i "s/HPKP1/${HPKP1}/g" /etc/nginx/_general.conf
 sed -i "s/HPKP2/${HPKP2}/g" /etc/nginx/_general.conf
+}
 
-service nginx restart
+update_lets_encrypt() {
+  cd ${SCRIPT_PATH}/.acme.sh/
+  acme.sh --upgrade
 }
