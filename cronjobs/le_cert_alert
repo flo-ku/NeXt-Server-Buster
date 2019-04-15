@@ -1,0 +1,11 @@
+#!/bin/bash
+#Please check the license provided with the script!
+#-------------------------------------------------------------------------------------------------------------
+
+SCRIPT_PATH="/root/NeXt-Server-Buster"
+
+source ${SCRIPT_PATH}/configs/versions.cfg
+source ${SCRIPT_PATH}/configs/userconfig.cfg
+
+
+echo "The Let's encrypt certificate for your domain ${MYDOMAIN} is expiring soon, please start the NeXt-Server-Buster Script and update your certificate, otherwise your system will get in trouble!" | mail -s "Let's encrypt certificate expiring!" changeme

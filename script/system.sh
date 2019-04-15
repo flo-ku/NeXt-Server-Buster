@@ -146,6 +146,8 @@ sysctl -p >>"${main_log}" 2>>"${err_log}"
 cp -f ${SCRIPT_PATH}/cronjobs/webserver_backup /etc/cron.daily/
 chmod +x /etc/cron.daily/webserver_backup
 
+
+#################################### to do #########################
 cp -f ${SCRIPT_PATH}/cronjobs/free_disk_space /etc/cron.daily/
 sed -i "s/changeme/${NXT_SYSTEM_EMAIL}/g" /etc/cron.daily/free_disk_space
 chmod +x /etc/cron.daily/free_disk_space
