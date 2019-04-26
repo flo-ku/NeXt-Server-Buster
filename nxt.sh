@@ -33,7 +33,7 @@ MENU="\n Choose one of the following options: \n \n"
 						 4 "Update NeXt Server Script Code Base"
 						 5 "Services Options"
 						 6 "Addon Installation"
-						 7 "Addon Installation"
+						 7 "Update Let's encrypt certificate"
 						 8 "Exit")
 
 		CHOICE=$(dialog --clear \
