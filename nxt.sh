@@ -22,7 +22,7 @@ source ${SCRIPT_PATH}/script/prerequisites.sh; prerequisites
 
 HEIGHT=40
 WIDTH=80
-CHOICE_HEIGHT=7
+CHOICE_HEIGHT=8
 BACKTITLE="NeXt Server"
 TITLE="NeXt Server"
 MENU="\n Choose one of the following options: \n \n"
@@ -33,7 +33,8 @@ MENU="\n Choose one of the following options: \n \n"
 						 4 "Update NeXt Server Script Code Base"
 						 5 "Services Options"
 						 6 "Addon Installation"
-						 7 "Exit")
+						 7 "Addon Installation"
+						 8 "Exit")
 
 		CHOICE=$(dialog --clear \
 						--nocancel \
@@ -94,6 +95,23 @@ MENU="\n Choose one of the following options: \n \n"
 					fi
 					;;
 				7)
+					if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
+						if [[ ${NXT_IS_INSTALLED} == '1' ]] && [[ ${NXT_IS_INSTALLED_MAILSERVER} == '0' ]]; then
+							source ${SCRIPT_PATH}/script/lets_encrypt.sh; update_nginx_cert
+							echo "Updated your Let's Encrypt Certificate!"
+						fi
+					else
+						if [[ ${NXT_IS_INSTALLED} == '1' ]] && [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
+							source ${SCRIPT_PATH}/script/lets_encrypt.sh; update_nginx_cert
+							source ${SCRIPT_PATH}/script/lets_encrypt.sh; update_mailserver_cert
+							echo "Updated your Let's Encrypt Certificate!"
+						fi	
+					else
+						echo "You have to install the NeXt Server to install addons!"
+						source ${SCRIPT_PATH}/script/functions.sh; continue_to_menu
+					fi
+					;;
+				8)
 					echo "Exit"
 					exit 1
 					;;
