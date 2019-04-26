@@ -100,7 +100,6 @@ MENU="\n Choose one of the following options: \n \n"
 							source ${SCRIPT_PATH}/script/lets_encrypt.sh; update_nginx_cert
 							echo "Updated your Let's Encrypt Certificate!"
 						fi
-					else
 						if [[ ${NXT_IS_INSTALLED} == '1' ]] && [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
 							source ${SCRIPT_PATH}/script/lets_encrypt.sh; update_nginx_cert
 							source ${SCRIPT_PATH}/script/lets_encrypt.sh; update_mailserver_cert
