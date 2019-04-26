@@ -86,10 +86,8 @@ sed -i "s/HPKP2/${HPKP2}/g" /etc/nginx/_general.conf
 sed -i 's/HPKP1="1"/HPKP1="${HPKP1}"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 sed -i 's/HPKP2="2"/HPKP2="${HPKP2}"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 
-
 ### change path --> see system.sh
-## add function to main menu for updating cert
-echo "0 0 1 */3 *"   root    bash /root/test1234.sh >> /etc/crontab
+echo "0 0 1 */3 *"   root    bash /etc/cron.d/le_cert_alert >> /etc/crontab
 
 systemctl -q start nginx.service
 }

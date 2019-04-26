@@ -146,7 +146,6 @@ sysctl -p >>"${main_log}" 2>>"${err_log}"
 cp -f ${SCRIPT_PATH}/cronjobs/webserver_backup /etc/cron.daily/
 chmod +x /etc/cron.daily/webserver_backup
 
-######### to do ############
-#### copy to any folder where the crontab can exucute it ####
-sed -i "s/changeme/${NXT_SYSTEM_EMAIL}/g" /etc/cron.daily/le_cert_alert
+cp -f ${SCRIPT_PATH}/cronjobs/le_cert_alert /etc/cron.d/
+sed -i "s/changeme/${NXT_SYSTEM_EMAIL}/g" /etc/cron.d/le_cert_alert
 }
