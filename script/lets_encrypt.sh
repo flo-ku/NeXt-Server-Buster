@@ -64,6 +64,8 @@ rm /etc/nginx/ssl/${MYDOMAIN}-ecc.key
 #delete old keys
 sed -i 's/HPKP1="'${HPKP1}'"/HPKP1="1"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 sed -i 's/HPKP2="'${HPKP2}'"/HPKP2="2"/' ${SCRIPT_PATH}/configs/userconfig.cfg
+sed -i "s/"${HPKP1}"/HPKP1/g" /etc/nginx/_general.conf
+sed -i "s/"${HPKP2}"/HPKP2/g" /etc/nginx/_general.conf
 
 cd ${SCRIPT_PATH}/sources/acme.sh/
 bash acme.sh --issue --standalone --debug 2 --log -d ${MYDOMAIN} -d www.${MYDOMAIN} --keylength ec-384 --staging >>"${main_log}" 2>>"${err_log}"
