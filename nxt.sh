@@ -106,7 +106,7 @@ MENU="\n Choose one of the following options: \n \n"
 							echo "Updated your Let's Encrypt Certificate!"
 						fi	
 					else
-						echo "You have to install the NeXt Server to install addons!"
+						echo "You have to install the NeXt Server to update  Let's Encrypt Certificate!"
 						source ${SCRIPT_PATH}/script/functions.sh; continue_to_menu
 					fi
 					;;

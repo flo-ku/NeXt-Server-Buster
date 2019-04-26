@@ -40,8 +40,8 @@ HPKP2=$(echo "$HPKP2" | sed 's/\//\\\//g')
 sed -i "s/HPKP1/${HPKP1}/g" /etc/nginx/_general.conf
 sed -i "s/HPKP2/${HPKP2}/g" /etc/nginx/_general.conf
 
-sed -i 's/HPKP1="1"/HPKP1="${HPKP1}"/' ${SCRIPT_PATH}/configs/userconfig.cfg
-sed -i 's/HPKP2="2"/HPKP2="${HPKP2}"/' ${SCRIPT_PATH}/configs/userconfig.cfg
+sed -i 's/HPKP1="1"/HPKP1="'${HPKP1}'"/' ${SCRIPT_PATH}/configs/userconfig.cfg
+sed -i 's/HPKP2="2"/HPKP2="'${HPKP2}'"/' ${SCRIPT_PATH}/configs/userconfig.cfg
 
 ### change path --> see system.sh
 echo "0 0 1 */3 *"   root    bash /etc/cron.d/le_cert_alert >> /etc/crontab
