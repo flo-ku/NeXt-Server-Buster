@@ -180,6 +180,9 @@ case $CHOICE in
             ;;
 esac
 
+dialog_msg "If you don't install the Mailserver, we can't inform you, if your Let's Encrypt Certificate is expiring! \n\n
+You have to renew it every 90 days by yourself!"
+
 PHPVERSION7="7.3"
 CONFIG_COMPLETED="1"
 
