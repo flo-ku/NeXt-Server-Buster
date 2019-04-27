@@ -36,7 +36,7 @@ echo "#-------------------------------------------------------------------------
 echo "RAIN_HTTPAUTH_USER = ${RAIN_HTTPAUTH_USER}" >> ${SCRIPT_PATH}/login_information.txt
 echo "RAIN_HTTPAUTH_PASS = ${RAIN_HTTPAUTH_PASS}" >> ${SCRIPT_PATH}/login_information.txt
 echo "Disable the http auth?" >> ${SCRIPT_PATH}/login_information.txt
-echo "Login to the Rainloop admin panel (https://${MYDOMAIN}/webmail/?admin) and change the standard password (12345)!" >> ${SCRIPT_PATH}/login_information.txt
+echo "Login to the Rainloop admin panel (https://${MYDOMAIN}/webmail/?admin) and change the standard password (12345) + add your domain until everything is okay!" >> ${SCRIPT_PATH}/login_information.txt
 echo "After that open /etc/nginx/sites-available/${MYDOMAIN}.conf and delete the lines:" >> ${SCRIPT_PATH}/login_information.txt
 echo "location /webmail/ {" >> ${SCRIPT_PATH}/login_information.txt
 echo 'auth_basic "Restricted";' >> ${SCRIPT_PATH}/login_information.txt

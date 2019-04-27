@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://nxtsrv.de/">
-    <img src="https://nxtsrv.de/wp-content/uploads/2018/01/NeXt-logo.jpg">
+    <img src="https://raw.githubusercontent.com/shoujii/NeXt-Server-Buster/master/includes/NeXt-logo.jpg">
   </a>
 
   <h3 align="center">NeXt-Server-Buster</h3>
