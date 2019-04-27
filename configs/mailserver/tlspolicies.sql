@@ -1,3 +1,4 @@
+use vmail;
 insert into tlspolicies (domain, policy, params) values ('email.de', 'secure', 'match=.web.de');
 insert into tlspolicies (domain, policy, params) values ('freenet.de', 'secure', 'match=.freenet.de');
 insert into tlspolicies (domain, policy, params) values ('gmx.at', 'dane-only', '');
