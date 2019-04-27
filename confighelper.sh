@@ -177,11 +177,11 @@ case $CHOICE in
             ;;
 		2)
 			USE_MAILSERVER="0"
+			dialog_msg "If you don't install the Mailserver, we can't inform you, if your Let's Encrypt Certificate is expiring! \n\n
+You have to renew it every 90 days by yourself! \n\n
+You can change your choice at the end of the confighelper, if you select no restart the confighelper!"
             ;;
 esac
-
-dialog_msg "If you don't install the Mailserver, we can't inform you, if your Let's Encrypt Certificate is expiring! \n\n
-You have to renew it every 90 days by yourself!"
 
 PHPVERSION7="7.3"
 CONFIG_COMPLETED="1"
