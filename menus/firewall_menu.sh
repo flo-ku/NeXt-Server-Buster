@@ -46,7 +46,7 @@ MENU="Choose one of the following options:"
 								TCP_PORT="$CHOOSE_TCP_PORT"
 								if [ ${#TCP_PORT} -ge 7 ]; then
 										dialog_msg "Your Input has more than 6 numbers, please try again"
-										source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+										source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
                 else
                     sed -i "/\<$TCP_PORT\>/ "\!"s/^OPEN_TCP=\"/&$TCP_PORT, /" /etc/arno-iptables-firewall/firewall.conf
 										systemctl force-reload arno-iptables-firewall.service
@@ -56,7 +56,7 @@ MENU="Choose one of the following options:"
 						fi
 					done
 					source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
-					source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+					source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 				;;
 			2)
 			while true
@@ -71,7 +71,7 @@ MENU="Choose one of the following options:"
 							UDP_PORT="$CHOOSE_UDP_PORT"
 							if [ ${#UDP_PORT} -ge 7 ]; then
 									dialog_msg "Your Input has more than 6 numbers, please try again"
-									source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+									source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 							else
 									sed -i "/\<$UDP_PORT\>/ "\!"s/^OPEN_UDP=\"/&$UDP_PORT, /" /etc/arno-iptables-firewall/firewall.conf
 									systemctl force-reload arno-iptables-firewall.service
@@ -81,7 +81,7 @@ MENU="Choose one of the following options:"
 					fi
 				done
 				source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
-				source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+				source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 				;;
 			3)
 			while true
@@ -96,7 +96,7 @@ MENU="Choose one of the following options:"
 							TCP_PORT_CLOSE="$CHOOSE_TCP_PORT_CLOSE"
 							if [ ${#TCP_PORT_CLOSE} -ge 7 ]; then
 									dialog_msg "Your Input has more than 6 numbers, please try again"
-									source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+									source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 							else
 									sed -i "s/$TCP_PORT_CLOSE, //g" /etc/arno-iptables-firewall/firewall.conf
 									systemctl force-reload arno-iptables-firewall.service
@@ -106,7 +106,7 @@ MENU="Choose one of the following options:"
 					fi
 				done
 				source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
-				source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+				source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 				;;
 			4)
 			while true
@@ -121,7 +121,7 @@ MENU="Choose one of the following options:"
 							UDP_PORT_CLOSE="$CHOOSE_UDP_PORT_CLOSE"
 							if [ ${#UDP_PORT_CLOSE} -ge 7 ]; then
 									dialog_msg "Your Input has more than 6 numbers, please try again"
-									source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+									source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 							else
 									sed -i "s/$UDP_PORT_CLOSE, //g" /etc/arno-iptables-firewall/firewall.conf
 									systemctl force-reload arno-iptables-firewall.service
@@ -131,12 +131,12 @@ MENU="Choose one of the following options:"
 					fi
 				done
 				source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
-				source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+				source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 				;;
 			5)
 				source ${SCRIPT_PATH}/script/firewall_options.sh; show_open_ports
 				source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
-				source ${SCRIPT_PATH}/menus/menu_firewall.sh; menu_options_firewall
+				source ${SCRIPT_PATH}/menus/firewall_menu.sh; menu_options_firewall
 				;;
 			6)
 				source ${SCRIPT_PATH}/menus/services_menu.sh; menu_options_services
