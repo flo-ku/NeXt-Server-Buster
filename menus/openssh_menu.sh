@@ -75,6 +75,7 @@ MENU="Choose one of the following options:"
 								echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
 								echo "" >> ${SCRIPT_PATH}/login_information.txt
 								service sshd restart
+								break
 						fi
 					else
 						dialog_msg "The Port should only contain numbers!"
