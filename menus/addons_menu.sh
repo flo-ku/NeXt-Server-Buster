@@ -58,6 +58,8 @@ MENU="Choose one of the following options:"
 	else
 		echo "You have to install the NeXt Server to run this Addon!"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 2)
 	if [[ ${TS3_IS_INSTALLED} == '0' ]]; then
@@ -70,6 +72,8 @@ MENU="Choose one of the following options:"
 		UDP: 2010, 9987\n
 		If you need them, please reopen them manually!"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 3)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
@@ -83,6 +87,8 @@ MENU="Choose one of the following options:"
 else
 	echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 ;;
 4)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
@@ -96,6 +102,8 @@ fi
 	else
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 5)
 	if [[ ${NEXTCLOUD_IS_INSTALLED} == '0' ]]; then
@@ -105,6 +113,8 @@ fi
 			source ${SCRIPT_PATH}/addons/nextcloud_deinstall.sh; deinstall_nextcloud
 		dialog_msg "Finished Deinstalling Nextcloud"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 6)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
@@ -119,6 +129,8 @@ fi
 	else
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 7)
 	if [[ ${PMA_IS_INSTALLED} == '0' ]]; then
@@ -128,6 +140,8 @@ fi
 		source ${SCRIPT_PATH}/addons/phpmyadmin_deinstall.sh; deinstall_phpmyadmin
 		dialog_msg "Finished Deinstalling PHPmyadmin"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 8)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
@@ -142,6 +156,8 @@ fi
 	else
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 9)
 	if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
@@ -159,6 +175,8 @@ fi
 	else
 		echo "You have to install the NeXt Server with the Webserver component to run this Addon!"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 10)
 	if [[ ${WORDPRESS_IS_INSTALLED} == '0' ]]; then
@@ -168,6 +186,8 @@ fi
 			source ${SCRIPT_PATH}/addons/wordpress_deinstall.sh; deinstall_wordpress
 		dialog_msg "Finished Deinstalling Wordpress"
 	fi
+	source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+	source ${SCRIPT_PATH}/menus/addons_menu.sh; menu_options_addons
 	;;
 11)
   bash ${SCRIPT_PATH}/nxt.sh

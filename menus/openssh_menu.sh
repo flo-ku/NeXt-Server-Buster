@@ -40,6 +40,8 @@ MENU="Choose one of the following options:"
 				)
 				source ${SCRIPT_PATH}/script/openssh_options.sh; add_openssh_user
 				dialog_msg "Finished adding Openssh User"
+				source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+				source ${SCRIPT_PATH}/menus/openssh_menu.sh; menu_options_openssh
 				;;
 			2)
 			while true
@@ -70,7 +72,9 @@ MENU="Choose one of the following options:"
 					fi
 				done
 				source ${SCRIPT_PATH}/script/openssh_options.sh; change_openssh_port
-				dialog_info "Changed SSH Port to $NEW_SSH_PORT"
+				dialog_msg "Changed SSH Port to $NEW_SSH_PORT"
+				source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+				source ${SCRIPT_PATH}/menus/openssh_menu.sh; menu_options_openssh
 				;;
 			3)
 				dialog_info "Creating new Openssh key"
@@ -86,10 +90,11 @@ MENU="Choose one of the following options:"
 				echo
 				echo "Your new SSH Key"
 				cat ${SCRIPT_PATH}/ssh_privatekey.txt
-				exit 1
+				source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
+				source ${SCRIPT_PATH}/menus/openssh_menu.sh; menu_options_openssh
 				;;
 			4)
-				bash ${SCRIPT_PATH}/nxt.sh
+				source ${SCRIPT_PATH}/menus/services_menu.sh; menu_options_services
 				;;
 			5)
 				echo "Exit"

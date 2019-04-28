@@ -91,7 +91,7 @@ MENU="Choose one of the following options:"
         source ${SCRIPT_PATH}/menus/mailserver_menu.sh; menu_options_mailserver
         ;;
       6)
-        bash ${SCRIPT_PATH}/nxt.sh
+        source ${SCRIPT_PATH}/menus/services_menu.sh; menu_options_services
         ;;
       7)
         echo "Exit"
