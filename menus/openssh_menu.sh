@@ -71,6 +71,7 @@ MENU="Choose one of the following options:"
 										fi
 									done
 								echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
+								echo "#Date of change $(date +"%d-%m-%Y_%H_%M_%S")" >> ${SCRIPT_PATH}/login_information.txt
 								echo "#NEW_SSH_PORT: $NEW_SSH_PORT" >> ${SCRIPT_PATH}/login_information.txt
 								echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
 								echo "" >> ${SCRIPT_PATH}/login_information.txt
