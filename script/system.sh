@@ -148,4 +148,8 @@ chmod +x /etc/cron.daily/webserver_backup
 
 cp -f ${SCRIPT_PATH}/cronjobs/le_cert_alert /etc/cron.d/
 sed -i "s/changeme/${NXT_SYSTEM_EMAIL}/g" /etc/cron.d/le_cert_alert
+
+cp -f ${SCRIPT_PATH}/cronjobs/free_disk_space /etc/cron.daily/
+sed -i "s/changeme/${NXT_SYSTEM_EMAIL}/g" /etc/cron.daily/free_disk_space
+chmod +x /etc/cron.daily/free_disk_space
 }

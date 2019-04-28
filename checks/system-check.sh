@@ -49,6 +49,20 @@ else
   echo "${error} free_disk_space cron does NOT exist" >>"${failed_checks_log}"
 fi
 
+if [ -e /etc/cron.daily/webserver_backup ]; then
+  passed_system_checks=$((passed_system_checks + 1))
+else
+  failed_system_checks=$((failed_system_checks + 1))
+  echo "${error} webserver_backup cron does NOT exist" >>"${failed_checks_log}"
+fi
+
+if [ -e /etc/cron.d/le_cert_alert ]; then
+  passed_system_checks=$((passed_system_checks + 1))
+else
+  failed_system_checks=$((failed_system_checks + 1))
+  echo "${error} le_cert_alert cron does NOT exist" >>"${failed_checks_log}"
+fi
+
 if [ -e ${SCRIPT_PATH}/login_information.txt ]; then
   passed_system_checks=$((passed_system_checks + 1))
 else
