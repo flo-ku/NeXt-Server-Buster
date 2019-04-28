@@ -11,21 +11,6 @@ apt-get update
 
 }
 
-change_openssh_port() {
-
-trap error_exit ERR
-
-##add check if port is used otherwise!
-sed -i "s/^Port .*/Port $NEW_SSH_PORT/g" /etc/ssh/sshd_config
-
-echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
-echo "#NEW_SSH_PORT: $NEW_SSH_PORT" >> ${SCRIPT_PATH}/login_information.txt
-echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
-echo "" >> ${SCRIPT_PATH}/login_information.txt
-
-service sshd restart
-}
-
 create_new_openssh_key() {
 
 trap error_exit ERR

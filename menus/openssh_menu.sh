@@ -57,21 +57,30 @@ MENU="Choose one of the following options:"
 								dialog_msg "Your Input has more than 3 numbers, please try again"
 								dialog --clear
 						else
-								if [[ -v BLOCKED_PORTS[$INPUT_NEW_SSH_PORT] ]]; then
-									dialog_msg "$INPUT_NEW_SSH_PORT is known. Choose an other Port!"
-									dialog --clear
-								else
-									NEW_SSH_PORT="$INPUT_NEW_SSH_PORT"
-									echo " you port is $NEW_SSH_PORT"
-									break
-								fi
+								array=($(cat "${SCRIPT_PATH}/configs/blocked_ports.conf"))
+								printf -v array_str -- ',,%q' "${array[@]}"
+									while true
+									do
+										if [[ "${array_str},," =~ ,,${INPUT_NEW_SSH_PORT},, ]]; then
+											dialog_msg "$INPUT_NEW_SSH_PORT is known. Choose an other Port!"
+											dialog --clear
+										else
+											NEW_SSH_PORT="$INPUT_NEW_SSH_PORT"
+											sed -i "s/^Port .*/Port $NEW_SSH_PORT/g" /etc/ssh/sshd_config
+											break
+										fi
+									done
+								echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
+								echo "#NEW_SSH_PORT: $NEW_SSH_PORT" >> ${SCRIPT_PATH}/login_information.txt
+								echo "#------------------------------------------------------------------------------#" >> ${SCRIPT_PATH}/login_information.txt
+								echo "" >> ${SCRIPT_PATH}/login_information.txt
+								service sshd restart
 						fi
 					else
 						dialog_msg "The Port should only contain numbers!"
 						dialog --clear
 					fi
 				done
-				source ${SCRIPT_PATH}/script/openssh_options.sh; change_openssh_port
 				dialog_msg "Changed SSH Port to $NEW_SSH_PORT"
 				source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
 				source ${SCRIPT_PATH}/menus/openssh_menu.sh; menu_options_openssh
