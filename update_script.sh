@@ -12,6 +12,5 @@ if git diff --quiet origin/master; then
 else
   GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
   dialog_msg "The local Version ${GIT_LOCAL_FILES_HEAD} is equal with Github, no update needed!"
-  exit 1
 fi
 }
