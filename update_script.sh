@@ -38,13 +38,13 @@ dialog_msg "Fetching from ${remote}..."
 git fetch $remote
 
 if git merge-base --is-ancestor $remote_branch HEAD; then
-    GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
-    dialog_msg "Already up-to-date Version ${GIT_LOCAL_FILES_HEAD}"
-elif [[ git merge-base --is-ancestor HEAD $remote_branch ]]; then
-    git stash
-    git merge --ff-only --stat $remote_branch
-    GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
-    dialog_msg "Merged to the new Version ${GIT_LOCAL_FILES_HEAD}" 
+  GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
+  dialog_msg "Already up-to-date Version ${GIT_LOCAL_FILES_HEAD}"
+elif git merge-base --is-ancestor HEAD $remote_branch; then
+  git stash
+  git merge --ff-only --stat $remote_branch
+  GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
+  dialog_msg "Merged to the new Version ${GIT_LOCAL_FILES_HEAD}" 
 fi
 
 if [ -d "/root/backup_next_server/logs/" ]; then
