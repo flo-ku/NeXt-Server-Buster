@@ -12,15 +12,17 @@ echo "Fetching from $remote..."
 git fetch $remote
 
 if git merge-base --is-ancestor $remote_branch HEAD; then
-    echo 'Already up-to-date'
+    dialog_msg "Already up-to-date Version ${GIT_LOCAL_FILES_HEAD}"
     exit 0
 fi
 
 if git merge-base --is-ancestor HEAD $remote_branch; then
-    echo 'Fast-forward possible. Merging...'
+    git stash
     git merge --ff-only --stat $remote_branch
+    dialog_msg "Merged to the new Version ${GIT_LOCAL_FILES_HEAD}"
 else
     echo 'Fast-forward not possible. Rebasing...'
+    source ${SCRIPT_PATH}/script/functions.sh; continue_or_exit
     git rebase --preserve-merges --stat $remote_branch
 fi
 }
