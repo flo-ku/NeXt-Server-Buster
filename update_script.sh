@@ -14,7 +14,6 @@ git fetch $remote
 if git merge-base --is-ancestor $remote_branch HEAD; then
     GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
     dialog_msg "Already up-to-date Version ${GIT_LOCAL_FILES_HEAD}"
-    exit 0
 fi
 
 if git merge-base --is-ancestor HEAD $remote_branch; then
