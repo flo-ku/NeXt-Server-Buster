@@ -8,7 +8,7 @@ local_branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
 remote_branch=$(git rev-parse --abbrev-ref --symbolic-full-name @{u})
 remote=$(git config branch.$local_branch.remote)
 
-echo "Fetching from $remote..."
+dialog_msg "Fetching from ${remote}..."
 git fetch $remote
 
 if git merge-base --is-ancestor $remote_branch HEAD; then
