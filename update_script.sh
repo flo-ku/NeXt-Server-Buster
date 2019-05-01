@@ -4,13 +4,15 @@
 
 update_script() {
 
-git remote update
-if git diff --quiet origin/master; then
-  cd ${SCRIPT_PATH}
-  git pull origin master
-  GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
+changed=0
+git remote update && git status -uno | grep -q 'Your branch is behind' && changed=1
+if [ $changed = 1 ]; then
+    git pull
+    $(git rev-parse --short HEAD)
+    dialog_msg "Update to version ${GIT_LOCAL_FILES_HEAD} successfull!"
+    echo "Updated successfully";
 else
-  GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
-  dialog_msg "The local Version ${GIT_LOCAL_FILES_HEAD} is equal with Github, no update needed!"
+    $(git rev-parse --short HEAD)
+    dialog_msg "The local Version ${GIT_LOCAL_FILES_HEAD} is equal with Github, no update needed!"
 fi
 }
