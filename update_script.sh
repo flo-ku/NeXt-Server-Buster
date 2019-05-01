@@ -53,29 +53,29 @@ else
     git rebase --preserve-merges --stat $remote_branch
 fi
 
-  if [ -d "/root/backup_next_server/logs/" ]; then
-    cp /root/backup_next_server/logs/* ${SCRIPT_PATH}/logs/
-  fi
+if [ -d "/root/backup_next_server/logs/" ]; then
+  cp /root/backup_next_server/logs/* ${SCRIPT_PATH}/logs/
+fi
 
-  if [ -e /root/backup_next_server/login_information.txt ]; then
-    cp /root/backup_next_server/login_information.txt ${SCRIPT_PATH}/
-  fi
+if [ -e /root/backup_next_server/login_information.txt ]; then
+  cp /root/backup_next_server/login_information.txt ${SCRIPT_PATH}/
+fi
 
-  if [ -e /root/backup_next_server/ssh_privatekey.txt ]; then
-    cp /root/backup_next_server/ssh_privatekey.txt ${SCRIPT_PATH}/
-  fi
+if [ -e /root/backup_next_server/ssh_privatekey.txt ]; then
+  cp /root/backup_next_server/ssh_privatekey.txt ${SCRIPT_PATH}/
+fi
 
-  if [ -e /root/backup_next_server/installation_times.txt ]; then
-    cp /root/backup_next_server/installation_times.txt ${SCRIPT_PATH}/
-  fi
+if [ -e /root/backup_next_server/installation_times.txt ]; then
+  cp /root/backup_next_server/installation_times.txt ${SCRIPT_PATH}/
+fi
 
-  if [ -e /root/backup_next_server/userconfig.cfg ]; then
-    cp /root/backup_next_server/userconfig.cfg ${SCRIPT_PATH}/configs/
-  fi
+if [ -e /root/backup_next_server/userconfig.cfg ]; then
+  cp /root/backup_next_server/userconfig.cfg ${SCRIPT_PATH}/configs/
+fi
 
-  if [ -e /root/backup_next_server/DKIM_KEY_ADD_TO_DNS.txt ]; then
-    cp /root/backup_next_server/DKIM_KEY_ADD_TO_DNS.txt ${SCRIPT_PATH}/
-  fi
+if [ -e /root/backup_next_server/DKIM_KEY_ADD_TO_DNS.txt ]; then
+  cp /root/backup_next_server/DKIM_KEY_ADD_TO_DNS.txt ${SCRIPT_PATH}/
+fi
 
   rm -R /root/backup_next_server/
 }
