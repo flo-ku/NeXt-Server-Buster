@@ -7,27 +7,27 @@ update_script() {
 mkdir -p /root/backup_next_server 
 if [ -d "${SCRIPT_PATH}/logs/" ]; then
   mkdir -p /root/backup_next_server/logs
-  cp ${SCRIPT_PATH}/logs/* /root/backup_next_server/logs/
+  mv ${SCRIPT_PATH}/logs/* /root/backup_next_server/logs/
 fi
 
 if [ -e ${SCRIPT_PATH}/login_information.txt ]; then
-    cp ${SCRIPT_PATH}/login_information.txt /root/backup_next_server/
+  mv ${SCRIPT_PATH}/login_information.txt /root/backup_next_server/
 fi
 
 if [ -e ${SCRIPT_PATH}/ssh_privatekey.txt ]; then
-  cp ${SCRIPT_PATH}/ssh_privatekey.txt /root/backup_next_server/
+  mv ${SCRIPT_PATH}/ssh_privatekey.txt /root/backup_next_server/
 fi
 
 if [ -e ${SCRIPT_PATH}/installation_times.txt ]; then
-  cp ${SCRIPT_PATH}/installation_times.txt /root/backup_next_server/
+  mv ${SCRIPT_PATH}/installation_times.txt /root/backup_next_server/
 fi
 
 if [ -e ${SCRIPT_PATH}/configs/userconfig.cfg ]; then
-  cp ${SCRIPT_PATH}/configs/userconfig.cfg /root/backup_next_server/
+  mv ${SCRIPT_PATH}/configs/userconfig.cfg /root/backup_next_server/
 fi
 
 if [ -e ${SCRIPT_PATH}/DKIM_KEY_ADD_TO_DNS.txt ]; then
-  cp ${SCRIPT_PATH}/DKIM_KEY_ADD_TO_DNS.txt /root/backup_next_server/
+  mv ${SCRIPT_PATH}/DKIM_KEY_ADD_TO_DNS.txt /root/backup_next_server/
 fi
 
 local_branch=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
@@ -54,27 +54,27 @@ else
 fi
 
 if [ -d "/root/backup_next_server/logs/" ]; then
-  cp /root/backup_next_server/logs/* ${SCRIPT_PATH}/logs/
+  mv /root/backup_next_server/logs/* ${SCRIPT_PATH}/logs/
 fi
 
 if [ -e /root/backup_next_server/login_information.txt ]; then
-  cp /root/backup_next_server/login_information.txt ${SCRIPT_PATH}/
+  mv /root/backup_next_server/login_information.txt ${SCRIPT_PATH}/
 fi
 
 if [ -e /root/backup_next_server/ssh_privatekey.txt ]; then
-  cp /root/backup_next_server/ssh_privatekey.txt ${SCRIPT_PATH}/
+  mv /root/backup_next_server/ssh_privatekey.txt ${SCRIPT_PATH}/
 fi
 
 if [ -e /root/backup_next_server/installation_times.txt ]; then
-  cp /root/backup_next_server/installation_times.txt ${SCRIPT_PATH}/
+  mv /root/backup_next_server/installation_times.txt ${SCRIPT_PATH}/
 fi
 
 if [ -e /root/backup_next_server/userconfig.cfg ]; then
-  cp /root/backup_next_server/userconfig.cfg ${SCRIPT_PATH}/configs/
+  mv /root/backup_next_server/userconfig.cfg ${SCRIPT_PATH}/configs/
 fi
 
 if [ -e /root/backup_next_server/DKIM_KEY_ADD_TO_DNS.txt ]; then
-  cp /root/backup_next_server/DKIM_KEY_ADD_TO_DNS.txt ${SCRIPT_PATH}/
+  mv /root/backup_next_server/DKIM_KEY_ADD_TO_DNS.txt ${SCRIPT_PATH}/
 fi
 
   rm -R /root/backup_next_server/
