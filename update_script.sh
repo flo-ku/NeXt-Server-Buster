@@ -4,15 +4,25 @@
 
 update_script() {
 
-changed=0
-git remote update && git status -uno | grep -q 'Your branch is behind' && changed=1
-if [ $changed = 1 ]; then
-    git pull
-    $(git rev-parse --short HEAD)
-    dialog_msg "Update to version ${GIT_LOCAL_FILES_HEAD} successfull!"
-    echo "Updated successfully";
+SCRIPT_PATH="/root/NeXt-Server-Buster" 
+cd ${SCRIPT_PATH}
+
+UPSTREAM=${1:-'@{u}'}
+LOCAL=$(git rev-parse @)
+REMOTE=$(git rev-parse "$UPSTREAM")
+BASE=$(git merge-base @ "$UPSTREAM")
+
+if [ $LOCAL = $REMOTE ]; then
+    echo "Up-to-date"
+elif [ $LOCAL = $BASE ]; then
+    git reset --hard origin/master
+    dialog_msg "Finished updating NeXt Server Script to Version ${GIT_LOCAL_FILES_HEAD}"
 else
-    $(git rev-parse --short HEAD)
-    dialog_msg "The local Version ${GIT_LOCAL_FILES_HEAD} is equal with Github, no update needed!"
+    echo "Diverged"
 fi
 }
+
+
+
+
+          

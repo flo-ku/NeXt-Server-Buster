@@ -75,7 +75,6 @@ MENU="\n Choose one of the following options: \n \n"
 				4)
 					dialog_info "Updating NeXt Server Script"
 					source ${SCRIPT_PATH}/update_script.sh; update_script
-					dialog_msg "Finished updating NeXt Server Script to Version ${GIT_LOCAL_FILES_HEAD}"
 					bash nxt.sh
 					;;
 				5)
