@@ -61,7 +61,6 @@ backup_nginx() {
 update_nginx() {
 
   trap error_exit ERR
-  set -x
   mkdir -p ${SCRIPT_PATH}/updates/sources/
 
   cd ${SCRIPT_PATH}/updates/sources/

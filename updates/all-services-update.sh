@@ -11,8 +11,6 @@ source ${SCRIPT_PATH}/configs/userconfig.cfg
 #updating script code base before updating the server!
 source ${SCRIPT_PATH}/update_script.sh; update_script
 
-##add update_lets_encrypt
-
 if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' ]]; then
   echo "0" | dialog --gauge "Updating package lists..." 10 70 0
   apt-get update >/dev/null 2>&1
@@ -24,19 +22,16 @@ if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' 
   apt-get -y dist-upgrade >/dev/null 2>&1
 
   echo "12" | dialog --gauge "Updating fail2ban..." 10 70 0
-  #source ${SCRIPT_PATH}/updates/fail2ban-update.sh; update_fail2ban
+  source ${SCRIPT_PATH}/updates/fail2ban-update.sh; update_fail2ban
 
   echo "15" | dialog --gauge "Updating firewall..." 10 70 0
-  source ${SCRIPT_PATH}/updates/firewall-update.sh; update_firewall
-
-  echo "25" | dialog --gauge "Updating Openssh..." 10 70 0
-  source ${SCRIPT_PATH}/updates/openssh-update.sh; update_openssh
+  #source ${SCRIPT_PATH}/updates/firewall-update.sh; update_firewall
 
   echo "30" | dialog --gauge "Updating Openssl..." 10 70 0
-  source ${SCRIPT_PATH}/updates/openssl-update.sh; update_openssl
+  #source ${SCRIPT_PATH}/updates/openssl-update.sh; update_openssl
 
 	echo "60" | dialog --gauge "Updating Nginx..." 10 70 0
-	#source ${SCRIPT_PATH}/updates/nginx-tools.sh; nginx_update_menu
+	source ${SCRIPT_PATH}/updates/nginx-tools.sh; nginx_update_menu
 
   if [[ ${NXT_IS_INSTALLED_MAILSERVER} = "1" ]]; then
     echo "Here will be updates for the mailserver later"

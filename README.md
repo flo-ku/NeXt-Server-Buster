@@ -186,5 +186,5 @@ A big thanks to [George Liu], for some great lines of code!.
 
 ## Copyright and license
 
-Code and documentation copyright 2017-2018 the [NeXt-Server-Buster Authors](https://github.com/shoujii/NeXt-Server-Buster/graphs/contributors)
+Code and documentation copyright 2017-2019 the [NeXt-Server-Buster Authors](https://github.com/shoujii/NeXt-Server-Buster/graphs/contributors)
 Code released under the [GNU General Public License v3.0](https://github.com/shoujii/NeXt-Server-Buster/blob/master/LICENSE).
