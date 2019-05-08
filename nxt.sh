@@ -29,7 +29,7 @@ MENU="\n Choose one of the following options: \n \n"
 
 		OPTIONS=(1 "Install NeXt Server Version: ${GIT_LOCAL_FILES_HEAD} - ${GIT_LOCAL_FILES_HEAD_LAST_COMMIT}"
 						 2 "After Installation configuration"
-						 3 "!Update NeXt Server Installation"
+						 3 "Update NeXt Server Installation"
 						 4 "Update NeXt Server Script Code Base"
 						 5 "Services Options"
 						 6 "Addon Installation"
