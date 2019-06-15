@@ -9,8 +9,8 @@ trap error_exit ERR
 
 install_packages "python3 libprotobuf17 python3-protobuf"
 
-wget http://ftp.de.debian.org/debian/pool/main/m/mysql-connector-python/python3-mysql.connector_8.0.15-1_all.deb
-dpkg -i python3-mysql.connector_8.0.15-1_all.deb
+wget http://ftp.de.debian.org/debian/pool/main/m/mysql-connector-python/python3-mysql.connector_8.0.15-1_all.deb >>"$main_log" 2>>"$err_log"
+dpkg -i python3-mysql.connector_8.0.15-1_all.deb >>"$main_log" 2>>"$err_log"
 #python3-mysql.connector
 
 mkdir -p /etc/managevmail/
