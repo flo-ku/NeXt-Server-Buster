@@ -28,7 +28,7 @@ check_system() {
 			install_packages "facter libruby"
 		fi
 
-		if	[ "$(facter virtual)" == 'physical' ] || [ "$(facter virtual)" == 'kvm' ]; then
+		if	[ "$(facter virtual)" == 'physical' ] || [ "$(facter virtual)" == 'kvm' ] || [ "$(facter virtual)" == 'xenu' ]; then
  		echo > /dev/null
 		else
 	        echo "This script does not support the virtualization technology ($(dmidecode -s system-product-name))"
