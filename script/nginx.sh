@@ -76,7 +76,8 @@ mkdir -p /var/www/${MYDOMAIN}/public
 mkdir -p /var/cache/nginx
 mkdir -p /var/log/nginx/
 
-wget_tar "-O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init"
+#wget_tar "-O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init"
+cp ${SCRIPT_PATH}/configs/nginx.init /etc/init.d/nginx
 chmod 0755 /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 chown root:root /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 update-rc.d nginx defaults >>"${main_log}" 2>>"${err_log}"
