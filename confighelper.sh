@@ -114,7 +114,7 @@ while true
 		NXT_SYSTEM_EMAIL=$(dialog --clear \
 		--backtitle "$BACKTITLE" \
 		--inputbox "Enter your Email adress for system services example (please use the domain, you use for the script installation): admin@${MYDOMAIN}" \
-		$HEIGHT $WIDTH \
+		$HEIGHT $WIDTH "admin@${MYDOMAIN}" \
 		3>&1 1>&2 2>&3 3>&- \
 		)
 			if [[ "$NXT_SYSTEM_EMAIL" =~ $CHECK_E_MAIL ]];then
@@ -153,7 +153,7 @@ $HEIGHT $WIDTH \
 IPV6GATINPUT=$(dialog --clear \
 --backtitle "$BACKTITLE" \
 --inputbox "Enter your IPv6 Gateway: (Example: fe80::1)" \
-$HEIGHT $WIDTH \
+$HEIGHT $WIDTH "fe80::1" \
 3>&1 1>&2 2>&3 3>&- \
 )
 
