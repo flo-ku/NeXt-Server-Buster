@@ -66,6 +66,8 @@ NGINX_MODULES="--without-http_browser_module \
 make -j $(nproc) >>"${main_log}" 2>>"${err_log}"
 make install >>"${main_log}" 2>>"${err_log}"
 
+cd ${SCRIPT_PATH}
+
 rm -R ${SCRIPT_PATH}/sources/nginx-${NGINX_VERSION}
 
 mkdir -p /var/lib/nginx/{body,proxy,fastcgi,uwsgi,scgi}
@@ -76,17 +78,11 @@ mkdir -p /var/www/${MYDOMAIN}/public
 mkdir -p /var/cache/nginx
 mkdir -p /var/log/nginx/
 
-#wget_tar "-O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init"
-cp ${SCRIPT_PATH}/configs/nginx.init /etc/init.d/nginx
+wget_tar "-O /etc/init.d/nginx -c4 --no-check-certificate https://raw.githubusercontent.com/Fleshgrinder/nginx-sysvinit-script/master/init"
 chmod 0755 /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 chown root:root /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 
-if [ ! `update-rc.d nginx defaults` ]; then
-  echo "update-rc.d returned $?" >> >>"${err_log}"
-fi
-
-# >>"${main_log}" 2>>"${err_log}"
-#sleep 5
+update-rc.d nginx defaults >>"${main_log}" 2>>"${err_log}"
 
 rm -rf /etc/nginx/nginx.conf
 cp ${SCRIPT_PATH}/configs/nginx/confs/* /etc/nginx/
