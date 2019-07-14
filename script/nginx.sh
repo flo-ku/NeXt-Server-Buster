@@ -80,7 +80,9 @@ mkdir -p /var/log/nginx/
 cp ${SCRIPT_PATH}/configs/nginx.init /etc/init.d/nginx
 chmod 0755 /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
 chown root:root /etc/init.d/nginx >>"${main_log}" 2>>"${err_log}"
-update-rc.d nginx defaults >>"${main_log}" 2>>"${err_log}"
+update-rc.d nginx defaults
+# >>"${main_log}" 2>>"${err_log}"
+sleep 5
 
 rm -rf /etc/nginx/nginx.conf
 cp ${SCRIPT_PATH}/configs/nginx/confs/* /etc/nginx/
