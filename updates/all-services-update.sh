@@ -34,6 +34,9 @@ if [[ ${NXT_IS_INSTALLED} == '1' ]] || [[ ${NXT_IS_INSTALLED_MAILSERVER} == '1' 
 	source ${SCRIPT_PATH}/updates/nginx-tools.sh; nginx_update_menu
 
   if [[ ${NXT_IS_INSTALLED_MAILSERVER} = "1" ]]; then
+    echo "70" | dialog --gauge "Patching rspamd..." 10 70 0
+    source ${SCRIPT_PATH}/updates/patches/rspamd-dkim-key-fix.sh; patch_rspamd_dkim
+
     echo "Here will be updates for the mailserver later"
   fi
 
