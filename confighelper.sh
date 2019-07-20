@@ -108,23 +108,6 @@ if [ ${CHECKRDNS} != mail.${MYDOMAIN} ] | [ ${CHECKRDNS} != mail.${MYDOMAIN}. ];
 	exit 1
 fi
 
-CHECK_E_MAIL="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z])?\$"
-while true
-	do
-		NXT_SYSTEM_EMAIL=$(dialog --clear \
-		--backtitle "$BACKTITLE" \
-		--inputbox "Enter your Email adress for system services example (please use the domain, you use for the script installation): admin@${MYDOMAIN}" \
-		$HEIGHT $WIDTH "admin@${MYDOMAIN}" \
-		3>&1 1>&2 2>&3 3>&- \
-		)
-			if [[ "$NXT_SYSTEM_EMAIL" =~ $CHECK_E_MAIL ]];then
-				break
-			else
-				dialog_msg "[ERROR] Should we again practice how a Email address looks?"
-				dialog --clear
-			fi
-	done
-
 # --- IP Adress ---
 CHOICE_HEIGHT=2
 MENU="What IP Mode do you want to use?:"
@@ -147,13 +130,6 @@ IPV6ADRINPUT=$(dialog --clear \
 --backtitle "$BACKTITLE" \
 --inputbox "Enter your IPv6 Address: (Example: 2a03:4000:2:11c5::1)" \
 $HEIGHT $WIDTH \
-3>&1 1>&2 2>&3 3>&- \
-)
-
-IPV6GATINPUT=$(dialog --clear \
---backtitle "$BACKTITLE" \
---inputbox "Enter your IPv6 Gateway: (Example: fe80::1)" \
-$HEIGHT $WIDTH "fe80::1" \
 3>&1 1>&2 2>&3 3>&- \
 )
 
@@ -184,6 +160,8 @@ You can change your choice at the end of the confighelper, if you select no rest
 esac
 
 PHPVERSION7="7.3"
+NXT_SYSTEM_EMAIL="admin@${MYDOMAIN}"
+IPV6NETINPUT="fe80::1"
 CONFIG_COMPLETED="1"
 
 GIT_LOCAL_FILES_HEAD=$(git rev-parse --short HEAD)
