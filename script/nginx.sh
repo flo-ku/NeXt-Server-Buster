@@ -66,8 +66,6 @@ NGINX_MODULES="--without-http_browser_module \
 make -j $(nproc) >>"${main_log}" 2>>"${err_log}"
 make install >>"${main_log}" 2>>"${err_log}"
 
-cd ${SCRIPT_PATH}
-
 rm -R ${SCRIPT_PATH}/sources/nginx-${NGINX_VERSION}
 
 mkdir -p /var/lib/nginx/{body,proxy,fastcgi,uwsgi,scgi}
